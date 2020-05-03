@@ -9,7 +9,11 @@ project(
   LANGUAGES CXX
 )
 set(LOWERCASE_PROJECT_NAME "project_name")
+add_library(project_options INTERFACE)
+target_compile_features(project_options INTERFACE cxx_std_17)
 include(cmake/StandardSettings.cmake)
+
+message("Started CMake for ${PROJECT_NAME} v${PROJECT_VERSION}...")
 
 #
 # Prevent building in the source directory
@@ -23,15 +27,21 @@ endif()
 # Create library, setup header and source files
 #
 
+# Find all headers and implementation files
+FILE(GLOB_RECURSE headers CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/include/*.h")
+FILE(GLOB_RECURSE sources CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
+
 # Header-only libraries should define the following CMake options, rather than the current ones
 #add_library(${PROJECT_NAME} INTERFACE)
 #set_target_properties(${PROJECT_NAME} PROPERTIES INTERFACE_COMPILE_FEATURES cxx_std_17)
 
 add_library(
   ${PROJECT_NAME}
-  src/*.cpp
+  ${headers}
+  ${sources}
 )
-set_target_properties(${PROJECT_NAME} PROPERTIES cxx_std_17)
+
+message("Added all header and implementation files.")
 
 #
 # Set the build/user include directories
@@ -47,8 +57,10 @@ target_include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
 
+message("Finished setting up include directories.")
+
 #
-# Set compiler warning as defined in the `compiler_warnings.cmake` file
+# Set compiler warning as defined in the `CompilerWarnings.cmake` file
 #
 
 add_library(project_warnings INTERFACE)
@@ -67,6 +79,8 @@ set_project_warnings(project_warnings)
 #    dependency1 ...
 #  PRIVATE
 #    dependency2 ...
+#    project_options        
+#    project_warnings        
 #)
 
 #
