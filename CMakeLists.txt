@@ -8,12 +8,11 @@ project(
   VERSION 0.1.0 
   LANGUAGES CXX
 )
-set(LOWERCASE_PROJECT_NAME "project_name")
-add_library(project_options INTERFACE)
-target_compile_features(project_options INTERFACE cxx_std_17)
+add_library(${PROJECT_NAME}_PROJECT_OPTIONS INTERFACE)
+target_compile_features(${PROJECT_NAME}_PROJECT_OPTIONS INTERFACE cxx_std_17)
 include(cmake/StandardSettings.cmake)
 
-message("Started CMake for ${PROJECT_NAME} v${PROJECT_VERSION}...")
+message("\nStarted CMake for ${PROJECT_NAME} v${PROJECT_VERSION}...")
 
 #
 # Prevent building in the source directory
@@ -41,6 +40,10 @@ add_library(
   ${sources}
 )
 
+if(VERBOSE_OUTPUT)
+  message("Found the following header files:\n${headers}\n")
+  message("Found the following source files:\n${sources}\n")
+endif()
 message("Added all header and implementation files.")
 
 #
@@ -63,9 +66,9 @@ message("Finished setting up include directories.")
 # Set compiler warning as defined in the `CompilerWarnings.cmake` file
 #
 
-add_library(project_warnings INTERFACE)
+add_library(${PROJECT_NAME}_PROJECT_WARNINGS INTERFACE)
 include(cmake/CompilerWarnings.cmake)
-set_project_warnings(project_warnings)
+set_project_warnings(${PROJECT_NAME}_PROJECT_WARNINGS)
 
 #
 # Model project dependencies 
@@ -79,8 +82,8 @@ set_project_warnings(project_warnings)
 #    dependency1 ...
 #  PRIVATE
 #    dependency2 ...
-#    project_options        
-#    project_warnings        
+#    ${PROJECT_NAME}_PROJECT_OPTIONS        
+#    ${PROJECT_NAME}_PROJECT_WARNINGS        
 #)
 
 #
@@ -92,7 +95,7 @@ install(
   TARGETS
     ${PROJECT_NAME}
   EXPORT
-    ${LOWERCASE_PROJECT_NAME}-export
+    ${PROJECT_NAME}Targets
   LIBRARY DESTINATION
     ${CMAKE_INSTALL_LIBDIR}
   ARCHIVE DESTINATION
@@ -101,7 +104,7 @@ install(
 
 install(
   EXPORT 
-    ${LOWERCASE_PROJECT_NAME}-targets
+    ${PROJECT_NAME}Targets
   FILE
     ${PROJECT_NAME}Targets.cmake
   NAMESPACE
@@ -117,8 +120,23 @@ install(
 include(CMakePackageConfigHelpers)
 write_basic_package_version_file(
   ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake
-  VERSION ${PROJECT_VERSION}
-  COMPATIBILITY AnyNewerVersion
+  VERSION
+    ${PROJECT_VERSION}
+  COMPATIBILITY
+    SameMajorVersion
 )
 
-export(PACKAGE ${PROJECT_NAME})
+configure_package_config_file(
+  ${PROJECT_NAME}Config.cmake.in
+  ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake
+  INSTALL_DESTINATION 
+    ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}
+)
+
+install(
+  FILES
+    ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake
+    ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake
+  DESTINATION
+    ${LIB_INSTALL_DIR}/cmake/${PROJECT_NAME}
+)
