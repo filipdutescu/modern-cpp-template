@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.15 FATAL_ERROR)
 # Project details
 #
 project(
-  "project_name" 
+  "project_name"
   VERSION 0.1.0 
   LANGUAGES CXX
 )
@@ -127,7 +127,7 @@ write_basic_package_version_file(
 )
 
 configure_package_config_file(
-  ${PROJECT_NAME}Config.cmake.in
+  ${CMAKE_CURRENT_LIST_DIR}/cmake/${PROJECT_NAME}Config.cmake.in
   ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake
   INSTALL_DESTINATION 
     ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}
@@ -140,3 +140,5 @@ install(
   DESTINATION
     ${LIB_INSTALL_DIR}/cmake/${PROJECT_NAME}
 )
+
+message("Finished installing package.\n")
