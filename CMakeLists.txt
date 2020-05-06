@@ -110,6 +110,8 @@ install(
     ${CMAKE_INSTALL_BINDIR}
   ARCHIVE DESTINATION
     ${CMAKE_INSTALL_LIBDIR}
+  INCLUDE DESTINATION
+    include
 )
 
 install(
