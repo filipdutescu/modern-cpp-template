@@ -1,16 +1,24 @@
-cmake_minimum_required(VERSION 3.15 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.15)
 
 #
 # Project details
 #
+
 project(
   "project_name"
   VERSION 0.1.0 
   LANGUAGES CXX
 )
-add_library(${PROJECT_NAME}_PROJECT_OPTIONS INTERFACE)
-target_compile_features(${PROJECT_NAME}_PROJECT_OPTIONS INTERFACE cxx_std_17)
+
+#
+# Set project options and warnings
+#
+
 include(cmake/StandardSettings.cmake)
+
+add_library(${PROJECT_NAME}_PROJECT_WARNINGS INTERFACE)
+include(cmake/CompilerWarnings.cmake)
+set_project_warnings(${PROJECT_NAME}_PROJECT_WARNINGS)
 
 message("\nStarted CMake for ${PROJECT_NAME} v${PROJECT_VERSION}...")
 
@@ -32,13 +40,16 @@ FILE(GLOB_RECURSE sources CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/*.c
 
 # Header-only libraries should define the following CMake options, rather than the current ones
 #add_library(${PROJECT_NAME} INTERFACE)
-#set_target_properties(${PROJECT_NAME} PROPERTIES INTERFACE_COMPILE_FEATURES cxx_std_17)
 
 add_library(
   ${PROJECT_NAME}
   ${headers}
   ${sources}
 )
+
+# Set the project standard and warnings
+target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
+target_link_libraries(${PROJECT_NAME} PUBLIC ${PROJECT_NAME}_PROJECT_WARNINGS)
 
 if(VERBOSE_OUTPUT)
   message("Found the following header files:\n${headers}\n")
@@ -63,14 +74,6 @@ target_include_directories(
 message("Finished setting up include directories.")
 
 #
-# Set compiler warning as defined in the `CompilerWarnings.cmake` file
-#
-
-add_library(${PROJECT_NAME}_PROJECT_WARNINGS INTERFACE)
-include(cmake/CompilerWarnings.cmake)
-set_project_warnings(${PROJECT_NAME}_PROJECT_WARNINGS)
-
-#
 # Model project dependencies 
 #
 
@@ -87,6 +90,11 @@ set_project_warnings(${PROJECT_NAME}_PROJECT_WARNINGS)
 #)
 
 #
+# Provide alias to library for 
+#
+add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
+
+#
 # Install library for easy downstream inclusion
 #
 
@@ -98,6 +106,8 @@ install(
     ${PROJECT_NAME}Targets
   LIBRARY DESTINATION
     ${CMAKE_INSTALL_LIBDIR}
+  RUNTIME DESTINATION
+    ${CMAKE_INSTALL_BINDIR}
   ARCHIVE DESTINATION
     ${CMAKE_INSTALL_LIBDIR}
 )
@@ -113,13 +123,20 @@ install(
     ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}
 )
 
+install(
+  DIRECTORY
+    include/${PROJECT_NAME}
+  DESTINATION
+    include
+)
+
 #
 # Quick `ConfigVersion.cmake` creation
 #
 
 include(CMakePackageConfigHelpers)
 write_basic_package_version_file(
-  ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake
+    ${PROJECT_NAME}ConfigVersion.cmake
   VERSION
     ${PROJECT_VERSION}
   COMPATIBILITY
