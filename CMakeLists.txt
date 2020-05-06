@@ -155,7 +155,7 @@ install(
     ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake
     ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake
   DESTINATION
-    ${LIB_INSTALL_DIR}/cmake/${PROJECT_NAME}
+    ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}
 )
 
 message("Finished installing package.\n")
