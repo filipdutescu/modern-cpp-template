@@ -20,7 +20,7 @@ add_library(${PROJECT_NAME}_PROJECT_WARNINGS INTERFACE)
 include(cmake/CompilerWarnings.cmake)
 set_project_warnings(${PROJECT_NAME}_PROJECT_WARNINGS)
 
-message("\nStarted CMake for ${PROJECT_NAME} v${PROJECT_VERSION}...")
+message("\nStarted CMake for ${PROJECT_NAME} v${PROJECT_VERSION}...\n")
 
 #
 # Prevent building in the source directory
