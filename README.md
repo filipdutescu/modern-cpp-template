@@ -10,75 +10,65 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+This project is meant to be only a template, thus versions of the software used can be change to better suit the needs of the developer(s). If you wish to use the template *as-is*, meaning using the versions recommended here, then you will need:
 
-```
-Give examples
-```
+  * **CMake** v3.15+ - found at [https://cmake.org/](https://cmake.org/)
+  * **C++ Compiler** - needs to support at least the **C++17** standard, i.e. *MSVC*, *GCC*, *Clang*
+
+> ***Note:*** *You also need to be able to provide ***CMake*** a supported [generator](https://cmake.org/cmake/help/latest/manual/cmake-generators.7.html).*
 
 ### Installing
 
 A step by step series of examples that tell you how to get a development env running
+It is fairly easy to install the project, all you need to do is clone if from [GitHub](https://github.com/filipdutescu/modern-cpp-template) or [generate a new repository from it](https://github.com/filipdutescu/modern-cpp-template/generate) (also on **GitHub**).
 
-Say what the step will be
+If you wish to clone the repository, rather than generate from it, you simply need to run
+````bash
+git clone https://github.com/filipdutescu/modern-cpp-template/
+````
 
-```
-Give the example
-```
+After finishing getting a copy of the project, with any of the methods above, create a new folder in the ```include/``` folder, with the name of your project.
 
-And repeat
+You will also need to rename the ```cmake/Config.cmake.in``` file to start with the ***exact name of your project***. Such as ```cmake/MyNewProjectConfig.cmake.in```.
 
-```
-until finished
-```
+Finally, change ```"project_name"``` from ```CMakeLists.txt```, from
+````cmake
+project(
+  "project_name"
+  VERSION 0.1.0 
+  LANGUAGES CXX
+)
+````
 
-End with an example of getting some data out of the system or using it for a little demo
+to the ***exact name of your project***, i.e. using the previous name it will become:
+````cmake
+project(
+  MyNewProject
+  VERSION 0.1.0 
+  LANGUAGES CXX
+)
+````
 
-## Running the tests
+## Building the project
 
-Explain how to run the automated tests for this system
+To build the project, all you need to do is follow the steps ***after correctly [installing the project](README.md#Installing)***, is run a similar **CMake** routine to the following:
 
-### Break down into end to end tests
+````bash
+mkdir build/ && cd build/
+cmake .. -DCMAKE_INSTALL_PREFIX=/absolute/path/to/custom/install/directory
+cmake --build . --target install
+````
 
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+```-DCMAKE_INSTALL_PREFIX=/absolute/path/to/custom/install/directory``` can be omitted if you wish to install in [the default install location](https://cmake.org/cmake/help/latest/module/GNUInstallDirs.html).
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+This project makes use of [SemVer](http://semver.org/) for versioning. A list of existing versions can be found in the [project's releases](https://github.com/username/project/releases). 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+* **Filip-Ioan Dutescu** - [@filipdutescu](https://github.com/filipdutescu)
 
 ## License
 
-This project is licensed under the Unilicense - see the [LICENSE](LICENSE) file for details
-
+This project is licensed under the [Unilicense](https://unlicense.org) - see the [LICENSE](LICENSE) file for details
