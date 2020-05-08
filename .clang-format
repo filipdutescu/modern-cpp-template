@@ -1,7 +1,7 @@
 ---
 BasedOnStyle: Google
 AccessModifierOffset: '-4'
-AlignAfterOpenBracket: Align
+AlignAfterOpenBracket: DontAlign
 AlignConsecutiveMacros: 'true'
 AlignConsecutiveAssignments: 'true'
 AllowAllArgumentsOnNextLine: 'false'
@@ -15,6 +15,7 @@ BinPackParameters: 'false'
 BreakBeforeBinaryOperators: NonAssignment
 BreakBeforeBraces: Allman
 Cpp11BracedListStyle: 'false'
+ColumnLimit: 125 
 IndentPPDirectives: BeforeHash
 IndentWidth: '4'
 KeepEmptyLinesAtTheStartOfBlocks: 'false'
