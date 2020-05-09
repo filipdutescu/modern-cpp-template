@@ -8,6 +8,8 @@ AllowAllArgumentsOnNextLine: 'false'
 AllowAllConstructorInitializersOnNextLine: 'false'
 AllowAllParametersOfDeclarationOnNextLine: 'false'
 AllowShortCaseLabelsOnASingleLine: 'true'
+AllowShortBlocksOnASingleLine: 'Empty'
+AllowShortIfStatementsOnASingleLine: 'Never' 
 AlwaysBreakBeforeMultilineStrings: 'false'
 AlwaysBreakTemplateDeclarations: 'Yes'
 BinPackArguments: 'false'
@@ -31,9 +33,9 @@ SpaceBeforeCtorInitializerColon: 'true'
 SpaceBeforeInheritanceColon: 'true'
 SpaceBeforeParens: ControlStatements
 SpaceBeforeRangeBasedForLoopColon: 'true'
-SpaceInEmptyBlock: 'true'
+SpaceInEmptyBlock: true
 SpaceInEmptyParentheses: 'false'
-Standard: Latest
+Standard: 'Latest'
 TabWidth: '4'
 
 ...
