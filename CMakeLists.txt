@@ -11,14 +11,10 @@ project(
 )
 
 #
-# Set project options and warnings
+# Set project options
 #
 
 include(cmake/StandardSettings.cmake)
-
-add_library(${PROJECT_NAME}_PROJECT_WARNINGS INTERFACE)
-include(cmake/CompilerWarnings.cmake)
-set_project_warnings(${PROJECT_NAME}_PROJECT_WARNINGS)
 
 message("\nStarted CMake for ${PROJECT_NAME} v${PROJECT_VERSION}...")
 
@@ -49,7 +45,8 @@ add_library(
 
 # Set the project standard and warnings
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
-target_link_libraries(${PROJECT_NAME} INTERFACE ${PROJECT_NAME}_PROJECT_WARNINGS)
+include(cmake/CompilerWarnings.cmake)
+set_project_warnings(${PROJECT_NAME})
 
 if(VERBOSE_OUTPUT)
   message("Found the following header files:\n${headers}\n")
