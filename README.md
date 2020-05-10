@@ -30,10 +30,10 @@ After finishing getting a copy of the project, with any of the methods above, cr
 
 You will also need to rename the ```cmake/Config.cmake.in``` file to start with the ***exact name of your project***. Such as ```cmake/MyNewProjectConfig.cmake.in```.
 
-Finally, change ```"project_name"``` from ```CMakeLists.txt```, from
+Finally, change ```"Project"``` from ```CMakeLists.txt```, from
 ````cmake
 project(
-  "project_name"
+  "Project"
   VERSION 0.1.0 
   LANGUAGES CXX
 )
