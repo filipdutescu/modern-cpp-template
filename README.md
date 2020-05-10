@@ -6,7 +6,7 @@ This is my personal take on such a type of template, thus I might not use the be
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
 
 ### Prerequisites
 
@@ -19,7 +19,6 @@ This project is meant to be only a template, thus versions of the software used 
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
 It is fairly easy to install the project, all you need to do is clone if from [GitHub](https://github.com/filipdutescu/modern-cpp-template) or [generate a new repository from it](https://github.com/filipdutescu/modern-cpp-template/generate) (also on **GitHub**).
 
 If you wish to clone the repository, rather than generate from it, you simply need to run
@@ -51,7 +50,7 @@ project(
 
 ## Building the project
 
-To build the project, all you need to do is follow the steps ***after correctly [installing the project](README.md#Installing)***, is run a similar **CMake** routine to the following:
+To build the project, all you need to do, ***after correctly [installing the project](README.md#Installing)***, is run a similar **CMake** routine to the the one below:
 
 ````bash
 mkdir build/ && cd build/
@@ -59,11 +58,11 @@ cmake .. -DCMAKE_INSTALL_PREFIX=/absolute/path/to/custom/install/directory
 cmake --build . --target install
 ````
 
-```-DCMAKE_INSTALL_PREFIX=/absolute/path/to/custom/install/directory``` can be omitted if you wish to install in [the default install location](https://cmake.org/cmake/help/latest/module/GNUInstallDirs.html).
+> ***Note:*** *```-DCMAKE_INSTALL_PREFIX=/absolute/path/to/custom/install/directory``` can be omitted if you wish to install in [the default install location](https://cmake.org/cmake/help/latest/module/GNUInstallDirs.html).*
 
 ## Versioning
 
-This project makes use of [SemVer](http://semver.org/) for versioning. A list of existing versions can be found in the [project's releases](https://github.com/username/project/releases). 
+This project makes use of [SemVer](http://semver.org/) for versioning. A list of existing versions can be found in the [project's releases](https://github.com/filipdutescu/modern-cpp-template/releases). 
 
 ## Authors
 
