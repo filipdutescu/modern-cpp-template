@@ -1,6 +1,7 @@
 [![Actions Status](https://github.com/filipdutescu/modern-cpp-template/workflows/MacOS/badge.svg)](https://github.com/filipdutescu/modern-cpp-template/actions)
 [![Actions Status](https://github.com/filipdutescu/modern-cpp-template/workflows/Windows/badge.svg)](https://github.com/filipdutescu/modern-cpp-template/actions)
 [![Actions Status](https://github.com/filipdutescu/modern-cpp-template/workflows/Ubuntu/badge.svg)](https://github.com/filipdutescu/modern-cpp-template/actions)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/filipdutescu/modern-cpp-template)
 
 # Modern CMake Template
 
@@ -62,7 +63,23 @@ cmake .. -DCMAKE_INSTALL_PREFIX=/absolute/path/to/custom/install/directory
 cmake --build . --target install
 ````
 
-> ***Note:*** *```-DCMAKE_INSTALL_PREFIX=/absolute/path/to/custom/install/directory``` can be omitted if you wish to install in [the default install location](https://cmake.org/cmake/help/latest/module/GNUInstallDirs.html).*
+> ***Note:*** *The custom ```CMAKE_INSTALL_PREFIX``` can be omitted if you wish to install in [the default install location](https://cmake.org/cmake/help/latest/module/GNUInstallDirs.html).*
+
+## Running the tests
+
+Explain how to run the automated tests for this system.
+
+### End to end tests
+
+If applicable, should be presented here.
+
+### Coding style tests
+
+If applicable, should be presented here.
+
+## Contributing
+
+Please read [CONTRIBUTING](CONTRIBUTING) for details on our how you can become a contributor and the process for submitting pull requests to us. Please read the [Code of Conduct](CODE_OF_CONDUCT.md) as well, before engaging with the project's community.
 
 ## Versioning
 
