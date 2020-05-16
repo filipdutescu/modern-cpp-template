@@ -41,8 +41,8 @@ Demonstrate the code is solid. Example: The exact commands you ran and their out
 
 ### Pull Request Readiness Checklist
 
-See details at [https://github.com/filipdutescu/modern-cpp-template/CONTRIBUTING](https://github.com/filipdutescu/modern-cpp-template/CONTRIBUTING).
-- [ ] I agree to contribute to the project under [INSERT PROJECT NAME] (Unilicense) License.
+See details at [https://github.com/filipdutescu/modern-cpp-template/CONTRIBUTING.md](https://github.com/filipdutescu/modern-cpp-template/CONTRIBUTING.md).
+- [ ] I agree to contribute to the project under [INSERT PROJECT NAME] (Unilicense) [License](LICENSE).
 - [ ] To the best of my knowledge, the proposed patch is not based on a code under GPL or other license that is incompatible with [INSERT PROJECT NAME]
 - [ ] The PR is proposed to proper branch
 - [ ] There is reference to original bug report and related work
