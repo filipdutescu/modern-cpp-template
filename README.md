@@ -79,7 +79,7 @@ If applicable, should be presented here.
 
 ## Contributing
 
-Please read [CONTRIBUTING](CONTRIBUTING) for details on our how you can become a contributor and the process for submitting pull requests to us. Please read the [Code of Conduct](CODE_OF_CONDUCT.md) as well, before engaging with the project's community.
+Please read [CONTRIBUTING](CONTRIBUTING.md) for details on our how you can become a contributor and the process for submitting pull requests to us. Please read the [Code of Conduct](CODE_OF_CONDUCT.md) as well, before engaging with the project's community.
 
 ## Versioning
 
