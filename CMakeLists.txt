@@ -157,4 +157,10 @@ install(
     ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}
 )
 
-message("Finished installing package.\n")
+message("Finished building requirements for installing the package.\n")
+
+if(ENABLE_UNIT_TESTING)
+  enable_testing()
+  message("Build unit tests for the project. Tests should always be found in the test folder\n")
+  add_subdirectory(test)
+endif()
