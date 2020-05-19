@@ -5,19 +5,22 @@ project(
   LANGUAGES CXX
 )
 
-file(GLOB_RECURSE sources CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
-add_executable(Tests ${sources})
+file(GLOB_RECURSE test_sources CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/**.cpp")
+add_executable(Tests ${test_sources})
 
-find_package(GTest)
+target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
+
+find_package(GTest REQUIRED)
 target_link_libraries(
-    Tests 
-    PUBLIC
-        GTest::GTest
+  Tests 
+  PUBLIC
+    GTest::gtest_main
+    Project
 )
 
 add_test(
   NAME
-    UnitTests
+    Tests
   COMMAND
-    ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR}/Tests
+    Tests
 )
