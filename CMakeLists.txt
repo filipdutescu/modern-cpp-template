@@ -48,6 +48,7 @@ add_library(
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
 include(cmake/CompilerWarnings.cmake)
 set_project_warnings(${PROJECT_NAME})
+add_compile_options(${PROJECT_WARNINGS})
 
 if(VERBOSE_OUTPUT)
   message("Found the following header files:\n${headers}\n")
