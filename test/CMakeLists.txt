@@ -11,11 +11,11 @@ add_executable(Tests ${test_sources})
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
 
 find_package(GTest REQUIRED)
-include_directories(${GTEST_INCLUDE_DIRS})
 target_link_libraries(
   Tests 
   PUBLIC
-    ${GTEST_BOTH_LIBRARIES}
+    GTest::gtest
+    GTest::gtest_main
     Project
 )
 
