@@ -14,8 +14,23 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: create install directory for dependencies
+      run: mkdir d:/a/.local
+
+    - name: install GoogleTest
+      run: |
+        cd ..
+        git clone https://github.com/google/googletest.git --branch release-1.10.0
+        cd googletest
+        cmake -Bbuild -DCMAKE_INSTALL_PREFIX=d:/a/.local -Dgtest_force_shared_crt=1
+        cmake --build build --config Debug
+        cmake --build build --config Release
+        cmake --build build --target install --config Debug
+        cmake --build build --target install --config Release
+        cd ../modern-cpp-template
+
     - name: configure
-      run: cmake -Bbuild -DENABLE_UNIT_TESTING=0
+      run: cmake -Bbuild -DCMAKE_INSTALL_PREFIX=d:/a/.local
       
     - name: build
       run: cmake --build build --config Release
