@@ -8,7 +8,7 @@ on:
 
 env:
   BUILD_TYPE: Release
-  INSTALL_LOCATION: d:/a/.local
+  INSTALL_LOCATION: ~/.local
 
 jobs:
   build:
