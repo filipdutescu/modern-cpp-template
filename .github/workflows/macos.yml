@@ -8,7 +8,7 @@ on:
 
 env:
   BUILD_TYPE: Release
-  INSTALL_LOCATION: /Users/runner/runners/2.262.1/work/.local
+  INSTALL_LOCATION: .local
 
 jobs:
   build:
@@ -20,11 +20,11 @@ jobs:
       
     - name: install GoogleTest
       run: |
-        mkdir $INSTALL_LOCATION
+        mkdir $GITHUB_WORKSPACE/$INSTALL_LOCATION
         cd ..
         git clone https://github.com/google/googletest.git --branch release-1.10.0
         cd googletest
-        cmake -Bbuild -DCMAKE_INSTALL_PREFIX=$INSTALL_LOCATION -Dgtest_force_shared_crt=1
+        cmake -Bbuild -DCMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/$INSTALL_LOCATION -Dgtest_force_shared_crt=1
         cmake --build build --config Debug
         cmake --build build --config Release
         cmake --build build --target install --config Debug
@@ -32,7 +32,7 @@ jobs:
         cd ../modern-cpp-template
 
     - name: configure
-      run: cmake -Bbuild -DCMAKE_INSTALL_PREFIX=$INSTALL_LOCATION
+      run: cmake -Bbuild -DCMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/$INSTALL_LOCATION
       
     - name: build
       run: cmake --build build --config $BUILD_TYPE -j4
