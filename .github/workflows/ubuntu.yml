@@ -35,7 +35,7 @@ jobs:
       run: cmake -Bbuild -DCMAKE_INSTALL_PREFIX=$INSTALL_LOCATION
       
     - name: build
-      run: cmake --build build --config $BUILD_TYPE
+      run: cmake --build build --config $BUILD_TYPE -j4
 
     - name: run tests
       run: |

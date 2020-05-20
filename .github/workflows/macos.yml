@@ -8,7 +8,7 @@ on:
 
 env:
   BUILD_TYPE: Release
-  INSTALL_LOCATION: /home/runner/work/.local
+  INSTALL_LOCATION: /Users/runner/runners/2.262.1/work/.local
 
 jobs:
   build:
@@ -35,7 +35,7 @@ jobs:
       run: cmake -Bbuild -DCMAKE_INSTALL_PREFIX=$INSTALL_LOCATION
       
     - name: build
-      run: cmake --build build --config $BUILD_TYPE
+      run: cmake --build build --config $BUILD_TYPE -j4
 
     - name: run tests
       run: |
