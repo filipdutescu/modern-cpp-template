@@ -8,7 +8,7 @@ on:
 
 env:
   BUILD_TYPE: Release
-  INSTALL_LOCATION: ~/.local
+  INSTALL_LOCATION: /home/runner/work/.local
 
 jobs:
   build:
