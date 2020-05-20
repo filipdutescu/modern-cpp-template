@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+  BUILD_TYPE: Release
+  INSTALL_LOCATION: d:/a/.local
+
 jobs:
   build:
 
@@ -14,8 +18,26 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       
+    - name: install GoogleTest
+      run: |
+        mkdir $INSTALL_LOCATION
+        cd ..
+        git clone https://github.com/google/googletest.git --branch release-1.10.0
+        cd googletest
+        cmake -Bbuild -DCMAKE_INSTALL_PREFIX=$INSTALL_LOCATION -Dgtest_force_shared_crt=1
+        cmake --build build --config Debug
+        cmake --build build --config Release
+        cmake --build build --target install --config Debug
+        cmake --build build --target install --config Release
+        cd ../modern-cpp-template
+
     - name: configure
-      run: cmake -Bbuild -DENABLE_UNIT_TESTING=0
+      run: cmake -Bbuild -DCMAKE_INSTALL_PREFIX=$INSTALL_LOCATION
       
     - name: build
-      run: cmake --build build --config Release
+      run: cmake --build build --config $BUILD_TYPE
+
+    - name: run tests
+      run: |
+        cd build
+        ctest -C $BUILD_TYPEe

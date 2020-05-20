@@ -10,14 +10,16 @@ add_executable(Tests ${test_sources})
 
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
 
-find_package(GTest REQUIRED)
-target_link_libraries(
-  Tests 
-  PUBLIC
-    GTest::gtest
-    GTest::gtest_main
-    Project
-)
+if(USE_GTEST)
+  find_package(GTest REQUIRED)
+  target_link_libraries(
+    Tests 
+    PUBLIC
+      GTest::gtest
+      GTest::gtest_main
+      Project
+  )
+endif()
 
 add_test(
   NAME

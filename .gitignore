@@ -1,6 +1,7 @@
-build/*
+[Bb]uild/*
 CMakeCache.*
-CMakeFiles/
+CMakeFiles/*
+[Tt]esting/*
 
 ### VisualStudioCode ###
 .vscode/*
