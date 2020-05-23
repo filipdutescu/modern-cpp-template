@@ -1,19 +1,19 @@
 cmake_minimum_required(VERSION 3.15)
 
 project(
-  Tests
+  ${CMAKE_PROJECT_NAME}Tests
   LANGUAGES CXX
 )
 
 file(GLOB_RECURSE test_sources CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/**.cpp")
-add_executable(Tests ${test_sources})
+add_executable(${PROJECT_NAME} ${test_sources})
 
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
 
 if(USE_GTEST)
   find_package(GTest REQUIRED)
   target_link_libraries(
-    Tests 
+    ${PROJECT_NAME} 
     PUBLIC
       GTest::gtest
       GTest::gtest_main
@@ -23,7 +23,7 @@ endif()
 
 add_test(
   NAME
-    Tests
+    ${PROJECT_NAME}
   COMMAND
-    Tests
+    ${PROJECT_NAME}
 )
