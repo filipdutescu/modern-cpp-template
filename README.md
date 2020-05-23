@@ -67,7 +67,12 @@ cmake --build . --target install
 
 ## Running the tests
 
-Explain how to run the automated tests for this system.
+By default, the template uses [Google Test](https://github.com/google/googletest/) for unit testing. Unit testing can be disabled in the options, by setting the `ENABLE_UNIT_TESTING` (from [cmake/StandardSettings.cmake](cmake/StandardSettings.cmake)) to be false. To run the tests, simply use CTest, from the build directory, passing the desired configuration for which to run tests for. An example of this procedure is:
+
+````bash
+cd build          # if not in the build directory already 
+ctest -C Release  # or `ctest -C Debug` or any other configuration you wish to test
+````
 
 ### End to end tests
 
