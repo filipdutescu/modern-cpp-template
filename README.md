@@ -17,7 +17,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 This project is meant to be only a template, thus versions of the software used can be change to better suit the needs of the developer(s). If you wish to use the template *as-is*, meaning using the versions recommended here, then you will need:
 
-  * **CMake v3.15+** - found at [https://cmake.org/]
+  * **CMake v3.15+** - found at [https://cmake.org/](https://cmake.org/)
   * **C++ Compiler** - needs to support at least the **C++17** standard, i.e. *MSVC*, *GCC*, *Clang*
 
 > ***Note:*** *You also need to be able to provide ***CMake*** a supported [generator](https://cmake.org/cmake/help/latest/manual/cmake-generators.7.html).*
