@@ -19,6 +19,16 @@ if(USE_GTEST)
       GTest::gtest_main
       Project
   )
+elseif(USE_CATCH2)
+  find_package(Catch2 REQUIRED)
+  target_link_libraries(
+    ${PROJECT_NAME} 
+    PUBLIC
+      Catch2::Catch2
+      Project
+  )
+else()
+  message(FATAL_ERROR "Unknown testing library. Please setup your desired unit testing library by using `target_link_libraries`.")  
 endif()
 
 add_test(

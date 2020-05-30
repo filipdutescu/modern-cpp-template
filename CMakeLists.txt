@@ -15,15 +15,14 @@ project(
 #
 
 include(cmake/StandardSettings.cmake)
-
-message("\nStarted CMake for ${PROJECT_NAME} v${PROJECT_VERSION}...")
+message("\nStarted CMake for ${PROJECT_NAME} v${PROJECT_VERSION}...\n")
 
 #
 # Prevent building in the source directory
 #
 
 if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
-  message(FATAL_ERROR "In-source builds not allowed. Please make a new directory (called a build directory) and run CMake from there.")
+  message(FATAL_ERROR "In-source builds not allowed. Please make a new directory (called a build directory) and run CMake from there.\n")
 endif()
 
 #
@@ -39,22 +38,24 @@ file(GLOB_RECURSE sources CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/**.
 
 add_library(
   ${PROJECT_NAME}
-  STATIC
-    ${headers}
-    ${sources}
+  ${headers}
+  ${sources}
 )
-
-# Set the project standard and warnings
-target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
-include(cmake/CompilerWarnings.cmake)
-set_project_warnings(${PROJECT_NAME})
-add_compile_options(${PROJECT_WARNINGS})
 
 if(VERBOSE_OUTPUT)
   message("Found the following header files:\n${headers}\n")
   message("Found the following source files:\n${sources}\n")
 endif()
-message("Added all header and implementation files.")
+message("Added all header and implementation files.\n")
+
+# Set the project standard and warnings
+target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
+include(cmake/CompilerWarnings.cmake)
+set_project_warnings(${PROJECT_NAME})
+
+if(VERBOSE_OUTPUT)
+  message("Applied compiler warnings. Using standard ${CXX_STANDARD}.\n")
+endif()
 
 #
 # Set the build/user include directories
@@ -88,10 +89,18 @@ message("Finished setting up include directories.")
 #    ${PROJECT_NAME}_PROJECT_WARNINGS        
 #)
 
+if(VERBOSE_OUTPUT)
+  message("Successfully added all dependencies and linked against them.")
+endif()
+
 #
 # Provide alias to library for 
 #
 add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
+
+if(VERBOSE_OUTPUT)
+  message("Project is now aliased as ${PROJECT_NAME}::${PROJECT_NAME}.\n")
+endif()
 
 #
 # Install library for easy downstream inclusion
@@ -132,6 +141,10 @@ install(
   DESTINATION
     include
 )
+
+if(VERBOSE_OUTPUT)
+  message("Install targets succesfully build. Install with `cmake --build build_directory --target install --config build_config`.")
+endif()
 
 #
 # Quick `ConfigVersion.cmake` creation
