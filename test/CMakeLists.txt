@@ -25,6 +25,15 @@ add_executable(${PROJECT_NAME} ${test_sources})
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
 
 #
+# Setup code coverage if enabled
+#
+
+if (ENABLE_CODE_COVERAGE)
+  target_compile_options(${CMAKE_PROJECT_NAME} PUBLIC -O0 -g -fprofile-arcs -ftest-coverage)
+  target_link_options(${CMAKE_PROJECT_NAME} PUBLIC -fprofile-arcs -ftest-coverage)
+endif()
+
+#
 # Load the desired unit testing framework
 #
 # Currently supported: GoogleTest (and GoogleMock), Catch2.

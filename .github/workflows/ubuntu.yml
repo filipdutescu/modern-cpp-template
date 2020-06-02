@@ -37,7 +37,7 @@ jobs:
         cd ../modern-cpp-template
 
     - name: configure
-      run: cmake -Bbuild -DCMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/$INSTALL_LOCATION
+      run: cmake -Bbuild -DCMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/$INSTALL_LOCATION -DENABLE_CODE_COVERAGE=1
       
     - name: build
       run: cmake --build build --config $BUILD_TYPE -j4

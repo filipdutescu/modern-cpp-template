@@ -33,6 +33,12 @@ option(ENABLE_CLANG_TIDY "Enable static analysis with Clang-Tidy." ON)
 option(ENABLE_CPPCHECK "Enable static analysis with Cppcheck." OFF)
 
 #
+# Code coverage
+#
+
+option(ENABLE_CODE_COVERAGE "Enable code coverage through GCC." OFF)
+
+#
 # Doxygen
 #
 
