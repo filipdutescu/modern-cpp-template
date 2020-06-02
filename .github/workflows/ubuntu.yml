@@ -23,7 +23,7 @@ jobs:
       id: cache-dependencies
       with:
         path: ${{env.INSTALL_LOCATION}}
-        key: ${{runner.os}}-${{hashFiles(${{env.INSTALL_LOCATION}})}}
+        key: ${{runner.os}}-${{hashFiles($env.INSTALL_LOCATION)}}
 
     - name: install GoogleTest
       if: steps.cache.output.cache-hit != 'true'
