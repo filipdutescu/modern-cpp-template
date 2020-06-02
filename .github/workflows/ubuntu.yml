@@ -46,3 +46,8 @@ jobs:
       run: |
         cd build
         ctest -C $BUILD_TYPE
+
+    - name: Code coverage using Codecov 
+      uses: codecov/codecov-action@v1
+      with:
+        fail_ci_if_error: true
