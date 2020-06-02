@@ -1,11 +1,11 @@
-#include <gtest/gtest.h>
-
 #include "tmp/tmp.hpp"
+
+#include <gtest/gtest.h>
 
 TEST(TmpAddTest, CheckValues)
 {
-    ASSERT_EQ(tmp::add(1, 2), 3);
-    EXPECT_TRUE(true);
+  ASSERT_EQ(tmp::add(1, 2), 3);
+  EXPECT_TRUE(true);
 }
 
 int main(int argc, char **argv)
