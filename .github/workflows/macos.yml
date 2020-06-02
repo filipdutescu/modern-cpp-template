@@ -25,8 +25,25 @@ jobs:
         path: ${{github.workspace}}/${{env.INSTALL_LOCATION}}
         key: ${{runner.os}}-dependencies
 
-    - name: test cache
-      run: echo ${{steps.cache.output.cache-hit}}
+    - name: test cache false
+      if: ${{steps.cache.output.cache-hit != 'true'}}
+      run: echo Cache not true
+
+    - name: test cache true
+      if: ${{steps.cache.output.cache-hit == 'true'}}
+      run: echo Cache true
+
+    - name: test cache false chain
+      if: ${{steps.cache.output.cache-hit != 'true'}}
+      run: |
+        echo chain test
+        echo Cache not true
+
+    - name: test cache true chain
+      if: ${{steps.cache.output.cache-hit == 'true'}}
+      run: |
+        echo chain test
+        echo Cache true
 
     - name: install GoogleTest
       if: ${{steps.cache.output.cache-hit != 'true'}}
