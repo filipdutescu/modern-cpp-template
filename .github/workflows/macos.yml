@@ -28,7 +28,6 @@ jobs:
     - name: install GoogleTest
       if: steps.cache.output.cache-hit != 'true'
       run: |
-        rm -rf $GITHUB_WORKSPACE/$INSTALL_LOCATION
         mkdir $GITHUB_WORKSPACE/$INSTALL_LOCATION
         cd ..
         git clone https://github.com/google/googletest.git --branch release-1.10.0
