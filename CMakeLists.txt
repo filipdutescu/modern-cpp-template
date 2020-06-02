@@ -182,6 +182,27 @@ install(
 
 message("Finished building requirements for installing the package.\n")
 
+#
+# Generate export header if specified
+#
+
+if(GENERATE_EXPORT_HEADER)
+  include(GenerateExportHeader)
+  generate_export_header(${PROJECT_NAME})
+  install(
+    FILES
+      ${PROJECT_BINARY_DIR}/${PROJECT_NAME}_export.h 
+    DESTINATION
+      include
+  )
+
+  message("Generated the export header `${PROJECT_NAME}_export.h` and installed it.")
+endif()
+
+#
+# Unit testing setup
+#
+
 if(ENABLE_UNIT_TESTING)
   enable_testing()
   message("Build unit tests for the project. Tests should always be found in the test folder\n")

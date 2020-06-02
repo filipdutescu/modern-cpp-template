@@ -46,6 +46,14 @@ option(ENABLE_DOXYGEN "Enable Doxygen documentation builds of source." OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 option(VERBOSE_OUTPUT "Enable verbose output, allowing for a better understanding of each step taken." ON)
+option(GENERATE_EXPORT_HEADER "Create a `project_export.h` file containing all exported symbols." OFF)
+
+# Export all symbols when building a shared library
+if(BUILD_SHARED_LIBS)
+    set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS OFF)
+    set(CMAKE_CXX_VISIBILITY_PRESET hidden)
+    set(CMAKE_VISIBILITY_INLINES_HIDDEN 1)
+endif()
 
 option(ENABLE_IPO "Enable Interprocedural Optimization, aka Link Time Optimization (LTO)." OFF)
 if(ENABLE_IPO)
