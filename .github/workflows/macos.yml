@@ -23,8 +23,8 @@ jobs:
       id: cache-dependencies
       with:
         path: ${{github.workspace}}/${{env.INSTALL_LOCATION}}
-        key: ${{runner.os}}-${{hashFiles(${{github.workspace}}/${INSTALL_LOCATION})}}
-
+        key: ${{runner.os}}-dependencies
+        
     - name: install GoogleTest
       if: steps.cache.output.cache-hit != 'true'
       run: |
