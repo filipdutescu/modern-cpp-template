@@ -4,9 +4,9 @@
 [![codecov](https://codecov.io/gh/filipdutescu/modern-cpp-template/branch/master/graph/badge.svg)](https://codecov.io/gh/filipdutescu/modern-cpp-template)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/filipdutescu/modern-cpp-template)](https://github.com/filipdutescu/modern-cpp-template/releases)
 
-# Modern CMake Template
+# Modern C++ Template
 
-A quick CMake template for modern C++ projects, aimed to be an easy to use starting point.
+A quick C++ template for modern CMake projects, aimed to be an easy to use starting point.
 
 This is my personal take on such a type of template, thus I might not use the best practices or you might disagree with how I do things. Any and all feedback is greatly appreciated!
 

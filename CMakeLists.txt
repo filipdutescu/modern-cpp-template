@@ -40,14 +40,17 @@ include(cmake/Vcpkg.cmake)
 # Find all headers and implementation files
 include(cmake/SourcesAndHeaders.cmake)
 
-# Header-only libraries should define the following CMake options, rather than the current ones
-#add_library(${PROJECT_NAME} INTERFACE)
-
-add_library(
-  ${PROJECT_NAME}
-  ${headers}
-  ${sources}
-)
+if(BUILD_EXECUTABLE)
+  add_executable(${PROJECT_NAME} ${sources})
+elseif(BUILD_HEADERS_ONLY)
+  add_library(${PROJECT_NAME} INTERFACE)
+else()
+  add_library(
+    ${PROJECT_NAME}
+    ${headers}
+    ${sources}
+  )
+endif()
 
 verbose_message("Found the following header files:\n${headers}\n")
 verbose_message("Found the following source files:\n${sources}\n")
@@ -57,7 +60,11 @@ message("Added all header and implementation files.\n")
 # Set the project standard and warnings
 #
 
-target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
+if(BUILD_HEADERS_ONLY)
+  target_compile_features(${PROJECT_NAME} INTERFACE cxx_std_17)
+else()
+  target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
+endif()
 include(cmake/CompilerWarnings.cmake)
 set_project_warnings(${PROJECT_NAME})
 
@@ -74,14 +81,23 @@ include(cmake/Doxygen.cmake)
 #
 
 # Allow usage of header files in the `src` directory, but only for utilities
-target_include_directories(
-  ${PROJECT_NAME}
-  PUBLIC 
-    $<INSTALL_INTERFACE:include>    
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-  PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}/src
-)
+if(BUILD_HEADERS_ONLY)
+  target_include_directories(
+    ${PROJECT_NAME}
+    INTERFACE 
+      $<INSTALL_INTERFACE:include>    
+      $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  )
+else()
+  target_include_directories(
+    ${PROJECT_NAME}
+    PUBLIC 
+      $<INSTALL_INTERFACE:include>    
+      $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    PRIVATE
+      ${CMAKE_CURRENT_SOURCE_DIR}/src
+  )
+endif()
 
 message("Finished setting up include directories.")
 
@@ -106,7 +122,12 @@ verbose_message("Successfully added all dependencies and linked against them.")
 #
 # Provide alias to library for 
 #
-add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
+
+if(BUILD_EXECUTABLE)
+  add_executable(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
+else()
+  add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
+endif()
 
 verbose_message("Project is now aliased as ${PROJECT_NAME}::${PROJECT_NAME}.\n")
 
@@ -150,7 +171,7 @@ install(
     include
 )
 
-verbose_message("Install targets succesfully build. Install with `cmake --build build_directory --target install --config build_config`.")
+verbose_message("Install targets succesfully build. Install with `cmake --build <build_directory> --target install --config <build_config>`.")
 
 #
 # Quick `ConfigVersion.cmake` creation

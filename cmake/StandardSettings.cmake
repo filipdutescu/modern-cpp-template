@@ -1,4 +1,11 @@
 #
+# Project settings
+#
+
+option(BUILD_EXECUTABLE "Build the project as an executable, rather than a library." OFF)
+option(BUILD_HEADERS_ONLY "Build the project as a header-only library." OFF)
+
+#
 # Compiler options
 #
 
