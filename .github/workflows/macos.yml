@@ -24,7 +24,7 @@ jobs:
       with:
         path: ${{github.workspace}}/${{env.INSTALL_LOCATION}}
         key: ${{runner.os}}-dependencies
-        
+
     - name: install GoogleTest
       if: steps.cache.output.cache-hit != 'true'
       run: |
@@ -32,10 +32,8 @@ jobs:
         cd ..
         git clone https://github.com/google/googletest.git --branch release-1.10.0
         cd googletest
-        cmake -Bbuild -DCMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/$INSTALL_LOCATION -Dgtest_force_shared_crt=1
-        cmake --build build --config Debug
+        cmake -Bbuild -DCMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/$INSTALL_LOCATION
         cmake --build build --config Release
-        cmake --build build --target install --config Debug
         cmake --build build --target install --config Release
         cd ../modern-cpp-template
 
