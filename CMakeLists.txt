@@ -15,6 +15,7 @@ project(
 #
 
 include(cmake/StandardSettings.cmake)
+include(cmake/Utils.cmake)
 message("\nStarted CMake for ${PROJECT_NAME} v${PROJECT_VERSION}...\n")
 
 #
@@ -26,12 +27,18 @@ if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
 endif()
 
 #
+# Enable package managers
+#
+
+include(cmake/Conan.cmake)
+include(cmake/Vcpkg.cmake)
+
+#
 # Create library, setup header and source files
 #
 
 # Find all headers and implementation files
-file(GLOB_RECURSE headers CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/include/**.h")
-file(GLOB_RECURSE sources CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/**.cpp")
+include(cmake/SourcesAndHeaders.cmake)
 
 # Header-only libraries should define the following CMake options, rather than the current ones
 #add_library(${PROJECT_NAME} INTERFACE)
@@ -42,20 +49,25 @@ add_library(
   ${sources}
 )
 
-if(VERBOSE_OUTPUT)
-  message("Found the following header files:\n${headers}\n")
-  message("Found the following source files:\n${sources}\n")
-endif()
+verbose_message("Found the following header files:\n${headers}\n")
+verbose_message("Found the following source files:\n${sources}\n")
 message("Added all header and implementation files.\n")
 
+#
 # Set the project standard and warnings
+#
+
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
 include(cmake/CompilerWarnings.cmake)
 set_project_warnings(${PROJECT_NAME})
 
-if(VERBOSE_OUTPUT)
-  message("Applied compiler warnings. Using standard ${CXX_STANDARD}.\n")
-endif()
+verbose_message("Applied compiler warnings. Using standard ${CXX_STANDARD}.\n")
+
+#
+# Enable Doxygen
+#
+
+include(cmake/Doxygen.cmake)
 
 #
 # Set the build/user include directories
@@ -89,18 +101,14 @@ message("Finished setting up include directories.")
 #    ${PROJECT_NAME}_PROJECT_WARNINGS        
 #)
 
-if(VERBOSE_OUTPUT)
-  message("Successfully added all dependencies and linked against them.")
-endif()
+verbose_message("Successfully added all dependencies and linked against them.")
 
 #
 # Provide alias to library for 
 #
 add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
-if(VERBOSE_OUTPUT)
-  message("Project is now aliased as ${PROJECT_NAME}::${PROJECT_NAME}.\n")
-endif()
+verbose_message("Project is now aliased as ${PROJECT_NAME}::${PROJECT_NAME}.\n")
 
 #
 # Install library for easy downstream inclusion
@@ -142,9 +150,7 @@ install(
     include
 )
 
-if(VERBOSE_OUTPUT)
-  message("Install targets succesfully build. Install with `cmake --build build_directory --target install --config build_config`.")
-endif()
+verbose_message("Install targets succesfully build. Install with `cmake --build build_directory --target install --config build_config`.")
 
 #
 # Quick `ConfigVersion.cmake` creation
