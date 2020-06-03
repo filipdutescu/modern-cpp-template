@@ -97,4 +97,4 @@ This project makes use of [SemVer](http://semver.org/) for versioning. A list of
 
 ## License
 
-This project is licensed under the [Unilicense](https://unlicense.org) - see the [LICENSE](LICENSE) file for details
+This project is licensed under the [Boost Software License](https://www.boost.org/LICENSE_1_0.txt) - see the [LICENSE](LICENSE) file for details
