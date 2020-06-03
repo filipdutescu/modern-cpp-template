@@ -132,6 +132,12 @@ endif()
 verbose_message("Project is now aliased as ${PROJECT_NAME}::${PROJECT_NAME}.\n")
 
 #
+# Format the project using the `clang-format` target (i.e: cmake --build build --target clang-format)
+#
+
+add_clang_format_target()
+
+#
 # Install library for easy downstream inclusion
 #
 

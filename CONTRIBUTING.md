@@ -62,7 +62,12 @@ The code in this project uses several different coding styles, depending on the 
 
 Use the following commands from the project's root directory to run clang-format (must be installed on the host system).
 
-**1. Using clang-format:**
+**1. Run the CMake target for `clang-format`:**
+````bash
+cmake --build build --target clang-format
+````
+
+**2. Using clang-format:**
 ````bash
 # !!! clang-format does not run recursively in subdirectories !!!
 
@@ -76,7 +81,7 @@ clang-format -i *.h
 clang-format -i *.hpp
 ````
 
-**2. Using TheLartians' Format.cmake:**
+**3. Using TheLartians' Format.cmake:**
 ````bash
 cmake -Htest -Bbuild/test
 
