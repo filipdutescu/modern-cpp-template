@@ -70,7 +70,6 @@ cmake --build build --target clang-format
 **2. Using clang-format:**
 ````bash
 # !!! clang-format does not run recursively in subdirectories !!!
-
 # for each .cpp file modified
 clang-format -i *.cpp
 
