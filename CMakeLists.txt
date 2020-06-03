@@ -40,9 +40,9 @@ include(cmake/Vcpkg.cmake)
 # Find all headers and implementation files
 include(cmake/SourcesAndHeaders.cmake)
 
-if(BUILD_EXECUTABLE)
+if(${PROJECT_NAME}_BUILD_EXECUTABLE)
   add_executable(${PROJECT_NAME} ${sources})
-elseif(BUILD_HEADERS_ONLY)
+elseif(${PROJECT_NAME}_BUILD_HEADERS_ONLY)
   add_library(${PROJECT_NAME} INTERFACE)
 else()
   add_library(
@@ -60,7 +60,7 @@ message("Added all header and implementation files.\n")
 # Set the project standard and warnings
 #
 
-if(BUILD_HEADERS_ONLY)
+if(${PROJECT_NAME}_BUILD_HEADERS_ONLY)
   target_compile_features(${PROJECT_NAME} INTERFACE cxx_std_17)
 else()
   target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
@@ -81,7 +81,7 @@ include(cmake/Doxygen.cmake)
 #
 
 # Allow usage of header files in the `src` directory, but only for utilities
-if(BUILD_HEADERS_ONLY)
+if(${PROJECT_NAME}_BUILD_HEADERS_ONLY)
   target_include_directories(
     ${PROJECT_NAME}
     INTERFACE 
@@ -123,7 +123,7 @@ verbose_message("Successfully added all dependencies and linked against them.")
 # Provide alias to library for 
 #
 
-if(BUILD_EXECUTABLE)
+if(${PROJECT_NAME}_BUILD_EXECUTABLE)
   add_executable(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 else()
   add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
@@ -207,7 +207,7 @@ message("Finished building requirements for installing the package.\n")
 # Generate export header if specified
 #
 
-if(GENERATE_EXPORT_HEADER)
+if(${PROJECT_NAME}_GENERATE_EXPORT_HEADER)
   include(GenerateExportHeader)
   generate_export_header(${PROJECT_NAME})
   install(
@@ -224,7 +224,7 @@ endif()
 # Unit testing setup
 #
 
-if(ENABLE_UNIT_TESTING)
+if(${PROJECT_NAME}_ENABLE_UNIT_TESTING)
   enable_testing()
   message("Build unit tests for the project. Tests should always be found in the test folder\n")
   add_subdirectory(test)

@@ -45,7 +45,7 @@ jobs:
     - name: run tests
       run: |
         cd build
-        ctest -C $BUILD_TYPE
+        ctest -C $BUILD_TYPE -VV
 
     - name: Code coverage using Codecov 
       run: bash <(curl -s https://codecov.io/bash) 

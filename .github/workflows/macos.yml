@@ -45,4 +45,4 @@ jobs:
     - name: run tests
       run: |
         cd build
-        ctest -C $BUILD_TYPE
+        ctest -C $BUILD_TYPE -VV

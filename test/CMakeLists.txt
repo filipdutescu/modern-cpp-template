@@ -28,7 +28,7 @@ target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
 # Setup code coverage if enabled
 #
 
-if (ENABLE_CODE_COVERAGE)
+if (${CMAKE_PROJECT_NAME}_ENABLE_CODE_COVERAGE)
   target_compile_options(${CMAKE_PROJECT_NAME} PUBLIC -O0 -g -fprofile-arcs -ftest-coverage)
   target_link_options(${CMAKE_PROJECT_NAME} PUBLIC -fprofile-arcs -ftest-coverage)
 endif()
@@ -38,10 +38,10 @@ endif()
 #
 # Currently supported: GoogleTest (and GoogleMock), Catch2.
 
-if(USE_GTEST)
+if(${CMAKE_PROJECT_NAME}_USE_GTEST)
   find_package(GTest REQUIRED)
 
-  if(USE_GOOGLE_MOCK)
+  if(${CMAKE_PROJECT_NAME}_USE_GOOGLE_MOCK)
     set(GOOGLE_MOCK_LIBRARIES GTest::gmock GTest::gmock_main)
   endif()
 
@@ -53,7 +53,7 @@ if(USE_GTEST)
       ${GOOGLE_MOCK_LIBRARIES}
       Project
   )
-elseif(USE_CATCH2)
+elseif(${CMAKE_PROJECT_NAME}_USE_CATCH2)
   find_package(Catch2 REQUIRED)
   target_link_libraries(
     ${PROJECT_NAME} 

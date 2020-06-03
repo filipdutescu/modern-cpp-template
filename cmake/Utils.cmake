@@ -1,5 +1,5 @@
 function(verbose_message content)
-    if(VERBOSE_OUTPUT)
+    if(${PROJECT_NAME}_VERBOSE_OUTPUT)
         message(${MESSAGE_TYPE} ${content})
     endif()
 endfunction()

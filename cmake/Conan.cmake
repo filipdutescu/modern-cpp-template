@@ -1,10 +1,10 @@
-if(ENABLE_CONAN)
+if(${PROJECT_NAME}_ENABLE_CONAN)
   #
   # Setup Conan requires and options here:
   #
 
-  set(CONAN_REQUIRES "")
-  set(CONAN_OPTIONS "")
+  set(${PROJECT_NAME}_CONAN_REQUIRES "")
+  set(${PROJECT_NAME}_CONAN_OPTIONS "")
 
   #
   # If `conan.cmake` (from https://github.com/conan-io/cmake-conan) does not exist, download it.
