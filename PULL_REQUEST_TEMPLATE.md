@@ -16,7 +16,7 @@ Ex:
 
 ### Code style and formatting
 
-Check the [Contributors Style Guidelines section](https://github.com/filipdutescu/modern-cpp-template/CONTRIBUTING#Style-Guidelines) for how to write your code and the [Contributors Code Formatting section](https://github.com/filipdutescu/modern-cpp-template/CONTRIBUTING#Code-Formatting) for how to format your code.
+Check the [Contributors Style Guidelines section](CONTRIBUTING.md#Style-guidelines) for how to write your code and the [Contributors Code Formatting section](CONTRIBUTING.md#Code-formatting) for how to format your code.
 
 **Closing Issues**
 
@@ -41,7 +41,7 @@ Demonstrate the code is solid. Example: The exact commands you ran and their out
 
 ### Pull Request Readiness Checklist
 
-See details at [https://github.com/filipdutescu/modern-cpp-template/blob/master/CONTRIBUTING.md](https://github.com/filipdutescu/modern-cpp-template/blob/master/CONTRIBUTING.md).
+See details at [CONTRIBUTING.md](https://github.com/filipdutescu/modern-cpp-template/blob/master/CONTRIBUTING.md).
 - [ ] I agree to contribute to the project under [INSERT PROJECT NAME] (Boost Software License) [License](LICENSE).
 - [ ] To the best of my knowledge, the proposed patch is not based on a code under GPL or other license that is incompatible with [INSERT PROJECT NAME]
 - [ ] The PR is proposed to proper branch

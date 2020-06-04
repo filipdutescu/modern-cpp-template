@@ -56,7 +56,7 @@ To learn how to build the code and run tests, follow the instructions in the [RE
 
 The code in this project uses several different coding styles, depending on the age and history of the code. Please attempt to match the style of surrounding code as much as possible. In new components, prefer the patterns described in the [C++ core guidelines](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines).
 
-### Code Formatting
+### Code formatting
 
 ***Run clang-format***
 
@@ -97,7 +97,7 @@ See [Format.cmake](https://github.com/TheLartians/Format.cmake) for more options
 
 Your change should include tests to verify new functionality wherever possible. Code should be structured so that it can be unit tested independently of the UI. Manual test cases should be used where automated testing is not feasible.
 
-### Git Workflow
+### Git workflow
 
 The core principle of the project, when it comes to Git workflows is that the `master` branch should always be in a healthy state which is ready for release. Every commit on master should be deployable on push. To ensure this, pull request **must not** be made directly on master. **Each change** should either be made in the **development branch** (named a variation of development, i.e. `dev`) or in a separate branch, named as a short summary of the change. 
 
@@ -105,7 +105,7 @@ If your change is complex, please clean up the branch history before submitting 
 
 When completing a pull request, we will generally squash your changes into a single commit. After confirming that the change works as intended, the branch *might* be deleted, in order to prevent branch polluting. Please let us know if your pull request needs to be merged as separate commits.
 
-## Review Process
+## Review process
 
 After submitting a pull request, members of the team will review your code. We will assign the request to an appropriate reviewer (if applicable). Any member of the community may participate in the review, but at least one member of the project team will ultimately approve the request.
 
