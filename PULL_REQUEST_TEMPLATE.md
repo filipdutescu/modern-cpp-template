@@ -46,5 +46,5 @@ See details at [https://github.com/filipdutescu/modern-cpp-template/blob/master/
 - [ ] To the best of my knowledge, the proposed patch is not based on a code under GPL or other license that is incompatible with [INSERT PROJECT NAME]
 - [ ] The PR is proposed to proper branch
 - [ ] There is reference to original bug report and related work
-- [ ] There is accuracy test, performance test and test data in opencv_extra repository, if applicable
+- [ ] There is accuracy test, performance test and test data in the repository, if applicable
 - [ ] The feature is well documented and sample code can be built with the project CMake
