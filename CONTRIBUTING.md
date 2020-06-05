@@ -105,6 +105,18 @@ If your change is complex, please clean up the branch history before submitting 
 
 When completing a pull request, we will generally squash your changes into a single commit. After confirming that the change works as intended, the branch *might* be deleted, in order to prevent branch polluting. Please let us know if your pull request needs to be merged as separate commits.
 
+### Continuous Integration
+
+For this project, CI is provided by [GitHub Actions](https://github.com/features/actions), with workflows found in the [`.github/workflows` folder](.github/workflows). Workflows are run automatically on every commit made on the master branch, unless told to skip for that particular commit. 
+
+To skip CI runs on a particular commit, include either `[skip ci]` or `[ci skip]` in the commit message.
+````bash
+# an example of a commit message that would not trigger CI workflows
+git commit -m "my normal commit message [skip ci]"
+# or
+git commit -m "my normal commit message [ci skip]"
+````
+
 ## Review process
 
 After submitting a pull request, members of the team will review your code. We will assign the request to an appropriate reviewer (if applicable). Any member of the community may participate in the review, but at least one member of the project team will ultimately approve the request.

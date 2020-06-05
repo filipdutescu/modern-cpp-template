@@ -68,6 +68,14 @@ project(
 )
 ````
 
+To install an already built project, you need to run the `install` target with CMake. For example:
+````bash
+cmake --build build --target install --config Release
+
+# a more general syntax for that command is:
+cmake --build <build_directory> --target install --config <desired_config>
+````
+
 ## Building the project
 
 To build the project, all you need to do, ***after correctly [installing the project](README.md#Installing)***, is run a similar **CMake** routine to the the one below:
@@ -79,6 +87,8 @@ cmake --build . --target install
 ````
 
 > ***Note:*** *The custom ```CMAKE_INSTALL_PREFIX``` can be omitted if you wish to install in [the default install location](https://cmake.org/cmake/help/latest/module/GNUInstallDirs.html).*
+
+More options that you can set for the project can be found in the [`cmake/StandardSettings.cmake` file](cmake/StandardSettings.cmake). For certain options additional configuration may be needed in their respective `*.cmake` files (i.e. Conan needs the `CONAN_REQUIRES` and might need the `CONAN_OPTIONS` to be setup for it work correctly; the two are set in the [`cmake/Conan.cmake` file](cmake/Conan.cmake)).
 
 ## Running the tests
 
