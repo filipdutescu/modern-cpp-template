@@ -50,3 +50,7 @@ jobs:
 
     - name: Code coverage using Codecov 
       run: bash <(curl -s https://codecov.io/bash) 
+
+    - name: install project
+      run: cmake --build . --target install --config Release 
+
