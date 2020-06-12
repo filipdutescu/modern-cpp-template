@@ -19,6 +19,18 @@ include(cmake/Utils.cmake)
 message("\nStarted CMake for ${PROJECT_NAME} v${PROJECT_VERSION}...\n")
 
 #
+# Setup alternative names
+#
+
+if(${PROJECT_NAME}_USE_ALT_NAMES)
+	string(TOLOWER ${PROJECT_NAME} PROJECT_NAME_LOWERCASE)
+	string(TOUPPER ${PROJECT_NAME} PROJECT_NAME_UPPERCASE)
+else()
+	set(PROJECT_NAME_LOWERCASE ${PROJECT_NAME})
+	set(PROJECT_NAME_UPPERCASE ${PROJECT_NAME})
+endif()
+
+#
 # Prevent building in the source directory
 #
 
@@ -170,9 +182,30 @@ install(
     ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}
 )
 
+#
+# Add version header
+#
+
+configure_file(
+    ${CMAKE_CURRENT_LIST_DIR}/cmake/version.hpp.in
+    include/${PROJECT_NAME_LOWERCASE}/version.hpp
+    @ONLY
+)
+
+install(
+  FILES
+    ${CMAKE_CURRENT_BINARY_DIR}/include/${PROJECT_NAME_LOWERCASE}/version.hpp
+  DESTINATION
+    include/${PROJECT_NAME_LOWERCASE}
+)
+
+#
+# Install the `include` directory
+#
+
 install(
   DIRECTORY
-    include/${PROJECT_NAME}
+    include/${PROJECT_NAME_LOWERCASE}
   DESTINATION
     include
 )
@@ -207,8 +240,6 @@ install(
     ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}
 )
 
-message("Finished building requirements for installing the package.\n")
-
 #
 # Generate export header if specified
 #
@@ -218,13 +249,15 @@ if(${PROJECT_NAME}_GENERATE_EXPORT_HEADER)
   generate_export_header(${PROJECT_NAME})
   install(
     FILES
-      ${PROJECT_BINARY_DIR}/${PROJECT_NAME}_export.h 
+      ${PROJECT_BINARY_DIR}/${PROJECT_NAME_LOWERCASE}_export.h 
     DESTINATION
       include
   )
 
-  message("Generated the export header `${PROJECT_NAME}_export.h` and installed it.")
+  message("Generated the export header `${PROJECT_NAME_LOWERCASE}_export.h` and installed it.")
 endif()
+
+message("Finished building requirements for installing the package.\n")
 
 #
 # Unit testing setup

@@ -3,5 +3,5 @@ set(sources
 )
 
 set(headers
-    include/Project/tmp.hpp
+    include/project/tmp.hpp
 )
