@@ -49,5 +49,5 @@ jobs:
         ctest -C "$env:BUILD_TYPE" -VV
 
     - name: install project
-      run: cmake --build . --target install --config Release 
+      run: cmake --build build --target install --config Release 
 
