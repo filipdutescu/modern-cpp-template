@@ -11,6 +11,7 @@ A quick C++ template for modern CMake projects, aimed to be an easy to use start
 This is my personal take on such a type of template, thus I might not use the best practices or you might disagree with how I do things. Any and all feedback is greatly appreciated!
 
 ### Features
+
   * Modern **CMake** configuration and project, which, to the best of my knowledge, uses the best practices,
   * An example of a **Clang-Format** config, inspired from the base *Google* model, with minor tweaks. This is aimed only as a starting point, as coding style is a subjective matter, everyone is free to either delete it (for the *LLVM* default) or supply their own alternative,
   * **Static analyzers** integration, with *Clang-Tidy* and *Cppcheck*, the former being the default option,
@@ -20,7 +21,7 @@ This is my personal take on such a type of template, thus I might not use the be
   * **Package manager support**, with *Conan* and *Vcpkg*, through their respective options
   * **CI workflows for Windows, Linux and MacOS** using *GitHub Actions*, making use of the caching features, to ensure minimum run time,
   * **.md templates** for: *README*, *Code of Conduct*, *Contributing Guideliness*, *Issues* and *Pull Requests*,
-  * **Permissive license** to allow you to integrate it as easily as possible. The template is licensed under the [Boost Software License](https://www.boost.org/LICENSE_1_0.txt),
+  * **Permissive license** to allow you to integrate it as easily as possible. The template is licensed under the [Unlicense](https://unlicense.org/),
   * Options to build as a header-only library or executable, not just a static or shared library.
   * **CCache** integration, for speeding up build times
 
@@ -92,13 +93,19 @@ More options that you can set for the project can be found in the [`cmake/Standa
 
 ## Running the tests
 
-By default, the template uses [Google Test](https://github.com/google/googletest/) for unit testing. Unit testing can be disabled in the options, by setting the `ENABLE_UNIT_TESTING` (from [cmake/StandardSettings.cmake](cmake/StandardSettings.cmake)) to be false. To run the tests, simply use CTest, from the build directory, passing the desired configuration for which to run tests for. An example of this procedure is:
+By default, the template uses [Google Test](https://github.com/google/googletest/)
+for unit testing. Unit testing can be disabled in the options, by setting the
+`ENABLE_UNIT_TESTING` (from
+[cmake/StandardSettings.cmake](cmake/StandardSettings.cmake)) to be false. To run
+the tests, simply use CTest, from the build directory, passing the desire
+configuration for which to run tests for. An example of this procedure is:
 
 ````bash
-cd build          # if not in the build directory already 
+cd build          # if not in the build directory already
 ctest -C Release  # or `ctest -C Debug` or any other configuration you wish to test
 
-# you can also run tests with the `-VV` flag for a more verbose output (i.e. GoogleTest output as well)
+# you can also run tests with the `-VV` flag for a more verbose output (i.e.
+GoogleTest output as well)
 ````
 
 ### End to end tests
@@ -111,11 +118,16 @@ If applicable, should be presented here.
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our how you can become a contributor and the process for submitting pull requests to us. Please read the [Code of Conduct](CODE_OF_CONDUCT.md) as well, before engaging with the project's community.
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our how you can
+become a contributor and the process for submitting pull requests to us. Please
+read the [Code of Conduct](CODE_OF_CONDUCT.md) as well, before engaging with the
+project's community.
 
 ## Versioning
 
-This project makes use of [SemVer](http://semver.org/) for versioning. A list of existing versions can be found in the [project's releases](https://github.com/filipdutescu/modern-cpp-template/releases). 
+This project makes use of [SemVer](http://semver.org/) for versioning. A list of
+existing versions can be found in the
+[project's releases](https://github.com/filipdutescu/modern-cpp-template/releases).
 
 ## Authors
 
@@ -123,4 +135,5 @@ This project makes use of [SemVer](http://semver.org/) for versioning. A list of
 
 ## License
 
-This project is licensed under the [Boost Software License](https://www.boost.org/LICENSE_1_0.txt) - see the [LICENSE](LICENSE) file for details
+This project is licensed under the [Unlicense](https://unlicense.org/) - see the
+[LICENSE](LICENSE) file for details
