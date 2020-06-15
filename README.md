@@ -156,7 +156,7 @@ cd build          # if not in the build directory already
 ctest -C Release  # or `ctest -C Debug` or any other configuration you wish to test
 
 # you can also run tests with the `-VV` flag for a more verbose output (i.e.
-GoogleTest output as well)
+#GoogleTest output as well)
 ````
 
 ### End to end tests
