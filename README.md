@@ -41,7 +41,7 @@ options
 * **CI workflows for Windows, Linux and MacOS** using *GitHub Actions*, making
 use of the caching features, to ensure minimum run time,
 
-* **.md templates** for: *README*, *Code of Conduct*, *Contributing Guideliness*,
+* **.md templates** for: *README*, *Contributing Guideliness*,
 *Issues* and *Pull Requests*,
 
 * **Permissive license** to allow you to integrate it as easily as possible. The
@@ -170,9 +170,7 @@ If applicable, should be presented here.
 ## Contributing
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our how you can
-become a contributor and the process for submitting pull requests to us. Please
-read the [Code of Conduct](CODE_OF_CONDUCT.md) as well, before engaging with the
-project's community.
+become a contributor and the process for submitting pull requests to us.
 
 ## Versioning
 
