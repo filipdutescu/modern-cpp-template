@@ -79,7 +79,7 @@ It is fairly easy to install the project, all you need to do is clone if from
 (also on **GitHub**).
 
 If you wish to clone the repository, rather than generate from it, you simply need
-to run
+to run:
 
 ````bash
 git clone https://github.com/filipdutescu/modern-cpp-template/
