@@ -46,7 +46,7 @@ Features
 
 -  **Permissive license** to allow you to integrate it as easily as
    possible. The template is licensed under the
-   `Unlicense <https://unlicense.org/>`,
+   `Unlicense <https://unlicense.org/>`_,
 
 -  Options to build as a header-only library or executable, not just a
    static or shared library.
@@ -70,21 +70,20 @@ versions recommended here, then you will need:
 -  **CMake v3.15+** - found at https://cmake.org/
 
 -  **C++ Compiler** - needs to support at least the **C++17** standard,
-   i.e. *MSVC*, *GCC*, *Clang*
+   i.e. *MSVC*, *GCC*, *Clang*
 
 ..
 
-   **Note:** *You also need to be able to provide*\ **CMake**\ \* a
-   supported
-   `generator <https://cmake.org/cmake/help/latest/manual/cmake-generators.7.html>`__.\*
+   **Note:** *You also need to be able to provide **CMake** a supported
+   *`generator <https://cmake.org/cmake/help/latest/manual/cmake-generators.7.html>`_.*
 
 Installing
 ~~~~~~~~~~
 
 It is fairly easy to install the project, all you need to do is clone if
-from `GitHub <https://github.com/filipdutescu/modern-cpp-template>`__ or
+from `GitHub <https://github.com/filipdutescu/modern-cpp-template>`_ or
 `generate a new repository from
-it <https://github.com/filipdutescu/modern-cpp-template/generate>`__
+it <https://github.com/filipdutescu/modern-cpp-template/generate>`_
 (also on **GitHub**).
 
 If you wish to clone the repository, rather than generate from it, you
@@ -112,7 +111,7 @@ Finally, change ``"Project"`` from ``CMakeLists.txt``, from
      LANGUAGES CXX
    )
 
-to the **exact name of your project**, i.e. using the previous name it
+to the **exact name of your project**, i.e. using the previous name it
 will become:
 
 .. code:: cmake
@@ -137,7 +136,7 @@ Building the project
 --------------------
 
 To build the project, all you need to do, **after
-correctly\ **\ `installing the project <README.md#Installing>`__, is run
+correctly `installing the project <README.md#Installing>`_**, is run
 a similar **CMake** routine to the the one below:
 
 .. code:: bash
@@ -149,16 +148,16 @@ a similar **CMake** routine to the the one below:
 ..
 
    **Note:** *The custom ``CMAKE_INSTALL_PREFIX`` can be omitted if you
-   wish to install in*\ `the default install
-   location <https://cmake.org/cmake/help/latest/module/GNUInstallDirs.html>`__\ *.*
+   wish to install in `the default install
+   location <https://cmake.org/cmake/help/latest/module/GNUInstallDirs.html>`_.*
 
 More options that you can set for the project can be found in the
 ```cmake/StandardSettings.cmake``
-file <cmake/StandardSettings.cmake>`__. For certain options additional
-configuration may be needed in their respective ``*.cmake`` files
-(i.e. Conan needs the ``CONAN_REQUIRES`` and might need the
-``CONAN_OPTIONS`` to be setup for it work correctly; the two are set in
-the ```cmake/Conan.cmake`` file <cmake/Conan.cmake>`__).
+file <cmake/StandardSettings.cmake>`_. For certain options additional
+configuration may be needed in their respective ``*.cmake`` files (i.e.
+Conan needs the ``CONAN_REQUIRES`` and might need the ``CONAN_OPTIONS``
+to be setup for it work correctly; the two are set in the
+```cmake/Conan.cmake`` file <cmake/Conan.cmake>`_).
 
 Generating the documentation
 ----------------------------
@@ -175,17 +174,17 @@ the workflow shown above as follows:
 
 ..
 
-   **Note:** *This will generate a ``docs/`` directory in
-   the*\ **project’s root directory**\ *.*
+   **Note:** *This will generate a ``docs\/`` directory in
+   the **project's root directory**.*
 
 Running the tests
 -----------------
 
 By default, the template uses `Google
-Test <https://github.com/google/googletest/>`__ for unit testing. Unit
+Test <https://github.com/google/googletest/>`_ for unit testing. Unit
 testing can be disabled in the options, by setting the
 ``ENABLE_UNIT_TESTING`` (from
-`cmake/StandardSettings.cmake <cmake/StandardSettings.cmake>`__) to be
+`cmake/StandardSettings.cmake <cmake/StandardSettings.cmake>`_) to be
 false. To run the tests, simply use CTest, from the build directory,
 passing the desire configuration for which to run tests for. An example
 of this procedure is:
@@ -211,28 +210,28 @@ If applicable, should be presented here.
 Contributing
 ------------
 
-Please read `CONTRIBUTING.md <CONTRIBUTING.md>`__ for details on our how
+Please read `CONTRIBUTING.md <CONTRIBUTING.md>`_ for details on our how
 you can become a contributor and the process for submitting pull
 requests to us.
 
 Versioning
 ----------
 
-This project makes use of `SemVer <http://semver.org/>`__ for
-versioning. A list of existing versions can be found in the `project’s
-releases <https://github.com/filipdutescu/modern-cpp-template/releases>`__.
+This project makes use of `SemVer <http://semver.org/>`_ for
+versioning. A list of existing versions can be found in the `project's
+releases <https://github.com/filipdutescu/modern-cpp-template/releases>`_.
 
 Authors
 -------
 
 -  **Filip-Ioan Dutescu** -
-   [@filipdutescu](https://github.com/filipdutescu)
+   `@filipdutescu <https://github.com/filipdutescu>`_
 
 License
 -------
 
 This project is licensed under the
-`Unlicense <https://unlicense.org/>`__ - see the `LICENSE <LICENSE>`__
+`Unlicense <https://unlicense.org/>`_ - see the `LICENSE <LICENSE>`_
 file for details
 
 .. |Actions Status| image:: https://github.com/filipdutescu/modern-cpp-template/workflows/MacOS/badge.svg
