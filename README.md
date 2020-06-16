@@ -142,6 +142,19 @@ options additional configuration may be needed in their respective `*.cmake` fil
 (i.e. Conan needs the `CONAN_REQUIRES` and might need the `CONAN_OPTIONS` to be setup
 for it work correctly; the two are set in the [`cmake/Conan.cmake` file](cmake/Conan.cmake)).
 
+## Generating the documentation
+
+In order to generate documentation for the project, you need to configure the build
+to use Doxygen. This is easily done, by modifying the workflow shown above as follows:
+
+````bash
+mkdir build/ && cd build/
+cmake .. -D<project_name>_ENABLE_DOXYGEN=1 -DCMAKE_INSTALL_PREFIX=/absolute/path/to/custom/install/directory
+cmake --build . --target doxygen-docs
+````
+
+> ***Note:*** *This will generate a `docs/` directory in the **project's root directory**.*
+
 ## Running the tests
 
 By default, the template uses [Google Test](https://github.com/google/googletest/)
