@@ -35,10 +35,10 @@ hearing your input.
 ## Finding issues you can help with
 
 Looking for something to work on?
-Issues marked [``good first issue``](https://github.com/filipdutescu/modern-cpp-template/labels/good%20first%20issue)
+Issues marked [`good first issue`](https://github.com/filipdutescu/modern-cpp-template/labels/good%20first%20issue)
 are a good place to start.
 
-You can also check the [``help wanted``](https://github.com/filipdutescu/modern-cpp-template/labels/help%20wanted)
+You can also check the [`help wanted`](https://github.com/filipdutescu/modern-cpp-template/labels/help%20wanted)
 tag to find other issues to help with. If you're interested in working on a fix,
 leave a comment to let everyone know and to help avoid duplicated effort from others.
 
@@ -99,13 +99,13 @@ Use the following commands from the project's root directory to run clang-format
 
 **1. Run the CMake target for `clang-format`:**
 
-````bash
+```bash
 cmake --build build --target clang-format
-````
+```
 
 **2. Using clang-format:**
 
-````bash
+```bash
 # !!! clang-format does not run recursively in subdirectories !!!
 # for each .cpp file modified
 clang-format -i *.cpp
@@ -115,11 +115,11 @@ clang-format -i *.h
 
 # for each .hpp file modified
 clang-format -i *.hpp
-````
+```
 
 **3. Using TheLartians' Format.cmake:**
 
-````bash
+```bash
 cmake -Htest -Bbuild/test
 
 # view changes
@@ -127,7 +127,7 @@ cmake --build build/test --target format
 
 # apply changes
 cmake --build build/test --target fix-format
-````
+```
 
 See [Format.cmake](https://github.com/TheLartians/Format.cmake) for more options.
 
@@ -166,12 +166,12 @@ for that particular commit.
 To skip CI runs on a particular commit, include either `[skip ci]` or `[ci skip]`
 in the commit message.
 
-````bash
+```bash
 # an example of a commit message that would not trigger CI workflows
 git commit -m "my normal commit message [skip ci]"
 # or
 git commit -m "my normal commit message [ci skip]"
-````
+```
 
 ## Review process
 
@@ -197,4 +197,7 @@ do it for each pull request made. This is done by checking the boxes in the
 ***Checking the aforementioned boxes means that you agree to provide your change
 and/or code FREE TO USE and SUBJECT TO CHANGES for the entire community!***
 
-You don't need to sign a CLA until you're ready to create a pull request. When your pull request is created, it is reviewed by a team member which, if the change is trivial (i.e. you just fixed a typo) will be labelled as `cla-not-required`. Otherwise, it's classified as `cla-required`, if not already signed.
+You don't need to sign a CLA until you're ready to create a pull request. When your
+pull request is created, it is reviewed by a team member which, if the change is
+trivial (i.e. you just fixed a typo) will be labelled as `cla-not-required`.
+Otherwise, it's classified as `cla-required`, if not already signed.

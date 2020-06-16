@@ -81,45 +81,45 @@ It is fairly easy to install the project, all you need to do is clone if from
 If you wish to clone the repository, rather than generate from it, you simply need
 to run:
 
-````bash
+```bash
 git clone https://github.com/filipdutescu/modern-cpp-template/
-````
+```
 
 After finishing getting a copy of the project, with any of the methods above, create
-a new folder in the ```include/``` folder, with the name of your project.
+a new folder in the `include/` folder, with the name of your project.
 
-You will also need to rename the ```cmake/Config.cmake.in``` file to start with the
-***exact name of your project***. Such as ```cmake/MyNewProjectConfig.cmake.in```.
+You will also need to rename the `cmake/Config.cmake.in` file to start with the
+***exact name of your project***. Such as `cmake/MyNewProjectConfig.cmake.in`.
 
-Finally, change ```"Project"``` from ```CMakeLists.txt```, from
+Finally, change `"Project"` from `CMakeLists.txt`, from
 
-````cmake
+```cmake
 project(
   "Project"
   VERSION 0.1.0
   LANGUAGES CXX
 )
-````
+```
 
 to the ***exact name of your project***, i.e. using the previous name it will become:
 
-````cmake
+```cmake
 project(
   MyNewProject
   VERSION 0.1.0
   LANGUAGES CXX
 )
-````
+```
 
 To install an already built project, you need to run the `install` target with CMake.
 For example:
 
-````bash
+```bash
 cmake --build build --target install --config Release
 
 # a more general syntax for that command is:
 cmake --build <build_directory> --target install --config <desired_config>
-````
+```
 
 ## Building the project
 
@@ -127,13 +127,13 @@ To build the project, all you need to do, ***after correctly
 [installing the project](README.md#Installing)***, is run a similar **CMake** routine
 to the the one below:
 
-````bash
+```bash
 mkdir build/ && cd build/
 cmake .. -DCMAKE_INSTALL_PREFIX=/absolute/path/to/custom/install/directory
 cmake --build . --target install
-````
+```
 
-> ***Note:*** *The custom ```CMAKE_INSTALL_PREFIX``` can be omitted if you wish to
+> ***Note:*** *The custom ``CMAKE_INSTALL_PREFIX`` can be omitted if you wish to
 install in [the default install location](https://cmake.org/cmake/help/latest/module/GNUInstallDirs.html).*
 
 More options that you can set for the project can be found in the
@@ -147,11 +147,11 @@ for it work correctly; the two are set in the [`cmake/Conan.cmake` file](cmake/C
 In order to generate documentation for the project, you need to configure the build
 to use Doxygen. This is easily done, by modifying the workflow shown above as follows:
 
-````bash
+```bash
 mkdir build/ && cd build/
 cmake .. -D<project_name>_ENABLE_DOXYGEN=1 -DCMAKE_INSTALL_PREFIX=/absolute/path/to/custom/install/directory
 cmake --build . --target doxygen-docs
-````
+```
 
 > ***Note:*** *This will generate a `docs/` directory in the **project's root directory**.*
 
@@ -164,13 +164,13 @@ for unit testing. Unit testing can be disabled in the options, by setting the
 the tests, simply use CTest, from the build directory, passing the desire
 configuration for which to run tests for. An example of this procedure is:
 
-````bash
+```bash
 cd build          # if not in the build directory already
 ctest -C Release  # or `ctest -C Debug` or any other configuration you wish to test
 
 # you can also run tests with the `-VV` flag for a more verbose output (i.e.
 #GoogleTest output as well)
-````
+```
 
 ### End to end tests
 
