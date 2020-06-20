@@ -1,0 +1,12 @@
+[
+{
+  "directory": "/home/filip/Documents/Workplace/modern-cpp-template/build",
+  "command": "/usr/bin/c++   -I/home/filip/Documents/Workplace/modern-cpp-template/include -I/home/filip/Documents/Workplace/modern-cpp-template/src    -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wnull-dereference -Wdouble-promotion -Wformat=2 -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wuseless-cast -std=gnu++17 -o CMakeFiles/Project.dir/src/tmp.cpp.o -c /home/filip/Documents/Workplace/modern-cpp-template/src/tmp.cpp",
+  "file": "/home/filip/Documents/Workplace/modern-cpp-template/src/tmp.cpp"
+},
+{
+  "directory": "/home/filip/Documents/Workplace/modern-cpp-template/build/test",
+  "command": "/usr/bin/c++   -I/home/filip/Documents/Workplace/modern-cpp-template/include -isystem /home/filip/.local/include    -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wnull-dereference -Wdouble-promotion -Wformat=2 -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wuseless-cast -std=gnu++17 -o CMakeFiles/ProjectTests.dir/src/tmp_test.cpp.o -c /home/filip/Documents/Workplace/modern-cpp-template/test/src/tmp_test.cpp",
+  "file": "/home/filip/Documents/Workplace/modern-cpp-template/test/src/tmp_test.cpp"
+}
+]

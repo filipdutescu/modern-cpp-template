@@ -1,0 +1,11 @@
+{
+       	"full_name": "Homer Simpson", 
+	"email": "homer.simpson@example.com", 
+	"github_username": "homersimpson", 
+	"project_name": "Modern C++ Template", 
+	"project_slug": "modern-cpp-template", 
+	"project_short_description": "A template for modern C++ projects, using CMake.", 
+	"version": "0.1.0", 
+	"license": [ "MIT", "BSD", "ISC", "Apache2.0", "GNUv3", "Not open source" ]
+}
+

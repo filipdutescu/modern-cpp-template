@@ -75,7 +75,7 @@ versions recommended here, then you will need:
 ..
 
    **Note:** *You also need to be able to provide **CMake** a supported
-   *`generator <https://cmake.org/cmake/help/latest/manual/cmake-generators.7.html>`_.*
+   `generator <https://cmake.org/cmake/help/latest/manual/cmake-generators.7.html>`_.*
 
 Installing
 ~~~~~~~~~~
