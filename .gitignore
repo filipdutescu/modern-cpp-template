@@ -1,5 +1,4 @@
 \{\{ cookiecutter.project_slug \}\}/[Bb]uild/*
-\{\{ cookiecutter.project_slug \}\}/[Dd]ocs/*
 \{\{ cookiecutter.project_slug \}\}/CMakeCache.*
 \{\{ cookiecutter.project_slug \}\}/CMakeFiles/*
 \{\{ cookiecutter.project_slug \}\}/[Tt]esting/*
