@@ -6,7 +6,7 @@ cmake_minimum_required(VERSION 3.15)
 
 project(
   {{ cookiecutter.project_name }}
-  VERSION {{ cookiecutter.project_version }}
+  VERSION {{ cookiecutter.version }}
   LANGUAGES CXX
 )
 
