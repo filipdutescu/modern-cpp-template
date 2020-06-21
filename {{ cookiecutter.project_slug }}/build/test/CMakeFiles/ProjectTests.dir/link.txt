@@ -1,1 +1,0 @@
-/usr/bin/c++     CMakeFiles/ProjectTests.dir/src/tmp_test.cpp.o  -o ProjectTests  ../libProject.a /home/filip/.local/lib/libgtest_main.a /home/filip/.local/lib/libgtest.a -lpthread 

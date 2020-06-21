@@ -81,9 +81,9 @@ Installing
 ~~~~~~~~~~
 
 It is fairly easy to install the project, all you need to do is clone if
-from `GitHub <https://github.com/filipdutescu/modern-cpp-template>`_ or
+from `GitHub <https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}>`_ or
 `generate a new repository from
-it <https://github.com/filipdutescu/modern-cpp-template/generate>`_
+it <https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/generate>`_
 (also on **GitHub**).
 
 If you wish to clone the repository, rather than generate from it, you
@@ -91,7 +91,7 @@ simply need to run:
 
 .. code:: bash
 
-   git clone https://github.com/filipdutescu/modern-cpp-template/
+   git clone https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/
 
 After finishing getting a copy of the project, with any of the methods
 above, create a new folder in the ``include/`` folder, with the name of
@@ -100,27 +100,6 @@ your project.
 You will also need to rename the ``cmake/Config.cmake.in`` file to start
 with the **exact name of your project**. Such as
 ``cmake/MyNewProjectConfig.cmake.in``.
-
-Finally, change ``"Project"`` from ``CMakeLists.txt``, from
-
-.. code:: cmake
-
-   project(
-     "Project"
-     VERSION 0.1.0
-     LANGUAGES CXX
-   )
-
-to the **exact name of your project**, i.e. using the previous name it
-will become:
-
-.. code:: cmake
-
-   project(
-     MyNewProject
-     VERSION 0.1.0
-     LANGUAGES CXX
-   )
 
 To install an already built project, you need to run the ``install``
 target with CMake. For example:
@@ -219,13 +198,13 @@ Versioning
 
 This project makes use of `SemVer <http://semver.org/>`_ for
 versioning. A list of existing versions can be found in the `project's
-releases <https://github.com/filipdutescu/modern-cpp-template/releases>`_.
+releases <https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/releases>`_.
 
 Authors
 -------
 
--  **Filip-Ioan Dutescu** -
-   `@filipdutescu <https://github.com/filipdutescu>`_
+-  **{{ cookiecutter.full_name }}** -
+   `@{{ cookiecutter.github_username }} <https://github.com/{{ cookiecutter.github_username }}>`_
 
 License
 -------
@@ -234,13 +213,13 @@ This project is licensed under the
 `Unlicense <https://unlicense.org/>`_ - see the `LICENSE <LICENSE>`_
 file for details
 
-.. |Actions Status| image:: https://github.com/filipdutescu/modern-cpp-template/workflows/MacOS/badge.svg
-   :target: https://github.com/filipdutescu/modern-cpp-template/actions
-.. |Actions Status| image:: https://github.com/filipdutescu/modern-cpp-template/workflows/Windows/badge.svg
-   :target: https://github.com/filipdutescu/modern-cpp-template/actions
-.. |Actions Status| image:: https://github.com/filipdutescu/modern-cpp-template/workflows/Ubuntu/badge.svg
-   :target: https://github.com/filipdutescu/modern-cpp-template/actions
-.. |codecov| image:: https://codecov.io/gh/filipdutescu/modern-cpp-template/branch/master/graph/badge.svg
-   :target: https://codecov.io/gh/filipdutescu/modern-cpp-template
-.. |GitHub release (latest by date)| image:: https://img.shields.io/github/v/release/filipdutescu/modern-cpp-template
-   :target: https://github.com/filipdutescu/modern-cpp-template/releases
+.. |Actions Status| image:: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/workflows/MacOS/badge.svg
+   :target: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/actions
+.. |Actions Status| image:: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/workflows/Windows/badge.svg
+   :target: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/actions
+.. |Actions Status| image:: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/workflows/Ubuntu/badge.svg
+   :target: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/actions
+.. |codecov| image:: https://codecov.io/gh/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/branch/master/graph/badge.svg
+   :target: https://codecov.io/gh/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}
+.. |GitHub release (latest by date)| image:: https://img.shields.io/github/v/release/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}
+   :target: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/releases
