@@ -81,9 +81,9 @@ Installing
 ~~~~~~~~~~
 
 It is fairly easy to install the project, all you need to do is clone if
-from `GitHub <https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}>`_ or
+from `GitHub <https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}>`_ or
 `generate a new repository from
-it <https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/generate>`_
+it <https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/generate>`_
 (also on **GitHub**).
 
 If you wish to clone the repository, rather than generate from it, you
@@ -91,7 +91,7 @@ simply need to run:
 
 .. code:: bash
 
-   git clone https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/
+   git clone https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/
 
 After finishing getting a copy of the project, with any of the methods
 above, create a new folder in the ``include/`` folder, with the name of
@@ -198,7 +198,7 @@ Versioning
 
 This project makes use of `SemVer <http://semver.org/>`_ for
 versioning. A list of existing versions can be found in the `project's
-releases <https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/releases>`_.
+releases <https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/releases>`_.
 
 Authors
 -------
@@ -213,13 +213,13 @@ This project is licensed under the
 `Unlicense <https://unlicense.org/>`_ - see the `LICENSE <LICENSE>`_
 file for details
 
-.. |Actions Status| image:: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/workflows/MacOS/badge.svg
-   :target: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/actions
-.. |Actions Status| image:: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/workflows/Windows/badge.svg
-   :target: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/actions
-.. |Actions Status| image:: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/workflows/Ubuntu/badge.svg
-   :target: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/actions
-.. |codecov| image:: https://codecov.io/gh/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/branch/master/graph/badge.svg
-   :target: https://codecov.io/gh/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}
-.. |GitHub release (latest by date)| image:: https://img.shields.io/github/v/release/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}
-   :target: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/releases
+.. |Actions Status| image:: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/workflows/MacOS/badge.svg
+   :target: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/actions
+.. |Actions Status| image:: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/workflows/Windows/badge.svg
+   :target: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/actions
+.. |Actions Status| image:: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/workflows/Ubuntu/badge.svg
+   :target: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/actions
+.. |codecov| image:: https://codecov.io/gh/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/branch/master/graph/badge.svg
+   :target: https://codecov.io/gh/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}
+.. |GitHub release (latest by date)| image:: https://img.shields.io/github/v/release/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}
+   :target: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/releases

@@ -49,11 +49,11 @@ Fixes #XXXX
 Demonstrate the code is solid. Example: The exact commands you ran and their output,
 screenshots / videos if the pull request changes UI.
 
-*Make sure tests pass on all of the [relevant CI workflows](https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/actions).*
+*Make sure tests pass on all of the [relevant CI workflows](https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/actions).*
 
 ### Pull Request Readiness Checklist
 
-See details at [CONTRIBUTING.md](https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/blob/master/CONTRIBUTING.md).
+See details at [CONTRIBUTING.md](https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/blob/master/CONTRIBUTING.md).
 
 * [ ] I agree to contribute to the project under {{ cookiecutter.project_name }} (Unlicense)
 [License](LICENSE).

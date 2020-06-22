@@ -8,14 +8,14 @@ better! There are several ways you can get involved.
 If you are looking for a good way to contribute to the project, please:
 
 -  have a look at the `available issue
-   templates <https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/issues/new/choose>`__
+   templates <https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/issues/new/choose>`__
    and checkout the `examples of good first
-   issues <https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/contribute>`__
+   issues <https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/contribute>`__
    (or `click
-   here <https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/labels/good%20first%20issue>`__).
+   here <https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/labels/good%20first%20issue>`__).
 
 -  look through the `issues that need
-   help <https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/labels/help%20wanted>`__.
+   help <https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/labels/help%20wanted>`__.
 
 -  take a look at a `Pull Request template <PULL_REQUEST_TEMPLATE.md>`__
    to get yourself started.
@@ -25,22 +25,22 @@ Reporting issues and suggesting new features
 
 If you find that the project is not working properly, please file a
 report using the `Bug Report
-template <https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/issues/new?assignees=&labels=bug&template=bug_report.md&title=%5BBUG%5D>`__.
+template <https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/issues/new?assignees=&labels=bug&template=bug_report.md&title=%5BBUG%5D>`__.
 Should the template provided not suit your needs, feel free to make a
 `custom Bug
-Report <https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/issues/new/choose>`__,
+Report <https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/issues/new/choose>`__,
 but please label it accordingly.
 
 We are happy to hear your ideas for how to further improve {{ cookiecutter.project_name }},
 ensuring it suits your needs. Check the
-`Issues <https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/issues>`__
+`Issues <https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/issues>`__
 and see if others have submitted similar feedback. You can upvote
 existing feedback (using the thumbs up reaction/by commenting) or
 `submit a new
-suggestion <https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/labels/feature>`__.
+suggestion <https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/labels/feature>`__.
 
 We always look at upvoted items in
-`Issues <https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/issues>`__
+`Issues <https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/issues>`__
 when we decide what to work on next. We read the comments and we look
 forward to hearing your input.
 
@@ -48,11 +48,11 @@ Finding issues you can help with
 --------------------------------
 
 Looking for something to work on? Issues marked
-```good first issue`` <https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/labels/good%20first%20issue>`__
+```good first issue`` <https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/labels/good%20first%20issue>`__
 are a good place to start.
 
 You can also check the
-```help wanted`` <https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/labels/help%20wanted>`__
+```help wanted`` <https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/labels/help%20wanted>`__
 tag to find other issues to help with. If you’re interested in working
 on a fix, leave a comment to let everyone know and to help avoid
 duplicated effort from others.
@@ -222,7 +222,7 @@ request.
 
 Often, multiple iterations or discussions will be needed to responding
 to feedback from reviewers. Try looking at `past pull
-requests <https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/pulls?q=is%3Apr+is%3Aclosed>`__
+requests <https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/pulls?q=is%3Apr+is%3Aclosed>`__
 to see what the experience might be like.
 
 Contributor License Agreement
