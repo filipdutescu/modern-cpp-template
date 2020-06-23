@@ -1,4 +1,4 @@
-#include "project/tmp.hpp"
+#include "{{ cookiecutter.project_slug }}/tmp.hpp"
 
 #include <gtest/gtest.h>
 
