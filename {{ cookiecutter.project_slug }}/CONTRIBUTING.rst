@@ -107,7 +107,7 @@ Preparing your development environment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To learn how to build the code and run tests, follow the instructions in
-the `README <README.md>`__.
+the `README <README.rst>`__.
 
 Style guidelines
 ~~~~~~~~~~~~~~~~

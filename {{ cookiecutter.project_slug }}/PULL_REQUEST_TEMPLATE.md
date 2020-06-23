@@ -23,8 +23,8 @@ Ex:
 
 ### Code style and formatting
 
-Check the [Contributors Style Guidelines section](CONTRIBUTING.md#Style-guidelines)
-for how to write your code and the [Contributors Code Formatting section](CONTRIBUTING.md#Code-formatting)
+Check the [Contributors Style Guidelines section](CONTRIBUTING.rst#Style-guidelines)
+for how to write your code and the [Contributors Code Formatting section](CONTRIBUTING.rst#Code-formatting)
 for how to format your code.
 
 #### Closing Issues
@@ -53,7 +53,7 @@ screenshots / videos if the pull request changes UI.
 
 ### Pull Request Readiness Checklist
 
-See details at [CONTRIBUTING.md](https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/blob/master/CONTRIBUTING.md).
+See details at [CONTRIBUTING.rst](https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/blob/master/CONTRIBUTING.rst).
 
 * [ ] I agree to contribute to the project under {{ cookiecutter.project_name }} (Unlicense)
 [License](LICENSE).

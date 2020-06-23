@@ -43,7 +43,7 @@ jobs:
         cmake -Bbuild -DCMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/$INSTALL_LOCATION
         cmake --build build --config Release
         cmake --build build --target install --config Release
-        cd ../modern-cpp-template
+        cd ../{{ cookiecutter.project_slug }}
 
     - name: configure
       run: cmake -Bbuild -DCMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/$INSTALL_LOCATION

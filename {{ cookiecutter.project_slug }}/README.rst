@@ -41,7 +41,7 @@ Features
 -  **CI workflows for Windows, Linux and MacOS** using *GitHub Actions*,
    making use of the caching features, to ensure minimum run time,
 
--  **.md templates** for: *README*, *Contributing Guideliness*, *Issues*
+-  **.rst templates** for: *README*, *Contributing Guideliness*, *Issues*
    and *Pull Requests*,
 
 -  **Permissive license** to allow you to integrate it as easily as
@@ -115,7 +115,7 @@ Building the project
 --------------------
 
 To build the project, all you need to do, **after
-correctly `installing the project <README.md#Installing>`_**, is run
+correctly `installing the project <README.rst#Installing>`_**, is run
 a similar **CMake** routine to the the one below:
 
 .. code:: bash
@@ -189,7 +189,7 @@ If applicable, should be presented here.
 Contributing
 ------------
 
-Please read `CONTRIBUTING.md <CONTRIBUTING.md>`_ for details on our how
+Please read `CONTRIBUTING.rst <CONTRIBUTING.rst>`_ for details on our how
 you can become a contributor and the process for submitting pull
 requests to us.
 
