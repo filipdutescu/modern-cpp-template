@@ -25,13 +25,16 @@ endef
 export PRINT_HELP_PYSCRIPT
 
 BROWSER := python -c "$$BROWSER_PYSCRIPT"
+INSTALL_LOCATION := ~/.local
 
 help:
 	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
 
 test: ## run tests quickly with ctest
+	rm -f build/
+	cmake -Bbuild -DCMAKE_INSTALL_PREFIX=$(INSTALL_LOCATION) 
 	cd build/
-	ctest -C Debug -VV
+	ctest -C Release -VV
 
 coverage: ## check code coverage quickly with the default Python
 	coverage run --source cookietemple -m pytest
@@ -42,10 +45,10 @@ coverage: ## check code coverage quickly with the default Python
 docs: ## generate Doxygen HTML documentation, including API docs
 	rm -f docs/
 	rm -f build/
-	cmake -Bbuild -DCMAKE_INSTALL_PREFIX=
-	$(MAKE) -C docs clean
-	$(MAKE) -C docs html
-	$(BROWSER) docs/_build/html/index.html
+	cmake -Bbuild -DCMAKE_INSTALL_PREFIX=$(INSTALL_LOCATION) -D{{ cookiecutter.project_slug }}_ENABLE_DOXYGEN=1
+	cmake --build build --config Release
+	cmake --build build --target doxygen-docs
+	$(BROWSER) docs/html/index.html
 
 install: clean ## install the package to the active Python's site-packages
 	cmake --build build --target install --config Release
