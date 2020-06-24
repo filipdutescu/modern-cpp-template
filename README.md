@@ -50,7 +50,7 @@ template is licensed under the [Unlicense](https://unlicense.org/),
 * Options to build as a header-only library or executable, not just a static or
 shared library.
 
-* **CCache** integration, for speeding up build times
+* **Ccache** integration, for speeding up rebuild times
 
 ## Getting Started
 
