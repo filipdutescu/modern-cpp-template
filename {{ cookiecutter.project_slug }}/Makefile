@@ -1,4 +1,4 @@
-.PHONY: docs help
+.PHONY: install coverage test docs help
 .DEFAULT_GOAL := help
 
 define BROWSER_PYSCRIPT
@@ -31,25 +31,28 @@ help:
 	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
 
 test: ## run tests quickly with ctest
-	rm -f build/
-	cmake -Bbuild -DCMAKE_INSTALL_PREFIX=$(INSTALL_LOCATION) 
-	cd build/
-	ctest -C Release -VV
+	rm -rf build/
+	cmake -Bbuild -DCMAKE_INSTALL_PREFIX=$(INSTALL_LOCATION) -D{{ cookiecutter.project_slug }}_ENABLE_UNIT_TESTING=1
+	cmake --build build --config Release
+	cd build/ && ctest -C Release -VV
 
-coverage: ## check code coverage quickly with the default Python
-	coverage run --source cookietemple -m pytest
-	coverage report -m
-	coverage html
-	$(BROWSER) htmlcov/index.html
+coverage: ## check code coverage quickly GCC
+	rm -rf build/
+	cmake -Bbuild -DCMAKE_INSTALL_PREFIX=$(INSTALL_LOCATION) -D{{ cookiecutter.project_slug }}_ENABLE_CODE_COVERAGE=1
+	cmake --build build --config Release
+	cd build/ && ctest -C Release -VV
 
 docs: ## generate Doxygen HTML documentation, including API docs
-	rm -f docs/
-	rm -f build/
+	rm -rf docs/
+	rm -rf build/
 	cmake -Bbuild -DCMAKE_INSTALL_PREFIX=$(INSTALL_LOCATION) -D{{ cookiecutter.project_slug }}_ENABLE_DOXYGEN=1
 	cmake --build build --config Release
 	cmake --build build --target doxygen-docs
 	$(BROWSER) docs/html/index.html
 
-install: clean ## install the package to the active Python's site-packages
+install: ## install the package to the `INSTALL_LOCATION`
+	rm -rf build/
+	cmake -Bbuild -DCMAKE_INSTALL_PREFIX=$(INSTALL_LOCATION)
+	cmake --build build --config Release
 	cmake --build build --target install --config Release
 
