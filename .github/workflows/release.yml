@@ -25,7 +25,7 @@ jobs:
             cxx: "cl",
             INSTALL_LOCATION: "d:/a/.local",
             environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat",
-            CACHE_LOCATION: ${{env.INSTALL_LOCATION}}
+            CACHE_LOCATION: '${{env.INSTALL_LOCATION}}'
           }
         - {
             name: "Windows Latest MinGW",
@@ -34,7 +34,7 @@ jobs:
             cc: "gcc",
             cxx: "g++",
             INSTALL_LOCATION: "d:/a/.local",
-            CACHE_LOCATION: ${{env.INSTALL_LOCATION}}
+            CACHE_LOCATION: '${{env.INSTALL_LOCATION}}'
           }
         - {
             name: "Ubuntu Latest GCC",
@@ -42,8 +42,8 @@ jobs:
             os: ubuntu-latest,
             cc: "gcc",
             cxx: "g++",
-            INSTALL_LOCATION: ${{github.workspace}}/.local,
-            CACHE_LOCATION: ${{github.workspace}}/${{env.INSTALL_LOCATION}}
+            INSTALL_LOCATION: '${{github.workspace}}/.local',
+            CACHE_LOCATION: '${{github.workspace}}/${{env.INSTALL_LOCATION}}'
           }
         - {
             name: "macOS Latest Clang",
@@ -51,8 +51,8 @@ jobs:
             os: macos-latest,
             cc: "clang",
             cxx: "clang++",
-            INSTALL_LOCATION: ${{github.workspace}}/.local,
-            CACHE_LOCATION: ${{github.workspace}}/${{env.INSTALL_LOCATION}}
+            INSTALL_LOCATION: '${{github.workspace}}/.local',
+            CACHE_LOCATION: '${{github.workspace}}/${{env.INSTALL_LOCATION}}'
           }
 
     steps:
