@@ -1,12 +1,15 @@
-name: Build
+name: Release
 
 on:
   push:
     branches:
-      - master
+      - 'master'
     tags:
       - 'v*'
-  pull_request: {}
+
+env:
+  PROJECT_NAME: "moden-cpp-template"
+  BUILD_TYPE: Release
 
 jobs:
   build:
@@ -19,22 +22,11 @@ jobs:
         config:
         - {
             name: "Windows Latest MSVC",
-            artifact: "Windows-MSVC.tar.xz",
+            artifact: "modern-cpp-template-windows.zip",
             os: windows-latest,
             cc: "cl",
             cxx: "cl",
-            INSTALL_LOCATION: "d:/a/.local",
             environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat",
-            CACHE_LOCATION: '${{matrix.config.INSTALL_LOCATION}}'
-          }
-        - {
-            name: "Windows Latest MinGW",
-            artifact: "Windows-MinGW.tar.xz",
-            os: windows-latest,
-            cc: "gcc",
-            cxx: "g++",
-            INSTALL_LOCATION: "d:/a/.local",
-            CACHE_LOCATION: '${{env.INSTALL_LOCATION}}'
           }
         - {
             name: "Ubuntu Latest GCC",
@@ -42,8 +34,6 @@ jobs:
             os: ubuntu-latest,
             cc: "gcc",
             cxx: "g++",
-            INSTALL_LOCATION: '${{github.workspace}}/.local',
-            CACHE_LOCATION: '${{github.workspace}}/${{env.INSTALL_LOCATION}}'
           }
         - {
             name: "macOS Latest Clang",
@@ -51,8 +41,6 @@ jobs:
             os: macos-latest,
             cc: "clang",
             cxx: "clang++",
-            INSTALL_LOCATION: '${{github.workspace}}/.local',
-            CACHE_LOCATION: '${{github.workspace}}/${{env.INSTALL_LOCATION}}'
           }
 
     steps:
@@ -66,7 +54,7 @@ jobs:
       uses: actions/cache@v2
       id: cache
       with:
-        path: ${{env.CACHE_LOCATION}}
+        path: ${{github.HOME}}/.local
         key: ${{runner.os}}-dependencies
 
     - name: install GoogleTest
@@ -75,23 +63,13 @@ jobs:
         cd ..
         git clone https://github.com/google/googletest.git --branch release-1.10.0
         cd googletest
-        cmake -Bbuild -DCMAKE_INSTALL_PREFIX="$env:INSTALL_LOCATION" -Dgtest_force_shared_crt=1
+        cmake -Bbuild -DCMAKE_INSTALL_PREFIX="${{github.HOME}}" -Dgtest_force_shared_crt=1
         cmake --build build --config Release
         cmake --build build --target install --config Release
         cd ../modern-cpp-template
 
-    - name: Installing vcpkg (windows only)
-      if: ${{ runner.os == 'Windows' }}
-      run: |
-        cd ..
-        git clone https://github.com/Microsoft/vcpkg.git
-        cd vcpkg
-        git checkout --force 2020.01
-        .\bootstrap-vcpkg.bat
-        .\vcpkg.exe install cppzmq:x64-windows
-    
     - name: configure
-      run: cmake -Bbuild -DCMAKE_INSTALL_PREFIX="$env:INSTALL_LOCATION"
+      run: cmake -Bbuild -DCMAKE_INSTALL_PREFIX="${{github.HOME}}"
       
     - name: build
       run: cmake --build build --config "$env:BUILD_TYPE" -j4
@@ -116,13 +94,13 @@ jobs:
     - name: Download artifact
       uses: actions/download-artifact@v2
 
-    - name: Upload to Release
-      uses: meeDamian/github-release@2.0
-      with:
-        files: >
-          Windows-MSVC.tar.xz
-          Windows-MinGW.tar.xz
-          Linux.tar.xz
-          macOS.tar.xz
-        gzip: folders
-        token: ${{ secrets.GITHUB_TOKEN }}
+      #    - name: Upload to Release
+      #      uses: meeDamian/github-release@2.0
+      #      with:
+      #        files: >
+      #          Windows-MSVC.tar.xz
+      #          Windows-MinGW.tar.xz
+      #          Linux.tar.xz
+      #          macOS.tar.xz
+      #        gzip: folders
+      #        token: ${{ secrets.GITHUB_TOKEN }}
