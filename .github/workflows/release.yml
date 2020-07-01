@@ -2,8 +2,6 @@ name: Release
 
 on:
   push:
-    branches:
-      - 'master'
     tags:
       - 'v*'
 
@@ -14,7 +12,6 @@ env:
 jobs:
   build:
     name: ${{ matrix.config.name }}
-    #if: "!contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, '[ci skip]')"
     runs-on: ${{ matrix.config.os }}
     strategy:
       fail-fast: false
@@ -22,7 +19,7 @@ jobs:
         config:
         - {
             name: "Windows Latest MSVC",
-            artifact: "modern-cpp-template-windows.zip",
+            artifact: "$PROJECT_NAME-windows.zip",
             os: windows-latest,
             cc: "cl",
             cxx: "cl",
@@ -30,14 +27,14 @@ jobs:
           }
         - {
             name: "Ubuntu Latest GCC",
-            artifact: "Linux.tar.xz",
+            artifact: "$PROJECT_NAME-linux.tar.xz",
             os: ubuntu-latest,
             cc: "gcc",
             cxx: "g++",
           }
         - {
             name: "macOS Latest Clang",
-            artifact: "macOS.tar.xz",
+            artifact: "$PROJECT_NAME-macos.tar.xz",
             os: macos-latest,
             cc: "clang",
             cxx: "clang++",
@@ -63,13 +60,13 @@ jobs:
         cd ..
         git clone https://github.com/google/googletest.git --branch release-1.10.0
         cd googletest
-        cmake -Bbuild -DCMAKE_INSTALL_PREFIX="$HOME" -Dgtest_force_shared_crt=1
+        cmake -Bbuild -DCMAKE_INSTALL_PREFIX="$HOME/.local" -Dgtest_force_shared_crt=1
         cmake --build build --config Release
         cmake --build build --target install --config Release
         cd ../modern-cpp-template
 
     - name: configure
-      run: cmake -Bbuild -DCMAKE_INSTALL_PREFIX="$HOME"
+      run: cmake -Bbuild -DCMAKE_INSTALL_PREFIX="$HOME/.local"
       
     - name: build
       run: cmake --build build --config "$env:BUILD_TYPE" -j4
