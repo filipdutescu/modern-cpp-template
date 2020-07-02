@@ -122,7 +122,6 @@ jobs:
       uses: actions/download-artifact@v2
 
     - name: upload windows release asset
-      id: upload-release-asset 
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -133,7 +132,6 @@ jobs:
         asset_content_type: application/zip
 
     - name: upload ubuntu release asset
-      id: upload-release-asset 
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -144,7 +142,6 @@ jobs:
         asset_content_type: application/x-tar
 
     - name: upload macos release asset
-      id: upload-release-asset 
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
