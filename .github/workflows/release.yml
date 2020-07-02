@@ -75,6 +75,7 @@ jobs:
       run: |
         cd build
         ctest -C "$env:BUILD_TYPE" -VV
+        cd ..
 
     # for a release not containing directly the source code, replace the files archived
     # with the actual files needed (i.e. *.lib/*.a and *.h(pp))
