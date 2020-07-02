@@ -8,7 +8,7 @@ on:
 
 env:
   BUILD_TYPE: Release
-  INSTALL_LOCATION: "d:/a/.local"
+  INSTALL_LOCATION: ".local"
 
 jobs:
   build:
@@ -32,13 +32,13 @@ jobs:
         cd ..
         git clone https://github.com/google/googletest.git --branch release-1.10.0
         cd googletest
-        cmake -Bbuild -DCMAKE_INSTALL_PREFIX="$env:INSTALL_LOCATION" -Dgtest_force_shared_crt=1
+        cmake -Bbuild -DCMAKE_INSTALL_PREFIX="$HOME/$env:INSTALL_LOCATION" -Dgtest_force_shared_crt=1
         cmake --build build --config Release
         cmake --build build --target install --config Release
         cd ../modern-cpp-template
 
     - name: configure
-      run: cmake -Bbuild -DCMAKE_INSTALL_PREFIX="$env:INSTALL_LOCATION"
+      run: cmake -Bbuild -DCMAKE_INSTALL_PREFIX="$HOME/$env:INSTALL_LOCATION"
       
     - name: build
       run: cmake --build build --config "$env:BUILD_TYPE" -j4

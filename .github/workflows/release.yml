@@ -19,7 +19,7 @@ jobs:
         config:
         - {
             name: "Windows Latest MSVC",
-            artifact: "$PROJECT_NAME-windows.zip",
+            artifact: "$PROJECT_NAME-windows-${GITHUB_REF#refs/*/}.zip",
             os: windows-latest,
             cc: "cl",
             cxx: "cl",
@@ -27,14 +27,14 @@ jobs:
           }
         - {
             name: "Ubuntu Latest GCC",
-            artifact: "$PROJECT_NAME-linux.tar.xz",
+            artifact: "$PROJECT_NAME-ubuntu-${GITHUB_REF#refs/*/}.tar.xz",
             os: ubuntu-latest,
             cc: "gcc",
             cxx: "g++",
           }
         - {
             name: "macOS Latest Clang",
-            artifact: "$PROJECT_NAME-macos.tar.xz",
+            artifact: "$PROJECT_NAME-macos-${GITHUB_REF#refs/*/}.tar.xz",
             os: macos-latest,
             cc: "clang",
             cxx: "clang++",
@@ -76,11 +76,28 @@ jobs:
         cd build
         ctest -C "$env:BUILD_TYPE" -VV
 
+    # for a release not containing directly the source code, replace the files archived
+    # with the actual files needed (i.e. *.lib/*.a and *.h(pp))
+
+    - name: generate archive (Windows)
+      if: ${{ runner.os == 'Windows' }}
+      run: |
+        rmdir /Q /S build
+        cd ..
+        7za a -tzip artifact.zip "$env:PROJECT_NAME/*"
+
+    - name:
+      if: ${{ runner.os != 'Windows' }}
+      run: |
+        rm -rf build
+        cd ..
+        tar -czf artifact.tar.gz "$env:PROJECT_NAME/*"     
+
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
         name: ${{ matrix.config.artifact }}
-        path: build/app*
+        path: ../artifact.zip
 
   release:
     if: contains(github.ref, 'tags/v')
@@ -88,16 +105,51 @@ jobs:
     needs: build
 
     steps:
-    - name: Download artifact
+    - name: create release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        # if needed, you can set the release body here
+        #body: "Release notes"
+        draft: false
+        prerelease: false
+
+    - name: download artifact
       uses: actions/download-artifact@v2
 
-      #    - name: Upload to Release
-      #      uses: meeDamian/github-release@2.0
-      #      with:
-      #        files: >
-      #          Windows-MSVC.tar.xz
-      #          Windows-MinGW.tar.xz
-      #          Linux.tar.xz
-      #          macOS.tar.xz
-      #        gzip: folders
-      #        token: ${{ secrets.GITHUB_TOKEN }}
+    - name: upload windows release asset
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: "./$PROJECT_NAME-windows-${GITHUB_REF#refs/*/}.zip"
+        asset_name: "$PROJECT_NAME-windows-${GITHUB_REF#refs/*/}.zip"
+        asset_content_type: application/zip
+
+    - name: upload ubuntu release asset
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: "./$PROJECT_NAME-ubuntu-${GITHUB_REF#refs/*/}.zip"
+        asset_name: "$PROJECT_NAME-ubuntu-${GITHUB_REF#refs/*/}.zip"
+        asset_content_type: application/x-tar
+
+    - name: upload macos release asset
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: "./$PROJECT_NAME-macos-${GITHUB_REF#refs/*/}.zip"
+        asset_name: "$PROJECT_NAME-macos-${GITHUB_REF#refs/*/}.zip"
+        asset_content_type: application/x-tar
