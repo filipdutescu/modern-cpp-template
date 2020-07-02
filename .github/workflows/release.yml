@@ -82,7 +82,7 @@ jobs:
     - name: generate archive (Windows)
       if: ${{ runner.os == 'Windows' }}
       run: |
-        rmdir /Q /S build
+        rmdir /S /Q build
         cd ..
         7za a -tzip artifact.zip "$env:PROJECT_NAME/*"
 
