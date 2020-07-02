@@ -91,7 +91,7 @@ jobs:
       run: |
         rm -rf build
         cd ..
-        tar -czf artifact.tar.gz "$env:PROJECT_NAME/*"     
+        tar -czf artifact.tar.gz "$PROJECT_NAME/*"     
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
