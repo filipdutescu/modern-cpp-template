@@ -107,14 +107,14 @@ jobs:
       uses: actions/upload-artifact@v2
       if: ${{ runner.os == 'Windows' }}
       with:
-        name: ${{ env.PROJECT_NAME }}-${{ runner.os }}-${{ steps.version_win.outputs.name }}${{ matrix.config.artifact_ext }}
+        name: ${{ runner.os }}-${{ steps.version_win.outputs.name }}
         path: '~/artifact.*'
 
     - name: upload artifacts
       uses: actions/upload-artifact@v2
       if: ${{ runner.os != 'Windows' }}
       with:
-        name: ${{ env.PROJECT_NAME }}-${{ runner.os }}-${{ steps.version.outputs.name }}${{ matrix.config.artifact_ext }}
+        name: ${{ runner.os }}-${{ steps.version.outputs.name }}
         path: '~/artifact.*'
 
   release:
@@ -143,7 +143,7 @@ jobs:
     - name: download artifact
       uses: actions/download-artifact@v2
       with:
-        name: "${{ env.PROJECT_NAME }}-Linux-${{ steps.version.outputs.name }}.tar.gz"
+        name: "Linux-${{ steps.version.outputs.name }}"
         path: ./
 
     - name: upload ubuntu release asset
@@ -152,9 +152,15 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: "${{ github.workspace }}/${{ env.PROJECT_NAME }}-Linux-${{ steps.version.outputs.name }}.tar.gz"
+        asset_path: "artifact.tar.gz"
         asset_name: "${{ env.PROJECT_NAME }}-Linux-${{ steps.version.outputs.name }}.tar.gz"
         asset_content_type: application/x-tar
+
+    - name: download artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: "Windows-${{ steps.version.outputs.name }}"
+        path: ./
 
     - name: upload windows release asset
       uses: actions/upload-release-asset@v1
@@ -162,9 +168,15 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: "${{ github.workspace }}/${{ env.PROJECT_NAME }}-Windows-${{ steps.version.outputs.name }}.zip"
+        asset_path: "artifact.zip"
         asset_name: "${{ env.PROJECT_NAME }}-Windows-${{ steps.version.outputs.name }}.zip"
         asset_content_type: application/zip
+
+    - name: download artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: "macOS-${{ steps.version.outputs.name }}"
+        path: ./
 
     - name: upload macos release asset
       uses: actions/upload-release-asset@v1
@@ -172,6 +184,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: "${{ github.workspace }}/${{ env.PROJECT_NAME }}-macOS-${{ steps.version.outputs.name }}.tar.gz"
+        asset_path: "./artifact.tar.gz"
         asset_name: "${{ env.PROJECT_NAME }}-macOS-${{ steps.version.outputs.name }}.tar.gz"
         asset_content_type: application/x-tar
