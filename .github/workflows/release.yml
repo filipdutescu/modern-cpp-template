@@ -21,7 +21,7 @@ jobs:
         config:
         - {
             name: "Windows Latest MSVC",
-            artifact: 'windows-${{ github.event.release.tag_name }}.zip',
+            artifact_ext: '.zip',
             os: windows-latest,
             cc: "cl",
             cxx: "cl",
@@ -29,20 +29,23 @@ jobs:
           }
         - {
             name: "Ubuntu Latest GCC",
-            artifact: 'ubuntu-${{ github.event.release.tag_name }}.tar.xz',
+            artifact_ext: '.tar.xz',
             os: ubuntu-latest,
             cc: "gcc",
             cxx: "g++",
           }
         - {
             name: "macOS Latest Clang",
-            artifact: 'macos-${{ github.event.release.tag_name }}.tar.xz',
+            artifact_ext: '.tar.xz',
             os: macos-latest,
             cc: "clang",
             cxx: "clang++",
           }
 
     steps:
+    - name: set version name
+        id: version
+        run: echo ::set-output name=name::${GITHUB_REF#refs/*/}
     
     - name: Checkout
       uses: actions/checkout@v2
@@ -85,7 +88,7 @@ jobs:
       if: ${{ runner.os == 'Windows' }}
       run: |
         rmdir -r -fo build
-        7z a -tzip $env:HOME/artifact.zip *
+        7z a -tzip $HOME/artifact.zip *
 
 
     - name: generate archive
@@ -97,7 +100,7 @@ jobs:
     - name: upload artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: ${{ env.PROJECT_NAME }}-${{ matrix.config.artifact }}
+        name: ${{ env.PROJECT_NAME }}-${{ runner.os }}-${{ steps.version.name }}-${{ matrix.config.artifact_ext }}
         path: '~/artifact.*'
 
   release:
