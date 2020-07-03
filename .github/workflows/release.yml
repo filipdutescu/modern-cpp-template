@@ -83,20 +83,20 @@ jobs:
       if: ${{ runner.os == 'Windows' }}
       run: |
         rmdir -r -fo build
-        7z a -tzip ../artifact.zip *
+        7z a -tzip $env:HOME/artifact.zip *
 
 
     - name: generate archive
       if: ${{ runner.os != 'Windows' }}
       run: |
         rm -rf build
-        tar -czf ../artifact.tar.gz .
+        tar -cvzf $HOME/artifact.tar.gz .
 
     - name: upload artifacts
       uses: actions/upload-artifact@v2
       with:
         name: ${{ matrix.config.artifact }}
-        path: '../artifact.*'
+        path: '~/artifact.*'
 
   release:
     if: contains(github.ref, 'tags/v')
