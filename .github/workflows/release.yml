@@ -75,11 +75,6 @@ jobs:
       run: |
         cd build
         ctest -C "$env:BUILD_TYPE" -VV
-        cd ..
-
-    - name: check current dir
-      if: ${{ runner.os != 'Windows' }}
-      run: echo $(pwd)
 
     # for a release not containing directly the source code, replace the files archived
     # with the actual files needed (i.e. *.lib/*.a and *.h(pp))
@@ -87,22 +82,20 @@ jobs:
     - name: generate archive (Windows)
       if: ${{ runner.os == 'Windows' }}
       run: |
-        rmdir /S /Q build
-        cd ..
-        7za a -tzip artifact.zip "$env:PROJECT_NAME/*"
+        rmdir -r -fo build
+        7za a -tzip ../artifact.zip *
 
     - name:
       if: ${{ runner.os != 'Windows' }}
       run: |
         rm -rf build
-        cd ..
-        tar -czf artifact.tar.gz "$PROJECT_NAME/*"     
+        tar -czf ../artifact.tar.gz .
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
         name: ${{ matrix.config.artifact }}
-        path: ../artifact.zip
+        path: ../artifact.*
 
   release:
     if: contains(github.ref, 'tags/v')
