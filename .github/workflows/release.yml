@@ -13,8 +13,6 @@ jobs:
   build:
     name: ${{ matrix.config.name }}
     runs-on: ${{ matrix.config.os }}
-    env:
-      PROJECT_NAME: "modern-cpp-template"
     strategy:
       fail-fast: false
       matrix:
@@ -45,7 +43,7 @@ jobs:
     steps:
     - name: set version name
       id: version
-      run: echo ::set-output name=name::${GITHUB_REF#refs/*/}
+      run: echo ::set-output name=name::${GITHUB_REF#refs/tags/}
     
     - name: Checkout
       uses: actions/checkout@v2
@@ -56,11 +54,11 @@ jobs:
       uses: actions/cache@v2
       id: cache
       with:
-        path: ${{github.HOME}}/.local
-        key: ${{runner.os}}-dependencies
+        path: ${{ github.HOME }}/.local
+        key: ${{ runner.os }}-dependencies
 
     - name: install GoogleTest
-      if: ${{steps.cache.output.cache-hit != 'true'}}
+      if: ${{ steps.cache.output.cache-hit != 'true' }}
       run: |
         cd ..
         git clone https://github.com/google/googletest.git --branch release-1.10.0
@@ -100,7 +98,7 @@ jobs:
     - name: upload artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: ${{ env.PROJECT_NAME }}-${{ runner.os }}-${{ steps.version.name }}-${{ matrix.config.artifact_ext }}
+        name: ${{ env.PROJECT_NAME }}-${{ runner.os }}-${{ steps.version.outputs.name }}-${{ matrix.config.artifact_ext }}
         path: '~/artifact.*'
 
   release:
@@ -116,7 +114,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
       with:
         tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.event.release.tag_name }}
+        release_name: Release ${{ steps.version.outputs.name }}
         # if needed, you can set the release body here
         #body: "Release notes"
         draft: false
@@ -131,8 +129,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: "./*.zip"
-        asset_name: "$PROJECT_NAME-windows-${GITHUB_REF#refs/*/}.zip"
+        asset_path: "./${{ env.PROJECT_NAME }}-Windows-${{ steps.version.output.name }}.zip"
+        asset_name: "${{ env.PROJECT_NAME }}-Windows-${{ steps.version.output.name }}.zip"
         asset_content_type: application/zip
 
     - name: upload ubuntu release asset
@@ -141,8 +139,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: "./$PROJECT_NAME-ubuntu-${GITHUB_REF#refs/*/}.tar.gz"
-        asset_name: "$PROJECT_NAME-ubuntu-${GITHUB_REF#refs/*/}.tar.gz"
+        asset_path: "./${{ env.PROJECT_NAME }}-Linux-${{ steps.version.output.name }}.tar.gz"
+        asset_name: "${{ env.PROJECT_NAME }}-Linux-${{ steps.version.output.name }}.tar.gz"
         asset_content_type: application/x-tar
 
     - name: upload macos release asset
@@ -151,6 +149,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: "./$PROJECT_NAME-macos-${GITHUB_REF#refs/*/}.tar.gz"
-        asset_name: "$PROJECT_NAME-macos-${GITHUB_REF#refs/*/}.tar.gz"
+        asset_path: "./${{ env.PROJECT_NAME }}-macOS-${{ steps.version.output.name }}.tar.gz"
+        asset_name: "${{ env.PROJECT_NAME }}-macOS-${{ steps.version.output.name }}.tar.gz"
         asset_content_type: application/x-tar
