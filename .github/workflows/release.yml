@@ -12,7 +12,6 @@ env:
 jobs:
   build:
     name: ${{ matrix.config.name }}
-    id: build
     runs-on: ${{ matrix.config.os }}
     env:
       PROJECT_NAME: ${{ env.PROJECT_NAME }}
@@ -22,7 +21,7 @@ jobs:
         config:
         - {
             name: "Windows Latest MSVC",
-            artifact: 'windows-${{ github.ref }}.zip',
+            artifact: '${{ jobs.build.env.PROJECT_NAME }}-windows-${{ github.ref }}.zip',
             os: windows-latest,
             cc: "cl",
             cxx: "cl",
@@ -30,14 +29,14 @@ jobs:
           }
         - {
             name: "Ubuntu Latest GCC",
-            artifact: 'ubuntu-${{ github.ref }}}.tar.xz',
+            artifact: '${{ jobs.build.env.PROJECT_NAME }}-${{ github.ref }}}.tar.xz',
             os: ubuntu-latest,
             cc: "gcc",
             cxx: "g++",
           }
         - {
             name: "macOS Latest Clang",
-            artifact: 'macos-${{ github.ref }}.tar.xz',
+            artifact: '${{ jobs.build.env.PROJECT_NAME }}-${{ github.ref }}.tar.xz',
             os: macos-latest,
             cc: "clang",
             cxx: "clang++",
@@ -98,7 +97,7 @@ jobs:
     - name: upload artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: ${{ jobs.build.env.PROJECT_NAME }}-${{ matrix.config.artifact }}
+        name: ${{ matrix.config.artifact }}
         path: '~/artifact.*'
 
   release:
@@ -139,8 +138,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: "./$PROJECT_NAME-ubuntu-${GITHUB_REF#refs/*/}.zip"
-        asset_name: "$PROJECT_NAME-ubuntu-${GITHUB_REF#refs/*/}.zip"
+        asset_path: "./$PROJECT_NAME-ubuntu-${GITHUB_REF#refs/*/}.tar.gz"
+        asset_name: "$PROJECT_NAME-ubuntu-${GITHUB_REF#refs/*/}.tar.gz"
         asset_content_type: application/x-tar
 
     - name: upload macos release asset
@@ -149,6 +148,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: "./$PROJECT_NAME-macos-${GITHUB_REF#refs/*/}.zip"
-        asset_name: "$PROJECT_NAME-macos-${GITHUB_REF#refs/*/}.zip"
+        asset_path: "./$PROJECT_NAME-macos-${GITHUB_REF#refs/*/}.tar.gz"
+        asset_name: "$PROJECT_NAME-macos-${GITHUB_REF#refs/*/}.tar.gz"
         asset_content_type: application/x-tar
