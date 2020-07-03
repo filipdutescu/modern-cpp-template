@@ -41,17 +41,17 @@ jobs:
           }
 
     steps:
-    #- name: set version name
-    #  id: version
-    #  run: echo ::set-output name=name::${GITHUB_REF#refs/tags/}
-
+    - name: set version name (Windows)
+      id: version_win
+      if: ${{ runner.os == 'Windows' }}
+      run: |
+        $TAG = ${env:GITHUB_REF} -replace 'refs/tags/', ''
+        echo "::set-env name=name::$TAG"
+    
     - name: set version name
       id: version
-      uses: actions/github-script@0.2.0
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        script: |
-          return context.payload.ref.replace(/\/refs\/tags\//, '');
+      if: ${{ runner.os != 'Windows' }}
+      run: echo ::set-output name=name::${GITHUB_REF#refs/tags/}
 
     - name: Checkout
       uses: actions/checkout@v2
@@ -105,8 +105,16 @@ jobs:
 
     - name: upload artifacts
       uses: actions/upload-artifact@v2
+      if: ${{ runner.os == 'Windows' }}
       with:
-        name: ${{ env.PROJECT_NAME }}-${{ runner.os }}-${{ steps.version.outputs.result }}${{ matrix.config.artifact_ext }}
+        name: ${{ env.PROJECT_NAME }}-${{ runner.os }}-${{ steps.version_win.outputs.name }}${{ matrix.config.artifact_ext }}
+        path: '~/artifact.*'
+
+    - name: upload artifacts
+      uses: actions/upload-artifact@v2
+      if: ${{ runner.os != 'Windows' }}
+      with:
+        name: ${{ env.PROJECT_NAME }}-${{ runner.os }}-${{ steps.version.outputs.name }}${{ matrix.config.artifact_ext }}
         path: '~/artifact.*'
 
   release:
