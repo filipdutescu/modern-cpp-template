@@ -21,7 +21,7 @@ jobs:
         config:
         - {
             name: "Windows Latest MSVC",
-            artifact: '${{ jobs.build.env.PROJECT_NAME }}-windows-${{ github.ref }}.zip',
+            artifact: 'windows-${{ github.ref }}.zip',
             os: windows-latest,
             cc: "cl",
             cxx: "cl",
@@ -29,14 +29,14 @@ jobs:
           }
         - {
             name: "Ubuntu Latest GCC",
-            artifact: '${{ jobs.build.env.PROJECT_NAME }}-${{ github.ref }}}.tar.xz',
+            artifact: '${{ github.ref }}}.tar.xz',
             os: ubuntu-latest,
             cc: "gcc",
             cxx: "g++",
           }
         - {
             name: "macOS Latest Clang",
-            artifact: '${{ jobs.build.env.PROJECT_NAME }}-${{ github.ref }}.tar.xz',
+            artifact: '${{ github.ref }}.tar.xz',
             os: macos-latest,
             cc: "clang",
             cxx: "clang++",
@@ -97,7 +97,7 @@ jobs:
     - name: upload artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: ${{ matrix.config.artifact }}
+        name: ${{ jobs.build.env.PROJECT_NAME }}-${{ matrix.config.artifact }}
         path: '~/artifact.*'
 
   release:
