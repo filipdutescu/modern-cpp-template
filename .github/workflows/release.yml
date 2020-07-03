@@ -12,14 +12,17 @@ env:
 jobs:
   build:
     name: ${{ matrix.config.name }}
+    id: "build"
     runs-on: ${{ matrix.config.os }}
+    env:
+      PROJECT_NAME: ${{ env.PROJECT_NAME }}
     strategy:
       fail-fast: false
       matrix:
         config:
         - {
             name: "Windows Latest MSVC",
-            artifact: '${{ env.PROJECT_NAME }}-windows-${{ github.ref }}.zip',
+            artifact: '${{ jobs.build.env.PROJECT_NAME }}-windows-${{ github.ref }}.zip',
             os: windows-latest,
             cc: "cl",
             cxx: "cl",
@@ -27,14 +30,14 @@ jobs:
           }
         - {
             name: "Ubuntu Latest GCC",
-            artifact: '${{ env.PROJECT_NAME }}-ubuntu-${{ github.ref }}}.tar.xz',
+            artifact: '${{ jobs.build.env.PROJECT_NAME }}-ubuntu-${{ github.ref }}}.tar.xz',
             os: ubuntu-latest,
             cc: "gcc",
             cxx: "g++",
           }
         - {
             name: "macOS Latest Clang",
-            artifact: '${{ env.PROJECT_NAME }}-macos-${{ github.ref }}.tar.xz',
+            artifact: '${{ jobs.build.env.PROJECT_NAME }}-macos-${{ github.ref }}.tar.xz',
             os: macos-latest,
             cc: "clang",
             cxx: "clang++",
