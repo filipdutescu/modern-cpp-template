@@ -41,15 +41,18 @@ jobs:
           }
 
     steps:
-    - name: set version name
+    - name: set version name (Windows)
       id: version
       if: ${{ runner.os == 'Windows' }}
       run: echo ::set-output name=name::${GITHUB_REF#refs/tags/}
+    
+    - name: set version name
+      id: version
       if: ${{ runner.os != 'Windows' }}
       run: |
         $TAG = ${env:GITHUB_REF} -replace 'refs/tags/', ''
         echo "::set-env name=name::$TAG"
-    
+
     - name: Checkout
       uses: actions/checkout@v2
       with:
