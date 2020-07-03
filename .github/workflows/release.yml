@@ -97,7 +97,7 @@ jobs:
     - name: upload artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: ${{ jobs.build.env.PROJECT_NAME }}-${{ matrix.config.artifact }}
+        name: ${{ env.PROJECT_NAME }}-${{ matrix.config.artifact }}
         path: '~/artifact.*'
 
   release:
