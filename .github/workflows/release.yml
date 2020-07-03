@@ -44,8 +44,8 @@ jobs:
 
     steps:
     - name: set version name
-        id: version
-        run: echo ::set-output name=name::${GITHUB_REF#refs/*/}
+      id: version
+      run: echo ::set-output name=name::${GITHUB_REF#refs/*/}
     
     - name: Checkout
       uses: actions/checkout@v2
