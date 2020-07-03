@@ -143,6 +143,7 @@ jobs:
     - name: download artifact
       uses: actions/download-artifact@v2
       with:
+        name: "${{ env.PROJECT_NAME }}-Linux-${{ steps.version.outputs.name }}.tar.gz"
         path: ./
 
     - name: upload ubuntu release asset
