@@ -27,14 +27,14 @@ jobs:
           }
         - {
             name: "Ubuntu Latest GCC",
-            artifact_ext: '.tar.xz',
+            artifact_ext: '.tar.gz',
             os: ubuntu-latest,
             cc: "gcc",
             cxx: "g++",
           }
         - {
             name: "macOS Latest Clang",
-            artifact_ext: '.tar.xz',
+            artifact_ext: '.tar.gz',
             os: macos-latest,
             cc: "clang",
             cxx: "clang++",
