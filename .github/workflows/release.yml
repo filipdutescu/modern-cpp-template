@@ -98,7 +98,7 @@ jobs:
     - name: upload artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: ${{ env.PROJECT_NAME }}-${{ runner.os }}-${{ steps.version.outputs.name }}-${{ matrix.config.artifact_ext }}
+        name: ${{ env.PROJECT_NAME }}-${{ runner.os }}-${{ steps.version.outputs.name }}${{ matrix.config.artifact_ext }}
         path: '~/artifact.*'
 
   release:
@@ -110,7 +110,7 @@ jobs:
     - name: set version name
       id: version
       run: echo ::set-output name=name::${GITHUB_REF#refs/tags/}
-      
+
     - name: create release
       id: create_release
       uses: actions/create-release@v1
