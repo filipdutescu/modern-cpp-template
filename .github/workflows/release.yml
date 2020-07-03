@@ -12,7 +12,7 @@ env:
 jobs:
   build:
     name: ${{ matrix.config.name }}
-    id: "build"
+    id: build
     runs-on: ${{ matrix.config.os }}
     env:
       PROJECT_NAME: ${{ env.PROJECT_NAME }}
@@ -22,7 +22,7 @@ jobs:
         config:
         - {
             name: "Windows Latest MSVC",
-            artifact: '${{ jobs.build.env.PROJECT_NAME }}-windows-${{ github.ref }}.zip',
+            artifact: 'windows-${{ github.ref }}.zip',
             os: windows-latest,
             cc: "cl",
             cxx: "cl",
@@ -30,14 +30,14 @@ jobs:
           }
         - {
             name: "Ubuntu Latest GCC",
-            artifact: '${{ jobs.build.env.PROJECT_NAME }}-ubuntu-${{ github.ref }}}.tar.xz',
+            artifact: 'ubuntu-${{ github.ref }}}.tar.xz',
             os: ubuntu-latest,
             cc: "gcc",
             cxx: "g++",
           }
         - {
             name: "macOS Latest Clang",
-            artifact: '${{ jobs.build.env.PROJECT_NAME }}-macos-${{ github.ref }}.tar.xz',
+            artifact: 'macos-${{ github.ref }}.tar.xz',
             os: macos-latest,
             cc: "clang",
             cxx: "clang++",
@@ -98,7 +98,7 @@ jobs:
     - name: upload artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: ${{ matrix.config.artifact }}
+        name: ${{ jobs.build.env.PROJECT_NAME }}-${{ matrix.config.artifact }}
         path: '~/artifact.*'
 
   release:
@@ -129,7 +129,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: "./$PROJECT_NAME-windows-${GITHUB_REF#refs/*/}.zip"
+        asset_path: "./*.zip"
         asset_name: "$PROJECT_NAME-windows-${GITHUB_REF#refs/*/}.zip"
         asset_content_type: application/zip
 
