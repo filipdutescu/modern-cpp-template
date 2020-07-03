@@ -21,7 +21,7 @@ jobs:
         config:
         - {
             name: "Windows Latest MSVC",
-            artifact: 'windows-${{ github.ref/refs\/tags\// }}.zip',
+            artifact: 'windows-${{ github.event.release.tag_name }}.zip',
             os: windows-latest,
             cc: "cl",
             cxx: "cl",
@@ -29,14 +29,14 @@ jobs:
           }
         - {
             name: "Ubuntu Latest GCC",
-            artifact: 'ubuntu-${{ github.ref/refs\/tags\// }}}.tar.xz',
+            artifact: 'ubuntu-${{ github.event.release.tag_name }}.tar.xz',
             os: ubuntu-latest,
             cc: "gcc",
             cxx: "g++",
           }
         - {
             name: "macOS Latest Clang",
-            artifact: 'macos-${{ github.ref/refs\/tags\// }}.tar.xz',
+            artifact: 'macos-${{ github.event.release.tag_name }}.tar.xz',
             os: macos-latest,
             cc: "clang",
             cxx: "clang++",
@@ -113,7 +113,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
       with:
         tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref/refs\/tags\// }}
+        release_name: Release ${{ github.event.release.tag_name }}
         # if needed, you can set the release body here
         #body: "Release notes"
         draft: false
