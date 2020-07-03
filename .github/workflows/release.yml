@@ -142,6 +142,8 @@ jobs:
 
     - name: download artifact
       uses: actions/download-artifact@v2
+      with:
+        path: ./
 
     - name: upload ubuntu release asset
       uses: actions/upload-release-asset@v1
