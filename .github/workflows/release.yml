@@ -45,7 +45,7 @@ jobs:
       id: version_win
       if: ${{ runner.os == 'Windows' }}
       run: |
-        $TAG = ${env:GITHUB_REF} -replace 'refs/tags/', ''
+        $TAG = (${env:GITHUB_REF} -replace 'refs/tags/', '')
         echo "::set-env name=name::$TAG"
     
     - name: set version name
@@ -151,6 +151,7 @@ jobs:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: "./${{ env.PROJECT_NAME }}-Windows-${{ steps.version.outputs.name }}.zip"
         asset_name: "${{ env.PROJECT_NAME }}-Windows-${{ steps.version.outputs.name }}.zip"
+        asset_label: "${{ env.PROJECT_NAME }}-Windows-${{ steps.version.outputs.name }}.zip"
         asset_content_type: application/zip
 
     - name: upload ubuntu release asset
@@ -161,6 +162,7 @@ jobs:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: "./${{ env.PROJECT_NAME }}-Linux-${{ steps.version.outputs.name }}.tar.gz"
         asset_name: "${{ env.PROJECT_NAME }}-Linux-${{ steps.version.outputs.name }}.tar.gz"
+        asset_label: "${{ env.PROJECT_NAME }}-Linux-${{ steps.version.outputs.name }}.tar.gz"
         asset_content_type: application/x-tar
 
     - name: upload macos release asset
@@ -171,4 +173,5 @@ jobs:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: "./${{ env.PROJECT_NAME }}-macOS-${{ steps.version.outputs.name }}.tar.gz"
         asset_name: "${{ env.PROJECT_NAME }}-macOS-${{ steps.version.outputs.name }}.tar.gz"
+        asset_label: "${{ env.PROJECT_NAME }}-macOS-${{ steps.version.outputs.name }}.tar.gz"
         asset_content_type: application/x-tar
