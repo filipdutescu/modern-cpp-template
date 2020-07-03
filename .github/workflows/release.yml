@@ -6,7 +6,7 @@ on:
       - 'v*'
 
 env:
-  PROJECT_NAME: "moden-cpp-template"
+  PROJECT_NAME: "modern-cpp-template"
   BUILD_TYPE: Release
 
 jobs:
@@ -143,16 +143,6 @@ jobs:
     - name: download artifact
       uses: actions/download-artifact@v2
 
-    - name: upload windows release asset
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: "${{ github.workspace }}/${{ env.PROJECT_NAME }}-Windows-${{ steps.version.outputs.name }}.zip"
-        asset_name: "${{ env.PROJECT_NAME }}-Windows-${{ steps.version.outputs.name }}.zip"
-        asset_content_type: application/zip
-
     - name: upload ubuntu release asset
       uses: actions/upload-release-asset@v1
       env:
@@ -162,6 +152,16 @@ jobs:
         asset_path: "${{ github.workspace }}/${{ env.PROJECT_NAME }}-Linux-${{ steps.version.outputs.name }}.tar.gz"
         asset_name: "${{ env.PROJECT_NAME }}-Linux-${{ steps.version.outputs.name }}.tar.gz"
         asset_content_type: application/x-tar
+
+    - name: upload windows release asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: "${{ github.workspace }}/${{ env.PROJECT_NAME }}-Windows-${{ steps.version.outputs.name }}.zip"
+        asset_name: "${{ env.PROJECT_NAME }}-Windows-${{ steps.version.outputs.name }}.zip"
+        asset_content_type: application/zip
 
     - name: upload macos release asset
       uses: actions/upload-release-asset@v1
