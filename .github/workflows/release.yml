@@ -46,7 +46,7 @@ jobs:
       if: ${{ runner.os == 'Windows' }}
       run: |
         $TAG = (${env:GITHUB_REF} -replace 'refs/tags/', '')
-        echo "::set-env name=name::$TAG"
+        echo "::set-output name=name::$TAG"
     
     - name: set version name
       id: version
