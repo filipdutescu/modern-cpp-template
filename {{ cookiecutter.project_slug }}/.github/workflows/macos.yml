@@ -27,7 +27,7 @@ jobs:
         key: {% raw %}${{ runner.os }}{% endraw %}-dependencies
 
     - name: install GoogleTest
-      if: ${{ steps.cache.output.cache-hit != 'true' }}
+      if: {% raw %}${{ steps.cache.output.cache-hit != 'true' }}{% endraw %}
         path: {% raw %}${{github.workspace}}{% endraw %}/{% raw %}${{env.INSTALL_LOCATION}}{% endraw %}
         key: {% raw %}${{runner.os}}{% endraw %}-dependencies
 
