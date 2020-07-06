@@ -11,8 +11,8 @@ env:
 
 jobs:
   build:
-    name: ${{ matrix.config.name }}
-    runs-on: ${{ matrix.config.os }}
+    name: {% raw %}${{ matrix.config.name }}{% endraw %}
+    runs-on: {% raw %}${{ matrix.config.os }}{% endraw %}
     strategy:
       fail-fast: false
       matrix:
@@ -45,13 +45,13 @@ jobs:
       id: version_win
       if: ${{ runner.os == 'Windows' }}
       run: |
-        $TAG = (${env:GITHUB_REF} -replace 'refs/tags/', '')
+        $TAG = ({% raw %}${env:GITHUB_REF}{% endraw %} -replace 'refs/tags/', '')
         echo "::set-output name=name::$TAG"
     
     - name: set version name
       id: version
-      if: ${{ runner.os != 'Windows' }}
-      run: echo ::set-output name=name::${GITHUB_REF#refs/tags/}
+      if: {% raw %}${{ runner.os != 'Windows' }}{% endraw %}
+      run: echo ::set-output name=name::{% raw %}${GITHUB_REF#refs/tags/}{% endraw %}
 
     - name: Checkout
       uses: actions/checkout@v2
@@ -62,11 +62,11 @@ jobs:
       uses: actions/cache@v2
       id: cache
       with:
-        path: ${{ github.HOME }}/.local
-        key: ${{ runner.os }}-dependencies
+        path: {% raw %}${{ github.HOME }}{% endraw %}/.local
+        key: {% raw %}${{ runner.os }}{% endraw %}-dependencies
 
     - name: install GoogleTest
-      if: ${{ steps.cache.output.cache-hit != 'true' }}
+      if: {% raw %}${{ steps.cache.output.cache-hit != 'true' }}{% endraw %}
       run: |
         cd ..
         git clone https://github.com/google/googletest.git --branch release-1.10.0
@@ -91,30 +91,30 @@ jobs:
     # with the actual files needed (i.e. *.lib/*.a and *.h(pp))
 
     - name: generate archive (Windows)
-      if: ${{ runner.os == 'Windows' }}
+      if: {% raw %}${{ runner.os == 'Windows' }}{% endraw %}
       run: |
         rmdir -r -fo build
         7z a -tzip $HOME/artifact.zip *
 
 
     - name: generate archive
-      if: ${{ runner.os != 'Windows' }}
+      if: {% raw %}${{ runner.os != 'Windows' }}{% endraw %}
       run: |
         rm -rf build
         tar -cvzf $HOME/artifact.tar.gz .
 
     - name: upload artifacts
       uses: actions/upload-artifact@v2
-      if: ${{ runner.os == 'Windows' }}
+      if: {% raw %}${{ runner.os == 'Windows' }}{% endraw %}
       with:
-        name: ${{ runner.os }}-${{ steps.version_win.outputs.name }}
+        name: {% raw %}${{ runner.os }}{% endraw %}-{% raw %}${{ steps.version_win.outputs.name }}{% endraw %}
         path: '~/artifact.*'
 
     - name: upload artifacts
       uses: actions/upload-artifact@v2
-      if: ${{ runner.os != 'Windows' }}
+      if: {% raw %}${{ runner.os != 'Windows' }}{% endraw %}
       with:
-        name: ${{ runner.os }}-${{ steps.version.outputs.name }}
+        name: {% raw %}${{ runner.os }}{% endraw %}-{% raw %}${{ steps.version.outputs.name }}{% endraw %}
         path: '~/artifact.*'
 
   release:
@@ -125,16 +125,16 @@ jobs:
     steps:
     - name: set version name
       id: version
-      run: echo ::set-output name=name::${GITHUB_REF#refs/tags/}
+      run: echo ::set-output name=name::{% raw %}${GITHUB_REF#refs/tags/}{% endraw %}
 
     - name: create release
       id: create_release
       uses: actions/create-release@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        GITHUB_TOKEN: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %} # This token is provided by Actions, you do not need to create your own token
       with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ steps.version.outputs.name }}
+        tag_name: {% raw %}${{ github.ref }}{% endraw %}
+        release_name: Release {% raw %}${{ steps.version.outputs.name }}{% endraw %}
         # if needed, you can set the release body here
         #body: "Release notes"
         draft: false
@@ -143,47 +143,47 @@ jobs:
     - name: download artifact
       uses: actions/download-artifact@v2
       with:
-        name: "Linux-${{ steps.version.outputs.name }}"
+        name: "Linux-{% raw %}${{ steps.version.outputs.name }}{% endraw %}"
         path: ./
 
     - name: upload ubuntu release asset
       uses: actions/upload-release-asset@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        upload_url: {% raw %}${{ steps.create_release.outputs.upload_url }}{% endraw %}
         asset_path: "artifact.tar.gz"
-        asset_name: "${{ env.PROJECT_NAME }}-Linux-${{ steps.version.outputs.name }}.tar.gz"
+        asset_name: "{% raw %}${{ env.PROJECT_NAME }}{% endraw %}-Linux-{% raw %}${{ steps.version.outputs.name }}{% endraw %}.tar.gz"
         asset_content_type: application/x-tar
 
     - name: download artifact
       uses: actions/download-artifact@v2
       with:
-        name: "Windows-${{ steps.version.outputs.name }}"
+        name: "Windows-{% raw %}${{ steps.version.outputs.name }}{% endraw %}"
         path: ./
 
     - name: upload windows release asset
       uses: actions/upload-release-asset@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        upload_url: {% raw %}${{ steps.create_release.outputs.upload_url }}{% endraw %}
         asset_path: "artifact.zip"
-        asset_name: "${{ env.PROJECT_NAME }}-Windows-${{ steps.version.outputs.name }}.zip"
+        asset_name: "{% raw %}${{ env.PROJECT_NAME }}{% endraw %}-Windows-{% raw %}${{ steps.version.outputs.name }}{% endraw %}.zip"
         asset_content_type: application/zip
 
     - name: download artifact
       uses: actions/download-artifact@v2
       with:
-        name: "macOS-${{ steps.version.outputs.name }}"
+        name: "macOS-{% raw %}${{ steps.version.outputs.name }}{% endraw %}"
         path: ./
 
     - name: upload macos release asset
       uses: actions/upload-release-asset@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        upload_url: {% raw %}${{ steps.create_release.outputs.upload_url }}{% endraw %}
         asset_path: "./artifact.tar.gz"
-        asset_name: "${{ env.PROJECT_NAME }}-macOS-${{ steps.version.outputs.name }}.tar.gz"
+        asset_name: "{% raw %}${{ env.PROJECT_NAME }}{% endraw %}-macOS-{% raw %}${{ steps.version.outputs.name }}{% endraw %}.tar.gz"
         asset_content_type: application/x-tar

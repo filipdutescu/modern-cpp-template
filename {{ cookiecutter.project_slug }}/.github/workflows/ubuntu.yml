@@ -23,19 +23,11 @@ jobs:
       uses: actions/cache@v2
       id: cache
       with:
-<<<<<<< HEAD
-        path: ${{ github.workspace }}/${{ env.INSTALL_LOCATION }}
-        key: ${{ runner.os }}-dependencies
+        path: {% raw %}${{ github.workspace }}{% endraw %}/{% raw %}${{ env.INSTALL_LOCATION }}{% endraw %}
+        key: {% raw %}${{ runner.os }}{% endraw %}-dependencies
 
     - name: install GoogleTest
-      if: ${{ steps.cache.output.cache-hit != 'true' }}
-=======
-        path: {% raw %}${{github.workspace}}{% endraw %}/{% raw %}${{env.INSTALL_LOCATION}}{% endraw %}
-        key: {% raw %}${{runner.os}}{% endraw %}-dependencies
-
-    - name: install GoogleTest
-      if: {% raw %}${{steps.cache.output.cache-hit != 'true'}}{% endraw %}
->>>>>>> d1aea34... used correct cookiecutter variable for naming repo and CMake project
+      if: {% raw %}${{ steps.cache.output.cache-hit != 'true' }}{% endraw %}
       run: |
         cd ..
         git clone https://github.com/google/googletest.git --branch release-1.10.0

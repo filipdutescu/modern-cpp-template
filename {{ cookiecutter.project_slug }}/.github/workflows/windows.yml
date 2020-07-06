@@ -23,11 +23,11 @@ jobs:
       uses: actions/cache@v2
       id: cache
       with:
-        path: {% raw %}${{env.INSTALL_LOCATION}}{% endraw %}
-        key: {% raw %}${{runner.os}}{% endraw %}-dependencies
+        path: {% raw %}${{ env.INSTALL_LOCATION }}{% endraw %}
+        key: {% raw %}${{ runner.os }}{% endraw %}-dependencies
 
     - name: install GoogleTest
-      if: {% raw %}${{steps.cache.output.cache-hit != 'true'}}{% endraw %}
+      if: {% raw %}${{ steps.cache.output.cache-hit != 'true' }}{% endraw %}
       run: |
         cd ..
         git clone https://github.com/google/googletest.git --branch release-1.10.0
