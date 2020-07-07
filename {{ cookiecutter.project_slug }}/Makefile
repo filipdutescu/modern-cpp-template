@@ -41,6 +41,7 @@ coverage: ## check code coverage quickly GCC
 	cmake -Bbuild -DCMAKE_INSTALL_PREFIX=$(INSTALL_LOCATION) -D{{ cookiecutter.project_slug }}_ENABLE_CODE_COVERAGE=1
 	cmake --build build --config Release
 	cd build/ && ctest -C Release -VV
+	cd .. && (bash -c "find . -type f -name '*.gcno' -exec gcov -pb {} +" || true)
 
 docs: ## generate Doxygen HTML documentation, including API docs
 	rm -rf docs/

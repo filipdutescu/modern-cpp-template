@@ -1,5 +1,8 @@
 ignore:
   - "test"
 
+fixes:
+  - "/home/runner/work/{ cookiecutter.project_slug }/{ cookiecutter.project_slug }::"
+
 comment:
   require_changes: true
