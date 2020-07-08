@@ -1,5 +1,8 @@
 ignore:
   - "test"
 
+fixes:
+  - "/home/runner/work/modern-cpp-template/modern-cpp-template/::"
+
 comment:
   require_changes: true
