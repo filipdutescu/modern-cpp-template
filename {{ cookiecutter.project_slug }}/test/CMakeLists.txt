@@ -9,6 +9,8 @@ project(
   LANGUAGES CXX
 )
 
+verbose_message("Adding tests under ${CMAKE_PROJECT_NAME}Tests...")
+
 #
 # Set the sources for the unit tests and add the executable(s)
 #
@@ -31,6 +33,7 @@ target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
 if (${CMAKE_PROJECT_NAME}_ENABLE_CODE_COVERAGE)
   target_compile_options(${CMAKE_PROJECT_NAME} PUBLIC -O0 -g -fprofile-arcs -ftest-coverage)
   target_link_options(${CMAKE_PROJECT_NAME} PUBLIC -fprofile-arcs -ftest-coverage)
+  verbose_message("Code coverage is enabled and provided with GCC.")
 endif()
 
 #
@@ -75,3 +78,5 @@ add_test(
   COMMAND
     ${PROJECT_NAME}
 )
+
+verbose_message("Finished adding unit tests for ${CMAKE_PROJECT_NAME}.") 
