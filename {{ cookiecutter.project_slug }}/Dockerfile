@@ -21,7 +21,7 @@ RUN apt install -y \
 			python3-pip
 
 RUN echo "Installing dependencies not found in the package repos..."
-RUN apt install build-essential libssl-dev && \
+RUN apt install -y build-essential libssl-dev && \
 			wget https://github.com/Kitware/CMake/releases/download/v3.15.0/cmake-3.15.0.tar.gz && \
 			tar -zxvf cmake-3.15.0.tar.gz && \
 			cd cmake-3.15.0 && \
