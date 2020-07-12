@@ -38,7 +38,7 @@ jobs:
         cd ../{{ cookiecutter.project_slug }}
 
     - name: configure
-      run: cmake -Bbuild -DCMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/$INSTALL_LOCATION -D$PROJECT_NAME_ENABLE_CODE_COVERAGE=1
+      run: cmake -Bbuild -DCMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/$INSTALL_LOCATION -D{ cookiecutter.project_slug }_ENABLE_CODE_COVERAGE=1
       
     - name: build
       run: cmake --build build --config $BUILD_TYPE -j4
