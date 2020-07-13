@@ -30,7 +30,3 @@ RUN apt install -y wget tar build-essential libssl-dev && \
 			make install 
 RUN pip3 install conan
 
-RUN echo "Copying project to Docker image"
-RUN mkdir /home/docker
-COPY . /home/docker/libcpp
-RUN echo "Project can be found at '/home/docker/libcpp/'."
