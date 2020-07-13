@@ -14,13 +14,12 @@ RUN apt install -y \
 			doxygen \
 			gcc \
 			git \
-			google-mock \
-			googletest \
 			make \
 			python3 \
 			python3-pip
 
 RUN echo "Installing dependencies not found in the package repos..."
+
 RUN apt install -y wget tar build-essential libssl-dev && \
 			wget https://github.com/Kitware/CMake/releases/download/v3.15.0/cmake-3.15.0.tar.gz && \
 			tar -zxvf cmake-3.15.0.tar.gz && \
@@ -28,5 +27,12 @@ RUN apt install -y wget tar build-essential libssl-dev && \
 			./bootstrap && \
 			make && \
 			make install 
+
 RUN pip3 install conan
+
+RUN git clone https://github.com/google/googletest.git --branch release-1.10.0 && \
+        cd googletest && \
+        cmake -Bbuild && \
+        cmake --build build --config Release && \
+        cmake --build build --target install --config Release
 
