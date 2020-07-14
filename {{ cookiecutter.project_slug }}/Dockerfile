@@ -14,6 +14,7 @@ RUN apt install -y \
 			doxygen \
 			gcc \
 			git \
+			libpthread-stubs0-dev \
 			make \
 			python3 \
 			python3-pip

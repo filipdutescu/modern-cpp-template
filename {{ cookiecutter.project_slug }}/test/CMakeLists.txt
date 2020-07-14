@@ -51,8 +51,8 @@ if(${CMAKE_PROJECT_NAME}_USE_GTEST)
   target_link_libraries(
     ${PROJECT_NAME} 
     PUBLIC
-      GTest::gtest
-      GTest::gtest_main
+      gtest
+      gtest_main
       ${GOOGLE_MOCK_LIBRARIES}
       {{ cookiecutter.project_slug }}
   )
