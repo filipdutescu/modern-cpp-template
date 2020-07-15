@@ -52,7 +52,7 @@ if(${CMAKE_PROJECT_NAME}_USE_GTEST)
     ${PROJECT_NAME} 
     PUBLIC
       gtest
-      gtest_main
+			#gtest_main
       ${GOOGLE_MOCK_LIBRARIES}
       {{ cookiecutter.project_slug }}
   )

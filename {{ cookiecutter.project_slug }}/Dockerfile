@@ -1,7 +1,7 @@
 FROM ubuntu:18.04
 
 RUN echo "Updating Ubuntu"
-RUN apt update && apt upgrade -y
+RUN apt-get update && apt-get upgrade -y
 
 RUN echo "Installing dependencies..."
 RUN apt install -y \
@@ -14,7 +14,6 @@ RUN apt install -y \
 			doxygen \
 			gcc \
 			git \
-			libpthread-stubs0-dev \
 			make \
 			python3 \
 			python3-pip
@@ -31,9 +30,10 @@ RUN apt install -y wget tar build-essential libssl-dev && \
 
 RUN pip3 install conan
 
+# Disabled pthread support for GTest due to linking errors
 RUN git clone https://github.com/google/googletest.git --branch release-1.10.0 && \
         cd googletest && \
-        cmake -Bbuild && \
+        cmake -Bbuild -Dgtest_disable_pthreads=1 && \
         cmake --build build --config Release && \
         cmake --build build --target install --config Release
 
