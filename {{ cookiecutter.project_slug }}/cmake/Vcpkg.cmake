@@ -13,5 +13,8 @@ if(${PROJECT_NAME}_ENABLE_VCPKG)
     message(STATUS "Vcpkg config downloaded succesfully.")
   endif()
 
+	if(${PROJECT_NAME}_VERBOSE_OUTPUT)
+		set(VCPKG_VERBOSE ON)
+	endif()
   include(${CMAKE_BINARY_DIR}/vcpkg.cmake)
 endif()
