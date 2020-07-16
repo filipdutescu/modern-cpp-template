@@ -5,7 +5,6 @@ RUN apt-get update && apt-get upgrade -y
 
 RUN echo "Installing dependencies..."
 RUN apt install -y \
-			catch \
 			ccache \
 			clang \
 			clang-format \
@@ -14,9 +13,11 @@ RUN apt install -y \
 			doxygen \
 			gcc \
 			git \
+			graphviz \
 			make \
 			python3 \
-			python3-pip
+			python3-pip \
+			vim
 
 RUN echo "Installing dependencies not found in the package repos..."
 
@@ -37,3 +38,7 @@ RUN git clone https://github.com/google/googletest.git --branch release-1.10.0 &
         cmake --build build --config Release && \
         cmake --build build --target install --config Release
 
+RUN git clone https://github.com/catchorg/Catch2.git && \
+		 cd Catch2 && \
+		 cmake -Bbuild -H. -DBUILD_TESTING=OFF && \
+		 cmake --build build/ --target install
