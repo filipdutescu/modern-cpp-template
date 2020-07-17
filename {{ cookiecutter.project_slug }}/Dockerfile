@@ -10,13 +10,17 @@ RUN apt install -y \
 			clang-format \
 			clang-tidy \
 			cppcheck \
+			curl \
 			doxygen \
 			gcc \
 			git \
 			graphviz \
 			make \
+			ninja-build \
 			python3 \
 			python3-pip \
+			tar \
+			unzip \
 			vim
 
 RUN echo "Installing dependencies not found in the package repos..."
@@ -31,6 +35,11 @@ RUN apt install -y wget tar build-essential libssl-dev && \
 
 RUN pip3 install conan
 
+RUN git clone https://github.com/catchorg/Catch2.git && \
+		 cd Catch2 && \
+		 cmake -Bbuild -H. -DBUILD_TESTING=OFF && \
+		 cmake --build build/ --target install
+
 # Disabled pthread support for GTest due to linking errors
 RUN git clone https://github.com/google/googletest.git --branch release-1.10.0 && \
         cd googletest && \
@@ -38,7 +47,6 @@ RUN git clone https://github.com/google/googletest.git --branch release-1.10.0 &
         cmake --build build --config Release && \
         cmake --build build --target install --config Release
 
-RUN git clone https://github.com/catchorg/Catch2.git && \
-		 cd Catch2 && \
-		 cmake -Bbuild -H. -DBUILD_TESTING=OFF && \
-		 cmake --build build/ --target install
+RUN git clone https://github.com/microsoft/vcpkg -b 2020.06 && \
+		cd vcpkg && \
+		./bootstrap-vcpkg.sh -disableMetrics -useSystemBinaries	
