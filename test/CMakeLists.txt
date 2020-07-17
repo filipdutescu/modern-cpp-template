@@ -43,6 +43,7 @@ endif()
 
 if(${CMAKE_PROJECT_NAME}_USE_GTEST)
   find_package(GTest REQUIRED)
+	include_directories(${GTEST_INCLUDE_DIRS})
 
   if(${CMAKE_PROJECT_NAME}_USE_GOOGLE_MOCK)
 		set(GOOGLE_MOCK_LIBRARIES GTest::gmock GTest::gmock_main)
@@ -51,8 +52,7 @@ if(${CMAKE_PROJECT_NAME}_USE_GTEST)
   target_link_libraries(
     ${PROJECT_NAME} 
     PUBLIC
-      GTest::gtest
-			GTest::gtest_main
+			gtest
       ${GOOGLE_MOCK_LIBRARIES}
       Project
   )
