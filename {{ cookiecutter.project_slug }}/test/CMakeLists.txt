@@ -45,7 +45,7 @@ if(${CMAKE_PROJECT_NAME}_USE_GTEST)
   find_package(GTest REQUIRED)
 
   if(${CMAKE_PROJECT_NAME}_USE_GOOGLE_MOCK)
-    set(GOOGLE_MOCK_LIBRARIES GTest::gmock GTest::gmock_main)
+    set(GOOGLE_MOCK_LIBRARIES gmock gmock_main)
   endif()
 
   target_link_libraries(
