@@ -223,3 +223,4 @@ file for details
    :target: https://codecov.io/gh/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}
 .. |GitHub release (latest by date)| image:: https://img.shields.io/github/v/release/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}
    :target: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/releases
+
