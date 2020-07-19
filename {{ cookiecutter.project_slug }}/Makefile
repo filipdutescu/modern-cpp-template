@@ -30,19 +30,18 @@ INSTALL_LOCATION := ~/.local
 help:
 	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
 
-test: ## run tests quickly with ctest
+build: ## build the project
 	rm -rf build/
-	cmake -Bbuild -DCMAKE_INSTALL_PREFIX=$(INSTALL_LOCATION) -D{{ cookiecutter.project_slug }}_ENABLE_UNIT_TESTING=1
+	cmake -Bbuild -DCMAKE_INSTALL_PREFIX=$(INSTALL_LOCATION)
 	cmake --build build --config Release
-	cd build/ && ctest -C Release -VV
-
+ 
 coverage: ## check code coverage quickly GCC
 	rm -rf build/
-	cmake -Bbuild -DCMAKE_INSTALL_PREFIX=$(INSTALL_LOCATION) -D{{ cookiecutter.project_slug }}_ENABLE_CODE_COVERAGE=1
+	cmake -Bbuild -DCMAKE_INSTALL_PREFIX=$(INSTALL_LOCATION) -D{{ cookiecutter.project_slug }}_ENABLE_UNIT_TESTING=1 -D{{ cookiecutter.project_slug }}_ENABLE_CODE_COVERAGE=1
 	cmake --build build --config Release
 	cd build/ && ctest -C Release -VV
 	cd .. && (bash -c "find . -type f -name '*.gcno' -exec gcov -pb {} +" || true)
-
+ 
 docs: ## generate Doxygen HTML documentation, including API docs
 	rm -rf docs/
 	rm -rf build/
@@ -57,3 +56,8 @@ install: ## install the package to the `INSTALL_LOCATION`
 	cmake --build build --config Release
 	cmake --build build --target install --config Release
 
+test: ## run tests quickly with ctest
+	rm -rf build/
+	cmake -Bbuild -DCMAKE_INSTALL_PREFIX=$(INSTALL_LOCATION) -D{{ cookiecutter.project_slug }}_ENABLE_UNIT_TESTING=1
+	cmake --build build --config Release
+	cd build/ && ctest -C Release -VV
