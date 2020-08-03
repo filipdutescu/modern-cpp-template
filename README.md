@@ -86,9 +86,10 @@ git clone https://github.com/filipdutescu/modern-cpp-template/
 ```
 
 After finishing getting a copy of the project, with any of the methods above, create
-a new folder in the `include/` folder, with the name of your project.
+a new folder in the `include/` folder, with the name of your project.  Edit
+`cmake/SourcesAndHeaders.cmake` to add your files.
 
-You will also need to rename the `cmake/Config.cmake.in` file to start with the
+You will also need to rename the `cmake/ProjectConfig.cmake.in` file to start with the
 ***exact name of your project***. Such as `cmake/MyNewProjectConfig.cmake.in`.
 
 Finally, change `"Project"` from `CMakeLists.txt`, from
