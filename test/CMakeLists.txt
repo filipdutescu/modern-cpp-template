@@ -54,7 +54,7 @@ if(${CMAKE_PROJECT_NAME}_USE_GTEST)
       GTest::GTest
       GTest::Main
       ${GOOGLE_MOCK_LIBRARIES}
-      Project
+      ${CMAKE_PROJECT_NAME}
   )
 elseif(${CMAKE_PROJECT_NAME}_USE_CATCH2)
   find_package(Catch2 REQUIRED)
@@ -62,7 +62,7 @@ elseif(${CMAKE_PROJECT_NAME}_USE_CATCH2)
     ${PROJECT_NAME} 
     PUBLIC
       Catch2::Catch2
-      Project
+      ${CMAKE_PROJECT_NAME}
   )
 else()
   message(FATAL_ERROR "Unknown testing library. Please setup your desired unit testing library by using `target_link_libraries`.")  
