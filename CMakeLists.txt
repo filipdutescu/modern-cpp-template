@@ -11,6 +11,13 @@ project(
 )
 
 #
+# Generate compilation database, which might be useful to aid code completion of editors
+#
+
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+
+#
 # Set project options
 #
 
