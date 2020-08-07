@@ -16,7 +16,7 @@ project(
 
 include(cmake/StandardSettings.cmake)
 include(cmake/Utils.cmake)
-message("\nStarted CMake for ${PROJECT_NAME} v${PROJECT_VERSION}...\n")
+message("Started CMake for ${PROJECT_NAME} v${PROJECT_VERSION}...")
 
 #
 # Setup alternative names
@@ -35,7 +35,7 @@ endif()
 #
 
 if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
-  message(FATAL_ERROR "In-source builds not allowed. Please make a new directory (called a build directory) and run CMake from there.\n")
+  message(FATAL_ERROR "In-source builds not allowed. Please make a new directory (called a build directory) and run CMake from there.")
 endif()
 
 #
@@ -64,9 +64,9 @@ else()
   )
 endif()
 
-verbose_message("Found the following header files:\n${headers}\n")
-verbose_message("Found the following source files:\n${sources}\n")
-message("Added all header and implementation files.\n")
+verbose_message("Found the following header files:\n${headers}")
+verbose_message("Found the following source files:\n${sources}")
+message("Added all header and implementation files.")
 
 #
 # Set the project standard and warnings
@@ -80,7 +80,7 @@ endif()
 include(cmake/CompilerWarnings.cmake)
 set_project_warnings(${PROJECT_NAME})
 
-verbose_message("Applied compiler warnings. Using standard ${CXX_STANDARD}.\n")
+verbose_message("Applied compiler warnings. Using standard ${CXX_STANDARD}.")
 
 #
 # Enable Doxygen
@@ -141,7 +141,7 @@ else()
   add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 endif()
 
-verbose_message("Project is now aliased as ${PROJECT_NAME}::${PROJECT_NAME}.\n")
+verbose_message("Project is now aliased as ${PROJECT_NAME}::${PROJECT_NAME}.")
 
 #
 # Format the project using the `clang-format` target (i.e: cmake --build build --target clang-format)
@@ -257,7 +257,7 @@ if(${PROJECT_NAME}_GENERATE_EXPORT_HEADER)
   message("Generated the export header `${PROJECT_NAME_LOWERCASE}_export.h` and installed it.")
 endif()
 
-message("Finished building requirements for installing the package.\n")
+message("Finished building requirements for installing the package.")
 
 #
 # Unit testing setup
@@ -265,6 +265,6 @@ message("Finished building requirements for installing the package.\n")
 
 if(${PROJECT_NAME}_ENABLE_UNIT_TESTING)
   enable_testing()
-  message("Build unit tests for the project. Tests should always be found in the test folder\n")
+  message("Build unit tests for the project. Tests should always be found in the test folder")
   add_subdirectory(test)
 endif()
