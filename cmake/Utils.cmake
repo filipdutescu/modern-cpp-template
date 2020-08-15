@@ -4,7 +4,7 @@
 
 function(verbose_message content)
     if(${PROJECT_NAME}_VERBOSE_OUTPUT)
-        message(${MESSAGE_TYPE} ${content})
+        message(VERBOSE ${content})
     endif()
 endfunction()
 
@@ -20,6 +20,6 @@ function(add_clang_format_target)
     add_custom_target(clang-format
         COMMAND ${${PROJECT_NAME}_CLANG_FORMAT_BINARY}
         -i ${CMAKE_CURRENT_LIST_DIR}/${sources} ${CMAKE_CURRENT_LIST_DIR}/${headers})
-    message("Format the project using the `clang-format` target (i.e: cmake --build build --target clang-format).\n")
+		message(STATUS "Format the project using the `clang-format` target (i.e: cmake --build build --target clang-format).\n")
     endif()
 endfunction()

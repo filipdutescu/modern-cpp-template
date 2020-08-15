@@ -16,7 +16,7 @@ project(
 
 include(cmake/StandardSettings.cmake)
 include(cmake/Utils.cmake)
-message("\nStarted CMake for ${PROJECT_NAME} v${PROJECT_VERSION}...\n")
+message(STATUS "Started CMake for ${PROJECT_NAME} v${PROJECT_VERSION}...\n")
 
 #
 # Setup alternative names
@@ -53,7 +53,8 @@ include(cmake/Vcpkg.cmake)
 include(cmake/SourcesAndHeaders.cmake)
 
 if(${PROJECT_NAME}_BUILD_EXECUTABLE)
-  add_executable(${PROJECT_NAME} ${sources})
+  add_executable(${PROJECT_NAME} ${exe_sources})
+  add_library(${PROJECT_NAME}_LIB ${headers} ${sources})
 elseif(${PROJECT_NAME}_BUILD_HEADERS_ONLY)
   add_library(${PROJECT_NAME} INTERFACE)
 else()
@@ -64,9 +65,15 @@ else()
   )
 endif()
 
-verbose_message("Found the following header files:\n${headers}\n")
-verbose_message("Found the following source files:\n${sources}\n")
-message("Added all header and implementation files.\n")
+verbose_message("Found the following header files:")
+verbose_message(${headers})
+verbose_message("Found the following source files:")
+if(${PROJECT_NAME}_BUILD_EXECUTABLE)
+	verbose_message(${exe_sources})
+else()
+	verbose_message(${sources})
+endif()
+message(STATUS "Added all header and implementation files.\n")
 
 #
 # Set the project standard and warnings
@@ -109,9 +116,19 @@ else()
     PRIVATE
       ${CMAKE_CURRENT_SOURCE_DIR}/src
   )
+	if(${PROJECT_NAME}_BUILD_EXECUTABLE)
+		target_include_directories(
+			${PROJECT_NAME}_LIB
+			PUBLIC 
+				$<INSTALL_INTERFACE:include>    
+				$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+			PRIVATE
+				${CMAKE_CURRENT_SOURCE_DIR}/src
+		)
+	endif()
 endif()
 
-message("Finished setting up include directories.")
+message(STATUS "Finished setting up include directories.")
 
 #
 # Model project dependencies 
@@ -254,10 +271,10 @@ if(${PROJECT_NAME}_GENERATE_EXPORT_HEADER)
       include
   )
 
-  message("Generated the export header `${PROJECT_NAME_LOWERCASE}_export.h` and installed it.")
+message(STATUS "Generated the export header `${PROJECT_NAME_LOWERCASE}_export.h` and installed it.")
 endif()
 
-message("Finished building requirements for installing the package.\n")
+message(STATUS "Finished building requirements for installing the package.\n")
 
 #
 # Unit testing setup
@@ -265,6 +282,6 @@ message("Finished building requirements for installing the package.\n")
 
 if(${PROJECT_NAME}_ENABLE_UNIT_TESTING)
   enable_testing()
-  message("Build unit tests for the project. Tests should always be found in the test folder\n")
+	message(STATUS "Build unit tests for the project. Tests should always be found in the test folder\n")
   add_subdirectory(test)
 endif()
