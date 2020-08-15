@@ -4,7 +4,7 @@
 
 function(verbose_message content)
     if(${PROJECT_NAME}_VERBOSE_OUTPUT)
-        message(VERBOSE ${content})
+			message(STATUS ${content})
     endif()
 endfunction()
 
