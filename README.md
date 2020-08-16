@@ -89,8 +89,12 @@ After finishing getting a copy of the project, with any of the methods above, cr
 a new folder in the `include/` folder, with the name of your project.  Edit
 `cmake/SourcesAndHeaders.cmake` to add your files.
 
-You will also need to rename the `cmake/ProjectConfig.cmake.in` file to start with the
-***exact name of your project***. Such as `cmake/MyNewProjectConfig.cmake.in`.
+You will also need to rename the `cmake/ProjectConfig.cmake.in` file to start with
+the ***exact name of your project***. Such as `cmake/MyNewProjectConfig.cmake.in`.
+You should also make the same changes in the GitHub workflows provided, notably
+[`.github/workflows/ubuntu.yml`](.github/workflows/ubuntu.yml), in which you should
+replace the CMake option `-DProject_ENABLE_CODE_COVERAGE=1` to
+`-DMyNewProject_ENABLE_CODE_COVERAGE=1`.
 
 Finally, change `"Project"` from `CMakeLists.txt`, from
 
