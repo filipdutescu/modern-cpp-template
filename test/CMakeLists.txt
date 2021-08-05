@@ -50,7 +50,7 @@ foreach(file ${test_sources})
     endif()
 
     target_link_libraries(
-      ${PROJECT_NAME} 
+      ${test_name}_Tests
       PUBLIC
         GTest::GTest
         GTest::Main
@@ -60,7 +60,7 @@ foreach(file ${test_sources})
   elseif(${CMAKE_PROJECT_NAME}_USE_CATCH2)
     find_package(Catch2 REQUIRED)
     target_link_libraries(
-      ${PROJECT_NAME} 
+      ${test_name}_Tests
       PUBLIC
         Catch2::Catch2
         ${${CMAKE_PROJECT_NAME}_TEST_LIB}
@@ -75,9 +75,9 @@ foreach(file ${test_sources})
 
   add_test(
     NAME
-      ${PROJECT_NAME}
+      ${test_name}
     COMMAND
-      ${PROJECT_NAME}
+      ${test_name}_Tests
   )
 endforeach()
 
