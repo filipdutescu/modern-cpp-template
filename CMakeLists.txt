@@ -15,7 +15,11 @@ project(
 #
 
 include(cmake/StandardSettings.cmake)
+include(cmake/StaticAnalyzers.cmake)
 include(cmake/Utils.cmake)
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE "Debug")
+endif()
 message(STATUS "Started CMake for ${PROJECT_NAME} v${PROJECT_VERSION}...\n")
 
 #
@@ -54,7 +58,10 @@ include(cmake/SourcesAndHeaders.cmake)
 
 if(${PROJECT_NAME}_BUILD_EXECUTABLE)
   add_executable(${PROJECT_NAME} ${exe_sources})
-  add_library(${PROJECT_NAME}_LIB ${headers} ${sources})
+
+  if(${PROJECT_NAME}_ENABLE_UNIT_TESTING)
+    add_library(${PROJECT_NAME}_LIB ${headers} ${sources})
+  endif()
 elseif(${PROJECT_NAME}_BUILD_HEADERS_ONLY)
   add_library(${PROJECT_NAME} INTERFACE)
 else()
@@ -65,14 +72,20 @@ else()
   )
 endif()
 
-verbose_message("Found the following header files:")
-verbose_message(${headers})
-verbose_message("Found the following source files:")
-if(${PROJECT_NAME}_BUILD_EXECUTABLE)
-	verbose_message(${exe_sources})
-else()
-	verbose_message(${sources})
+set_target_properties(${PROJECT_NAME}
+  PROPERTIES
+    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/${CMAKE_BUILD_TYPE}"
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/${CMAKE_BUILD_TYPE}"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/${CMAKE_BUILD_TYPE}"
+)
+if(${PROJECT_NAME}_ENABLE_UNIT_TESTING)
+  set_target_properties(${PROJECT_NAME}_LIB
+    PROPERTIES
+      ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/${CMAKE_BUILD_TYPE}"
+      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/${CMAKE_BUILD_TYPE}"
+      OUTPUT_NAME ${PROJECT_NAME})
 endif()
+
 message(STATUS "Added all header and implementation files.\n")
 
 #
@@ -83,17 +96,46 @@ if(${PROJECT_NAME}_BUILD_HEADERS_ONLY)
   target_compile_features(${PROJECT_NAME} INTERFACE cxx_std_17)
 else()
   target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
+
+  if(${PROJECT_NAME}_BUILD_EXECUTABLE AND ${PROJECT_NAME}_ENABLE_UNIT_TESTING)
+    target_compile_features(${PROJECT_NAME}_LIB PUBLIC cxx_std_17)
+  endif()
 endif()
 include(cmake/CompilerWarnings.cmake)
 set_project_warnings(${PROJECT_NAME})
 
-verbose_message("Applied compiler warnings. Using standard ${CXX_STANDARD}.\n")
+verbose_message("Applied compiler warnings. Using standard ${CMAKE_CXX_STANDARD}.\n")
 
 #
 # Enable Doxygen
 #
 
 include(cmake/Doxygen.cmake)
+
+#
+# Model project dependencies 
+#
+
+# Identify and link with the specific "packages" the project uses
+#find_package(package_name package_version REQUIRED package_type [other_options])
+#target_link_libraries(
+#  ${PROJECT_NAME}
+#  PUBLIC
+#    dependency1 ...
+#  PRIVATE
+#    dependency2 ...
+#    ${PROJECT_NAME}_PROJECT_OPTIONS        
+#    ${PROJECT_NAME}_PROJECT_WARNINGS        
+#)
+#if(${PROJECT_NAME}_BUILD_EXECUTABLE AND ${PROJECT_NAME}_ENABLE_UNIT_TESTING)
+#  target_link_libraries(
+#    ${PROJECT_NAME}_LIB
+#    PUBLIC
+#      dependency1 ...
+#  )
+#endif()
+
+verbose_message("Successfully added all dependencies and linked against them.")
 
 #
 # Set the build/user include directories
@@ -116,7 +158,7 @@ else()
     PRIVATE
       ${CMAKE_CURRENT_SOURCE_DIR}/src
   )
-	if(${PROJECT_NAME}_BUILD_EXECUTABLE)
+	if(${PROJECT_NAME}_BUILD_EXECUTABLE AND ${PROJECT_NAME}_ENABLE_UNIT_TESTING)
 		target_include_directories(
 			${PROJECT_NAME}_LIB
 			PUBLIC 
@@ -129,24 +171,6 @@ else()
 endif()
 
 message(STATUS "Finished setting up include directories.")
-
-#
-# Model project dependencies 
-#
-
-# Identify and link with the specific "packages" the project uses
-#find_package(package_name package_version REQUIRED package_type [other_options])
-#target_link_libraries(
-#  ${PROJECT_NAME}
-#  PUBLIC
-#    dependency1 ...
-#  PRIVATE
-#    dependency2 ...
-#    ${PROJECT_NAME}_PROJECT_OPTIONS        
-#    ${PROJECT_NAME}_PROJECT_WARNINGS        
-#)
-
-verbose_message("Successfully added all dependencies and linked against them.")
 
 #
 # Provide alias to library for 

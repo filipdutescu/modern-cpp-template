@@ -32,7 +32,7 @@ help:
 
 test: ## run tests quickly with ctest
 	rm -rf build/
-	cmake -Bbuild -DCMAKE_INSTALL_PREFIX=$(INSTALL_LOCATION) -Dmodern-cpp-template_ENABLE_UNIT_TESTING=1
+	cmake -Bbuild -DCMAKE_INSTALL_PREFIX=$(INSTALL_LOCATION) -Dmodern-cpp-template_ENABLE_UNIT_TESTING=1 -DCMAKE_BUILD_TYPE="Release"
 	cmake --build build --config Release
 	cd build/ && ctest -C Release -VV
 
@@ -57,3 +57,7 @@ install: ## install the package to the `INSTALL_LOCATION`
 	cmake --build build --config Release
 	cmake --build build --target install --config Release
 
+format: ## format the project sources
+	rm -rf build/
+	cmake -Bbuild -DCMAKE_INSTALL_PREFIX=$(INSTALL_LOCATION)
+	cmake --build build --target clang-format
