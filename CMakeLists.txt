@@ -6,7 +6,7 @@ cmake_minimum_required(VERSION 3.15)
 
 project(
   "Project"
-  VERSION 0.1.0 
+  VERSION 0.1.0
   LANGUAGES CXX
 )
 
@@ -27,11 +27,11 @@ message(STATUS "Started CMake for ${PROJECT_NAME} v${PROJECT_VERSION}...\n")
 #
 
 if(${PROJECT_NAME}_USE_ALT_NAMES)
-	string(TOLOWER ${PROJECT_NAME} PROJECT_NAME_LOWERCASE)
-	string(TOUPPER ${PROJECT_NAME} PROJECT_NAME_UPPERCASE)
+  string(TOLOWER ${PROJECT_NAME} PROJECT_NAME_LOWERCASE)
+  string(TOUPPER ${PROJECT_NAME} PROJECT_NAME_UPPERCASE)
 else()
-	set(PROJECT_NAME_LOWERCASE ${PROJECT_NAME})
-	set(PROJECT_NAME_UPPERCASE ${PROJECT_NAME})
+  set(PROJECT_NAME_LOWERCASE ${PROJECT_NAME})
+  set(PROJECT_NAME_UPPERCASE ${PROJECT_NAME})
 endif()
 
 #
@@ -72,18 +72,21 @@ else()
   )
 endif()
 
-set_target_properties(${PROJECT_NAME}
+set_target_properties(
+  ${PROJECT_NAME}
   PROPERTIES
-    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/${CMAKE_BUILD_TYPE}"
-    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/${CMAKE_BUILD_TYPE}"
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/${CMAKE_BUILD_TYPE}"
+  ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/${CMAKE_BUILD_TYPE}"
+  LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/${CMAKE_BUILD_TYPE}"
+  RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/${CMAKE_BUILD_TYPE}"
 )
 if(${PROJECT_NAME}_BUILD_EXECUTABLE AND ${PROJECT_NAME}_ENABLE_UNIT_TESTING)
-  set_target_properties(${PROJECT_NAME}_LIB
+  set_target_properties(
+    ${PROJECT_NAME}_LIB
     PROPERTIES
-      ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/${CMAKE_BUILD_TYPE}"
-      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/${CMAKE_BUILD_TYPE}"
-      OUTPUT_NAME ${PROJECT_NAME})
+    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/${CMAKE_BUILD_TYPE}"
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/${CMAKE_BUILD_TYPE}"
+    OUTPUT_NAME ${PROJECT_NAME}
+  )
 endif()
 
 message(STATUS "Added all header and implementation files.\n")
@@ -113,7 +116,7 @@ verbose_message("Applied compiler warnings. Using standard ${CMAKE_CXX_STANDARD}
 include(cmake/Doxygen.cmake)
 
 #
-# Model project dependencies 
+# Model project dependencies
 #
 
 # Identify and link with the specific "packages" the project uses
@@ -124,8 +127,8 @@ include(cmake/Doxygen.cmake)
 #    dependency1 ...
 #  PRIVATE
 #    dependency2 ...
-#    ${PROJECT_NAME}_PROJECT_OPTIONS        
-#    ${PROJECT_NAME}_PROJECT_WARNINGS        
+#    ${PROJECT_NAME}_PROJECT_OPTIONS
+#    ${PROJECT_NAME}_PROJECT_WARNINGS
 #)
 #if(${PROJECT_NAME}_BUILD_EXECUTABLE AND ${PROJECT_NAME}_ENABLE_UNIT_TESTING)
 #  target_link_libraries(
@@ -134,6 +137,18 @@ include(cmake/Doxygen.cmake)
 #      dependency1 ...
 #  )
 #endif()
+
+# For Windows, it is necessary to link with the MultiThreaded library.
+# Depending on how the rest of the project's dependencies are linked, it might be necessary
+# to change the line to dynamically link with the library.
+#
+# This is done as follows:
+#
+# set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
+#
+# On Linux and Mac this variable is ignored. If any issues rise from it, try commenting it out
+# and letting CMake decide how to link with it.
+set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 
 verbose_message("Successfully added all dependencies and linked against them.")
 
@@ -145,35 +160,35 @@ verbose_message("Successfully added all dependencies and linked against them.")
 if(${PROJECT_NAME}_BUILD_HEADERS_ONLY)
   target_include_directories(
     ${PROJECT_NAME}
-    INTERFACE 
-      $<INSTALL_INTERFACE:include>    
-      $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    INTERFACE
+    $<INSTALL_INTERFACE:include>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   )
 else()
   target_include_directories(
     ${PROJECT_NAME}
-    PUBLIC 
-      $<INSTALL_INTERFACE:include>    
-      $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    PUBLIC
+    $<INSTALL_INTERFACE:include>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     PRIVATE
-      ${CMAKE_CURRENT_SOURCE_DIR}/src
+    ${CMAKE_CURRENT_SOURCE_DIR}/src
   )
-	if(${PROJECT_NAME}_BUILD_EXECUTABLE AND ${PROJECT_NAME}_ENABLE_UNIT_TESTING)
-		target_include_directories(
-			${PROJECT_NAME}_LIB
-			PUBLIC 
-				$<INSTALL_INTERFACE:include>    
-				$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-			PRIVATE
-				${CMAKE_CURRENT_SOURCE_DIR}/src
-		)
-	endif()
+  if(${PROJECT_NAME}_BUILD_EXECUTABLE AND ${PROJECT_NAME}_ENABLE_UNIT_TESTING)
+    target_include_directories(
+      ${PROJECT_NAME}_LIB
+      PUBLIC
+      $<INSTALL_INTERFACE:include>
+      $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+      PRIVATE
+      ${CMAKE_CURRENT_SOURCE_DIR}/src
+    )
+  endif()
 endif()
 
 message(STATUS "Finished setting up include directories.")
 
 #
-# Provide alias to library for 
+# Provide alias to library for
 #
 
 if(${PROJECT_NAME}_BUILD_EXECUTABLE)
@@ -197,30 +212,30 @@ add_clang_format_target()
 include(GNUInstallDirs)
 install(
   TARGETS
-    ${PROJECT_NAME}
+  ${PROJECT_NAME}
   EXPORT
-    ${PROJECT_NAME}Targets
+  ${PROJECT_NAME}Targets
   LIBRARY DESTINATION
-    ${CMAKE_INSTALL_LIBDIR}
+  ${CMAKE_INSTALL_LIBDIR}
   RUNTIME DESTINATION
-    ${CMAKE_INSTALL_BINDIR}
+  ${CMAKE_INSTALL_BINDIR}
   ARCHIVE DESTINATION
-    ${CMAKE_INSTALL_LIBDIR}
+  ${CMAKE_INSTALL_LIBDIR}
   INCLUDES DESTINATION
-    include
+  include
   PUBLIC_HEADER DESTINATION
-    include
+  include
 )
 
 install(
-  EXPORT 
-    ${PROJECT_NAME}Targets
+  EXPORT
+  ${PROJECT_NAME}Targets
   FILE
-    ${PROJECT_NAME}Targets.cmake
+  ${PROJECT_NAME}Targets.cmake
   NAMESPACE
-    ${PROJECT_NAME}::
+  ${PROJECT_NAME}::
   DESTINATION
-    ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}
+  ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}
 )
 
 #
@@ -228,16 +243,16 @@ install(
 #
 
 configure_file(
-    ${CMAKE_CURRENT_LIST_DIR}/cmake/version.hpp.in
-    include/${PROJECT_NAME_LOWERCASE}/version.hpp
-    @ONLY
+  ${CMAKE_CURRENT_LIST_DIR}/cmake/version.hpp.in
+  include/${PROJECT_NAME_LOWERCASE}/version.hpp
+  @ONLY
 )
 
 install(
   FILES
-    ${CMAKE_CURRENT_BINARY_DIR}/include/${PROJECT_NAME_LOWERCASE}/version.hpp
+  ${CMAKE_CURRENT_BINARY_DIR}/include/${PROJECT_NAME_LOWERCASE}/version.hpp
   DESTINATION
-    include/${PROJECT_NAME_LOWERCASE}
+  include/${PROJECT_NAME_LOWERCASE}
 )
 
 #
@@ -246,9 +261,9 @@ install(
 
 install(
   DIRECTORY
-    include/${PROJECT_NAME_LOWERCASE}
+  include/${PROJECT_NAME_LOWERCASE}
   DESTINATION
-    include
+  include
 )
 
 verbose_message("Install targets succesfully build. Install with `cmake --build <build_directory> --target install --config <build_config>`.")
@@ -259,26 +274,26 @@ verbose_message("Install targets succesfully build. Install with `cmake --build 
 
 include(CMakePackageConfigHelpers)
 write_basic_package_version_file(
-    ${PROJECT_NAME}ConfigVersion.cmake
+  ${PROJECT_NAME}ConfigVersion.cmake
   VERSION
-    ${PROJECT_VERSION}
+  ${PROJECT_VERSION}
   COMPATIBILITY
-    SameMajorVersion
+  SameMajorVersion
 )
 
 configure_package_config_file(
   ${CMAKE_CURRENT_LIST_DIR}/cmake/${PROJECT_NAME}Config.cmake.in
   ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake
-  INSTALL_DESTINATION 
-    ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}
+  INSTALL_DESTINATION
+  ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}
 )
 
 install(
   FILES
-    ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake
-    ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake
+  ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake
+  ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake
   DESTINATION
-    ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}
+  ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}
 )
 
 #
@@ -290,12 +305,12 @@ if(${PROJECT_NAME}_GENERATE_EXPORT_HEADER)
   generate_export_header(${PROJECT_NAME})
   install(
     FILES
-      ${PROJECT_BINARY_DIR}/${PROJECT_NAME_LOWERCASE}_export.h 
+    ${PROJECT_BINARY_DIR}/${PROJECT_NAME_LOWERCASE}_export.h
     DESTINATION
-      include
+    include
   )
 
-message(STATUS "Generated the export header `${PROJECT_NAME_LOWERCASE}_export.h` and installed it.")
+  message(STATUS "Generated the export header `${PROJECT_NAME_LOWERCASE}_export.h` and installed it.")
 endif()
 
 message(STATUS "Finished building requirements for installing the package.\n")
@@ -306,6 +321,6 @@ message(STATUS "Finished building requirements for installing the package.\n")
 
 if(${PROJECT_NAME}_ENABLE_UNIT_TESTING)
   enable_testing()
-	message(STATUS "Build unit tests for the project. Tests should always be found in the test folder\n")
+  message(STATUS "Build unit tests for the project. Tests should always be found in the test folder\n")
   add_subdirectory(test)
 endif()
