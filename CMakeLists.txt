@@ -140,15 +140,15 @@ include(cmake/Doxygen.cmake)
 
 # For Windows, it is necessary to link with the MultiThreaded library.
 # Depending on how the rest of the project's dependencies are linked, it might be necessary
-# to change the line to dynamically link with the library.
+# to change the line to statically link with the library.
 #
 # This is done as follows:
 #
-# set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
+# set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 #
 # On Linux and Mac this variable is ignored. If any issues rise from it, try commenting it out
 # and letting CMake decide how to link with it.
-set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
 
 verbose_message("Successfully added all dependencies and linked against them.")
 
