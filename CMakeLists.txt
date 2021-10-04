@@ -59,17 +59,49 @@ include(cmake/SourcesAndHeaders.cmake)
 if(${PROJECT_NAME}_BUILD_EXECUTABLE)
   add_executable(${PROJECT_NAME} ${exe_sources})
 
+  if(${PROJECT_NAME}_VERBOSE_OUTPUT)
+    verbose_message("Found the following sources:")
+    foreach(source IN LISTS exe_sources)
+      verbose_message("* ${source}")
+    endforeach()
+  endif()
+
   if(${PROJECT_NAME}_ENABLE_UNIT_TESTING)
     add_library(${PROJECT_NAME}_LIB ${headers} ${sources})
+
+    if(${PROJECT_NAME}_VERBOSE_OUTPUT)
+      verbose_message("Found the following headers:")
+      foreach(header IN LISTS headers)
+        verbose_message("* ${header}")
+      endforeach()
+    endif()
   endif()
 elseif(${PROJECT_NAME}_BUILD_HEADERS_ONLY)
   add_library(${PROJECT_NAME} INTERFACE)
+
+  if(${PROJECT_NAME}_VERBOSE_OUTPUT)
+    verbose_message("Found the following headers:")
+    foreach(header IN LIST headers)
+      verbose_message("* ${header}")
+    endforeach()
+  endif()
 else()
   add_library(
     ${PROJECT_NAME}
     ${headers}
     ${sources}
   )
+
+  if(${PROJECT_NAME}_VERBOSE_OUTPUT)
+    verbose_message("Found the following sources:")
+    foreach(source IN LISTS sources)
+      verbose_message("* ${source}")
+    endforeach()
+    verbose_message("Found the following headers:")
+    foreach(header IN LISTS headers)
+      verbose_message("* ${header}")
+    endforeach()
+  endif()
 endif()
 
 set_target_properties(
