@@ -303,7 +303,7 @@ install(
   include
 )
 
-verbose_message("Install targets succesfully build. Install with `cmake --build <build_directory> --target install --config <build_config>`.")
+verbose_message("Install targets successfully built. Install with `cmake --build <build_directory> --target install --config <build_config>`.")
 
 #
 # Quick `ConfigVersion.cmake` creation
