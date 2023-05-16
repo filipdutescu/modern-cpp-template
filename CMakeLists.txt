@@ -13,6 +13,7 @@ project(
 #
 # Set project options
 #
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON CACHE INTERNAL "") # works
 
 include(cmake/StandardSettings.cmake)
 include(cmake/StaticAnalyzers.cmake)
