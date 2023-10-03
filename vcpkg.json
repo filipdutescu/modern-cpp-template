@@ -1,0 +1,7 @@
+{
+  "name": "project",
+  "version-string": "latest",
+  "dependencies": [
+    "gtest"
+  ]
+}

@@ -366,3 +366,9 @@ healthchecksdb
 
 # Backup folder for Package Reference Convert tool in Visual Studio 2017
 MigrationBackup/
+
+# Additional build folder names
+cmake-*/
+
+# Compile commands
+compile_commands.json
