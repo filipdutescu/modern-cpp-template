@@ -24,7 +24,8 @@
             "binaryDir": "${sourceDir}/cmake-${presetName}-build",
             "generator": "Ninja",
             "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Release"
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_TOOLCHAIN_FILE": "vcpkg/scripts/buildsystems/vcpkg.cmake"
             }
         }
     ]
