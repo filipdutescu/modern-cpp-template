@@ -44,32 +44,35 @@ jobs:
     - name: set version name (Windows)
       id: version_win
       if: ${{ runner.os == 'Windows' }}
+      shell: pwsh
       run: |
         $TAG = (${env:GITHUB_REF} -replace 'refs/tags/', '')
-        echo "::set-output name=name::$TAG"
+        echo "name=$TAG" >> ${env:GITHUB_OUTPUT}
     
     - name: set version name
       id: version
       if: ${{ runner.os != 'Windows' }}
-      run: echo ::set-output name=name::${GITHUB_REF#refs/tags/}
+      run: |
+        TAG=${GITHUB_REF#refs/tags/}
+        echo "name=$TAG" >> "$GITHUB_OUTPUT"
 
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
         submodules: recursive
 
     - name: cache dependencies
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       id: cache
       with:
         path: ${{ github.HOME }}/.local
-        key: ${{ runner.os }}-dependencies
+        key: ${{ runner.os }}-dependencies-${{ hashFiles('CMakeLists.txt') }}
 
     - name: install GoogleTest
-      if: ${{ steps.cache.output.cache-hit != 'true' }}
+      if: ${{ steps.cache.outputs.cache-hit != 'true' }}
       run: |
         cd ..
-        git clone https://github.com/google/googletest.git --branch release-1.10.0
+        git clone https://github.com/google/googletest.git --branch v1.17.0
         cd googletest
         cmake -Bbuild -DCMAKE_INSTALL_PREFIX="$HOME/.local" -Dgtest_force_shared_crt=1
         cmake --build build --config Release
@@ -104,14 +107,14 @@ jobs:
         tar -cvzf $HOME/artifact.tar.gz .
 
     - name: upload artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       if: ${{ runner.os == 'Windows' }}
       with:
         name: ${{ runner.os }}-${{ steps.version_win.outputs.name }}
         path: '~/artifact.*'
 
     - name: upload artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       if: ${{ runner.os != 'Windows' }}
       with:
         name: ${{ runner.os }}-${{ steps.version.outputs.name }}
@@ -141,7 +144,7 @@ jobs:
         prerelease: false
 
     - name: download artifact
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v4
       with:
         name: "Linux-${{ steps.version.outputs.name }}"
         path: ./
@@ -157,7 +160,7 @@ jobs:
         asset_content_type: application/x-tar
 
     - name: download artifact
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v4
       with:
         name: "Windows-${{ steps.version.outputs.name }}"
         path: ./
@@ -173,7 +176,7 @@ jobs:
         asset_content_type: application/zip
 
     - name: download artifact
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v4
       with:
         name: "macOS-${{ steps.version.outputs.name }}"
         path: ./

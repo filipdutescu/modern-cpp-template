@@ -4,8 +4,6 @@ cmake_minimum_required(VERSION 3.15)
 # Project details
 #
 
-set(${CMAKE_PROJECT_NAME}Tests_VERBOSE_OUTPUT ${PROJECT_NAME}_VERBOSE_OUTPUT)
-
 project(
   ${CMAKE_PROJECT_NAME}Tests
   LANGUAGES CXX
