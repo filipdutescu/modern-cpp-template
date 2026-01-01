@@ -87,7 +87,7 @@ elseif(${PROJECT_NAME}_BUILD_HEADERS_ONLY)
 
   if(${PROJECT_NAME}_VERBOSE_OUTPUT)
     verbose_message("Found the following headers:")
-    foreach(header IN LIST headers)
+    foreach(header IN LISTS headers)
       verbose_message("* ${header}")
     endforeach()
   endif()
