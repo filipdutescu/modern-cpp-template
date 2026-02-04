@@ -40,6 +40,9 @@ else()
   set(PROJECT_NAME_UPPERCASE ${PROJECT_NAME})
 endif()
 
+# Transform PROJECT_NAME into valid C/C++ identifier
+string(REGEX REPLACE "[^A-Za-z0-9_]" "_" PROJECT_NAME_C "${PROJECT_NAME_UPPERCASE}")
+
 #
 # Prevent building in the source directory
 #
@@ -210,6 +213,7 @@ else()
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/src
+    ${CMAKE_CURRENT_BINARY_DIR}/include   
   )
   if(${PROJECT_NAME}_BUILD_EXECUTABLE AND ${PROJECT_NAME}_ENABLE_UNIT_TESTING)
     target_include_directories(
@@ -219,6 +223,7 @@ else()
       $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
       PRIVATE
       ${CMAKE_CURRENT_SOURCE_DIR}/src
+      ${CMAKE_CURRENT_BINARY_DIR}/include
     )
   endif()
 endif()
