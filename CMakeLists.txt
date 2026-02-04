@@ -40,6 +40,9 @@ else()
   set(PROJECT_NAME_UPPERCASE ${PROJECT_NAME})
 endif()
 
+# Transform PROJECT_NAME into valid C/C++ identifier
+string(REGEX REPLACE "[^A-Za-z0-9_]" "_" PROJECT_NAME_C "${PROJECT_NAME_UPPERCASE}")
+
 #
 # Prevent building in the source directory
 #
